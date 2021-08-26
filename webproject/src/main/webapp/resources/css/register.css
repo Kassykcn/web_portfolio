@@ -1,0 +1,48 @@
+/* ÀüÃ¼ */
+body{
+	font-size: 11pt;
+}
+/* table, th, td */
+.tb1{
+	border: 1px solid black;
+	text-align: center;
+	width: 90%
+}
+.th1{
+	width: 15%;
+}
+.td1{
+	height: 55px;
+}
+/* span */
+.small_txt{
+	font-size: 8pt;
+	color: gray;
+}
+/* input */
+.input_long{
+	width: 78%;
+}
+.input_number{
+	width: 78%;
+	text-align: right;
+}
+.input_short{
+	width: 80px;
+}
+.btn1{
+	background-color:white;
+	border: 2px solid black;
+	font-weight: bold;
+	width: 50px;
+	height:30px;
+}
+input:invalid{
+	color:red;
+	font-weight: bold;
+}
+/* textarea */
+.tarea1{
+	width: 80%;
+	height: 80px;
+}
