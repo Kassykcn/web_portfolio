@@ -1,0 +1,123 @@
+body{
+	font-size: 11pt;
+}
+
+/* table, td */
+.table1{
+	border: 1px solid black;
+	text-align: center;
+	width: 90%;
+	height: 100%;
+}
+.table1_td{
+	border: 1px solid black;
+	height: 100px;
+}
+.table2{
+	border: 1px solid black;
+	text-align: center;
+	width: 100%;
+}
+.td_top{
+	height: 20px;
+}
+.td_title{
+	/* width:25%; */
+	height: 40px;
+	font-weight: bold;
+}
+.td_content{
+	height: 40px;
+}
+
+/* span */
+.small_txt{
+	font-size: 8pt;
+	color: gray;
+}
+/* input */
+.input_number{
+	width: 100px;
+	text-align: right;
+}
+.btn1{
+	background-color:white;
+	border: 2px solid black;
+	font-weight: bold;
+	height:25px;
+}
+.QnA_btn{
+	background-color:white;
+	border: 2px solid black;
+	font-weight: bold;
+	height:25px;
+}
+
+/* img */
+.like_img{
+	width: 20px;
+	height: 20px;
+}
+.title_img{
+	width: 350px;
+	height: 350px;
+}
+.grade_help_img{
+	width:12px;
+	height: 12px;
+}
+/* div */
+#state{
+	font-weight: bold;
+	font-size: 15pt;
+	display: inline-block;
+	padding: 10px 15px;
+}
+#deadline{
+	font-weight: bold;
+	font-size: 15pt;
+	color:#ff0000;
+	display: inline-block;
+	padding: 10px 5px;
+}
+#QnA_div{
+	position: relative;
+}
+#QnA_inner_div{
+	position: absolute;
+	width:auto;
+	padding: 3px;
+	bottom: 0px;
+	right: 10px;
+}
+/* textarea */
+.tarea1{
+	width: 99%;
+	height: 100px;
+	overflow: hidden;
+}
+
+/* text-align */
+.align_left{
+	text-align: left;
+}
+
+/* tooltip */
+.tooltip { position: relative; display: inline-block; }
+.tooltip .tooltip-content {
+    visibility: hidden;
+    width: 230px;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius:10px;
+    padding: 3px;
+    margin: 15px 0 0 -90px;
+    font-size: 8pt;
+    font-weight:lighter;
+	color: gray;
+    text-align: left;
+    line-height:140%;
+    position: absolute;
+    z-index: 1;
+}
+.tooltip:hover .tooltip-content { visibility: visible; }

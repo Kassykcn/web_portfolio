@@ -6,7 +6,8 @@ body{
 .tb1{
 	border: 1px solid black;
 	text-align: center;
-	width: 90%
+	width: 90%;
+	height: 100%;
 }
 .th1{
 	width: 15%;
