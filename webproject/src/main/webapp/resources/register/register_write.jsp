@@ -20,13 +20,8 @@
 		<tr>
 			<th class="table1th">구분</th>
 			<td class="table1td">
-				<!-- <select id="classify" onchange="classify_change()">
-					<option value="0">선택</option>
-					<option value="auction">경매</option>
-					<option value="buy">구매</option>
-				</select> -->
-				<input type="radio" name="classify" value="auction" onclick="classify_change()">경매
-				<input type="radio" name="classify" value="buy" onclick="classify_change()">구매
+				<input type="radio" name="classify" value="auction">경매
+				<input type="radio" name="classify" value="buy">구매
 			</td>
 		</tr>
 		<tr>

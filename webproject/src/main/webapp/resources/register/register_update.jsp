@@ -21,24 +21,19 @@
 		<tr>
 			<th class="table1th">구분</th>
 			<td class="table1td">
-				<!-- <select id="classify" onchange="classify_change()">
-					<option value="0">선택</option>
-					<option value="auction">경매</option>
-					<option value="buy">구매</option>
-				</select> -->
-				<!-- <input type="radio" name="classify" value="auction" onclick="classify_change()">경매
-				<input type="radio" name="classify" value="buy" onclick="classify_change()">구매 -->
+				<!-- <input type="radio" name="classify" value="auction" >경매
+				<input type="radio" name="classify" value="buy" >구매 -->
 				경매
 			</td>
 		</tr>
 		<tr>
 			<th class="table1th">카테고리</th>
 			<td class="table1td">
-				<select id="category_first" onchange="category_select()">
+				<select id="category_first">
 					<!-- <option value="0">대분류</option> -->
 					<option value="전체">전체</option>
 				</select>
-				<select id="category_second" onchange="category_select()">
+				<select id="category_second">
 					<!-- <option value="0">중분류</option> -->
 					<option value="전체">전체</option>
 				</select>

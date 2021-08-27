@@ -64,21 +64,18 @@ $(document).ready(function (){
 	
 	/*** 구분 값(구매/경매) ***/
 	$("input[name=classify]").click(function(){
-		//var classify = $("#classify").val(); //select박스 버전
-		var classify = $("input[name=classify]:checked").val(); //radio버튼 버전
+		var classify = $("input[name=classify]:checked").val();
 
 		//값이 0이 아닐때에만 동작, 구분 값에 따라 <tr>태그 숨김/표시
-		//if(classify != "0"){ //select박스 버전
-			if(classify == "auction"){
-				$("#buy_tr").css("display","none");
-				$("#auction_tr1").css("display","");
-				$("#auction_tr2").css("display","");
-			}else{
-				$("#auction_tr1").css("display","none");
-				$("#auction_tr2").css("display","none");
-				$("#buy_tr").css("display","");
-			}
-		//}
+		if(classify == "auction"){
+			$("#buy_tr").css("display","none");
+			$("#auction_tr1").css("display","");
+			$("#auction_tr2").css("display","");
+		}else{
+			$("#auction_tr1").css("display","none");
+			$("#auction_tr2").css("display","none");
+			$("#buy_tr").css("display","");
+		}
 	});
 	
 	/*** 카테고리 ***/
