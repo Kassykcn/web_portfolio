@@ -9,7 +9,7 @@ create table register(
 	classify varchar(10), -- 구분 - 구매 buy / 경매 auction /  입찰 bid / 낙찰 success
 	classify_num int(10), -- 구분값이 입찰이나 낙찰일 때 해당 상품의 글번호
 	title varchar(20), -- 글 제목
-	category varchar(20), -- 카테고리
+	category int(5), -- 카테고리 번호
 	image varchar(20), -- 이미지 파일
 	grade varchar(5), -- 등급
 	details varchar(200), -- 상세설명
@@ -24,22 +24,22 @@ create table register(
 	deal_state varchar(20),	-- 거래상태 - 진행중 ongoing / 기간마감  close / 거래 완료 complete  - 상세페이지에서 사용
 	deal_date date,	-- 거래일 - 상세페이지에서 사용
 	hits int(10) default 0 -- 조회수 - 상세페이지에서 사용
-)engine=innodb default charset=euckr;
+)engine=innodb default charset=UTF8;
 
 insert into register values(
-	null, now(), 'aaa', 'buy', 0, 'title', 'idol', null, 'S', 'good', 100000, 
+	null, now(), 'aaa', 'buy', 0, 'title', 4, null, 'S', 'good', 100000, 
 	'2021-08-25', '2021-08-27', 0, 0, 0, 0, 'direct', 'ongoing', null, 0
 );
 insert into register values(
-	null, now(), 'bbb', 'auction', 10, 'title', 'etc', null, 'A', 'good', 0, 
+	null, now(), 'bbb', 'auction', 10, 'title', 13, null, 'A', 'good', 0, 
 	'2021-08-25', '2021-08-27', 10000, 100000, 11000, 0, 'delivery', 'ongoing', null, 0
 );
 insert into register values(
-	null, now(), 'ccc', 'auction', 10, 'title', 'etc', null, 'A', 'good', 0, 
+	null, now(), 'ccc', 'auction', 10, 'title', 13, null, 'A', 'good', 0, 
 	'2021-08-25', '2021-08-27', 10000, 100000, 12000, 0, 'delivery', 'ongoing', null, 0
 );
 insert into register values(
-	null, now(), 'ddd', 'auction', 10, 'title', 'etc', null, 'A', 'good', 0, 
+	null, now(), 'ddd', 'auction', 10, 'title', 13, null, 'A', 'good', 0, 
 	'2021-08-25', '2021-08-27', 10000, 100000, 0, 100000, 'delivery', 'complete', null, 0
 );
 
