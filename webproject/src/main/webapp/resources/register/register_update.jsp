@@ -16,7 +16,7 @@
 <div id="left"></div>
 <div id="content">
 	<h2>경매/구매 수정</h2>
-	<form name="reg_update">
+	<form id="reg_update">
 	<table class="table1">
 		<tr>
 			<th class="table1th">구분</th>

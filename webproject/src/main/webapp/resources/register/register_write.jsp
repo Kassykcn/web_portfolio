@@ -15,7 +15,7 @@
 <div id="left"></div>
 <div id="content">
 	<h2>경매/구매 등록</h2>
-	<form name="reg_write">
+	<form id="reg_write">
 	<table class="table1">
 		<tr>
 			<th class="table1th">구분</th>

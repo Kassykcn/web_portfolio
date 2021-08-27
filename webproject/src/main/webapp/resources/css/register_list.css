@@ -1,0 +1,97 @@
+/* ÀüÃ¼ */
+body{
+	font-size: 11pt;
+}
+#content{
+	width: 90%;
+}
+/* div */
+.sort{
+	width:auto;
+	display:inline-block;
+	float: right;
+	padding: 7px;
+}
+.sort div{
+	margin-left:10px;
+	float: left;
+}
+
+/* table, th, td */
+.table2{
+	border: 1px solid black;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	padding:0;
+	margin: 0;
+}
+.search_table{
+	text-align: center;
+	height: 100%;
+	padding-top: 10px;
+	margin: auto;
+}
+.table2th1{
+	width: 10%;
+}
+.table2th2{
+	width: 21%;
+}
+.table2th1, .table2th2, .table2th3, .table2td{
+	height: 35px;
+	border-bottom: 1px solid gray;
+}
+
+/* span */
+.small_txt{
+	font-size: 8pt;
+	color: gray;
+}
+/* input */
+.input_long{
+	width: 78%;
+}
+.input_number{
+	width: 78%;
+	text-align: right;
+}
+.input_short{
+	width: 80px;
+}
+#search_txt{
+	width: 250px;
+}
+#submit_btn{
+	background-color:white;
+	border: 2px solid black;
+	font-weight: bold;
+	width: 50px;
+	height:30px;
+}
+.btn1{
+	background-color:white;
+	border: 2px solid black;
+	font-weight: bold;
+	height:25px;
+}
+input:invalid{
+	color:red;
+	font-weight: bold;
+}
+/* textarea */
+.tarea1{
+	width: 80%;
+	height: 80px;
+}
+
+/* a */
+a:hover, a:active {
+	text-decoration: underline;
+	font-weight: bold;
+	color:black;
+}
+a:link, a:visited {
+	text-decoration: underline;
+	color:black;
+}

@@ -15,7 +15,7 @@
 <div id="left"></div>
 <div id="content">
 	<h2>경매/구매 상세페이지</h2>
-	<form name="reg_view">
+	<form id="reg_view">
 	<table class="table1">
 		<tr>
 			<td class="table1_td">
