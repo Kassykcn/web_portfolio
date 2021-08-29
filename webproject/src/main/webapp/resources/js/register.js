@@ -12,19 +12,25 @@ javascript, jquery
 
 
 /*** 금액부분에 천단위 콤마 넣기 ***/
-function add_comma(e){
-	//var input = e.getAttribute('id'); // id 불러오기
-	//alert(input);
-	var value = e.value; // 값 불러오기
-	
+function add_comma(value){
+	var num = value;
 	// ,가 있다면 모든 , 삭제 후 number로 형변환
 	if(value.indexOf(",") != -1 || value.indexOf(",") != 0){
-		value = Number(value.replace("/,/gi", ""));
-	}else{ // ,가 없다면 number로 형변환
-		value = Number(value);
+		num = value.replace(/,/g, "");
 	}
 	// 천단위마다 ,넣는 함수 toLocaleString('ko-KR')
-	e.value = value.toLocaleString('ko-KR');
+	num = Number(num).toLocaleString('ko-KR');
+	
+	return num;
+}
+
+/*** 금액부분에 천단위 콤마 지우기
+ * 폼에서 넘길때 오류 방지 ***/
+function remove_comma(value){
+	// 모든 , 삭제
+	var n = value.replace(/,/g, "");
+	
+	return n;
 }
 
 /*** 화면 첫 시작 시 자동 적용사항 입력 ***/
@@ -55,11 +61,12 @@ $(document).ready(function (){
 		$("#category_third").css("display","none");
 		// 시작일에 오늘 날짜 입력
 		$("#start_date").val(today);
+		
 	}else if(fileName.match("update")) {
 		/* $("#min_bid")[0]는 document.getElementById("min_bid")와 동일한 값을 가진다. */
-		//add_comma($("#price")[0]);
-		add_comma($("#min_bid")[0]);
-		add_comma($("#win_bid")[0]);
+		//add_comma($("#price").val());
+		//add_comma($("#min_bid").val());
+		//add_comma($("#win_bid").val());
 	}
 	
 	/*** 구분 값(구매/경매) ***/
@@ -67,7 +74,7 @@ $(document).ready(function (){
 		var classify = $("input[name=classify]:checked").val();
 
 		//값이 0이 아닐때에만 동작, 구분 값에 따라 <tr>태그 숨김/표시
-		if(classify == "auction"){
+		if(classify == "경매"){
 			$("#buy_tr").css("display","none");
 			$("#auction_tr1").css("display","");
 			$("#auction_tr2").css("display","");
@@ -91,6 +98,20 @@ $(document).ready(function (){
 		if($("#category_second").val() != 0){
 			$("#category_third").css("display","");
 		}
+	});
+	
+	/*** 금액에 , 추가 ***/
+	$("#price").blur(function(){
+		var comma = add_comma($("#price").val());
+		$("#price").val(comma);
+	});
+	$("#min_bid").blur(function(){
+		var comma = add_comma($("#min_bid").val());
+		$("#min_bid").val(comma);
+	});
+	$("#win_bid").blur(function(){
+		var comma = add_comma($("#win_bid").val());
+		$("#win_bid").val(comma);
 	});
 	
 	/*** 유효성 검사 ***/ 
@@ -153,27 +174,27 @@ $(document).ready(function (){
 		var classify = $("input[name=classify]:checked").val();
 		
 		//가격
-		if(classify == "buy" && ($("#price").val() == "" || $("#price").val() == "0")){
+		if(classify == "구매" && ($("#price").val() == "" || $("#price").val() == "0")){
 			alert("가격을 입력해주세요");
 			$("#price").focus();
 			return false;
 		}
 		
 		//최소입찰가
-		if(classify == "auction" && ($("#min_bid").val() == "" || $("#min_bid").val() == "0")){
+		if(classify == "경매" && ($("#min_bid").val() == "" || $("#min_bid").val() == "0")){
 			alert("최소 입찰가를 입력해주세요");
 			$("#min_bid").focus();
 			return false;
 		}
 		
 		//즉시낙찰가
-		if(classify == "auction" && ($("#win_bid").val() == "" || $("#win_bid").val() == "0")){
+		if(classify == "경매" && ($("#win_bid").val() == "" || $("#win_bid").val() == "0")){
 			alert("즉시 낙찰가를 입력해주세요");
 			$("#win_bid").focus();
 			return false;
 		}
 		// 즉시낙찰가 < 최소입찰가 방지
-		if(classify == "auction" && ($("#win_bid").val() <= $("#min_bid").val()) ){
+		if(classify == "경매" && ($("#win_bid").val() <= $("#min_bid").val()) ){
 			alert("즉시 낙찰가는 최소입찰가보다 작을 수 없습니다.");
 			$("#win_bid").val("");
 			$("#win_bid").focus();
@@ -186,13 +207,27 @@ $(document).ready(function (){
 			$("#details").focus();
 			return false;
 		}
-		
+
 		//이미지
-		if($("#image").val() == ""){
+		/*if($("#image").val() == ""){
 			alert("이미지를 추가해주세요");
 			$("#image").focus();
 			return false;
+		}*/
+		
+		/*** 금액에 , 제거 ***/
+		if(classify == "경매"){
+			var m_delc = remove_comma($("#min_bid").val());
+			$("#min_bid").val(m_delc);
+			var w_delc = remove_comma($("#win_bid").val());
+			$("#win_bid").val(w_delc);
+		}else if(classify == "구매"){
+			var p_delc = remove_comma($("#price").val());
+			$("#price").val(p_delc);
 		}
+		
+		$("form").submit();
 	});
+
 	
 });

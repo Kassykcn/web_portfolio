@@ -14,6 +14,18 @@
 	<logger name="soldesk.project.web">
 		<level value="info" />
 	</logger>
+	<logger name="web.my.bean">
+		<level value="info" />
+	</logger>
+	<logger name="web.my.controller">
+		<level value="info" />
+	</logger>
+	<logger name="web.my.mapper">
+		<level value="debug" />
+	</logger>
+	<logger name="web.my.service">
+		<level value="info" />
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

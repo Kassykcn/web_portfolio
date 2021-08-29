@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+<c:set var="cur_page" value="${cur_page}" />
+<c:set var="totalCnt" value="${totalCnt}" />  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/register_list.css">
+<link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/register_list.css"/>'>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="../js/register_list.js" charset="UTF-8"></script>
+<script type="text/javascript" src='<c:url value="/resources/js/register_list.js"/>' charset="UTF-8"></script>
 </head>
 <body>
 <!-- div의 css태그들은 frame.css 참조, 틀 위치잡기용  -->
@@ -15,6 +19,12 @@
 <div id="left"></div>
 <div id="content">
 <h2>경매/구매 목록</h2>
+	<div class="cntPage">
+		<span>총 게시물 수 : <c:out value="${totalCnt}"/> </span>
+	</div>
+	<div class="write_link">
+		<input type="button" id="write_link" class="btn1" value="등록">
+	</div>
 	<div class="sort">
 		<form id="sort_form">
 			<div>
@@ -34,9 +44,9 @@
 					<option value="complete">거래 완료</option>
 				</select>
 			</div>
-			<div>시작일 낮은순</div>
-			<div>시작일 높은순</div>
-			<div>조회수 높은순</div>
+			<div><a href="#">시작일 낮은순</a></div>
+			<div><a href="#">시작일 높은순</a></div>
+			<div><a href="#">조회수 높은순</a></div>
 		</form>
 	</div>
 	<form id="reg_list">
@@ -52,14 +62,23 @@
 				</tr>
 			</thead>
 			<tbody class="table2td">
+			<c:forEach var="list" items="${regList}">
 				<tr>
-					<td>1</td>
-					<td>경매</td>
-					<td><a href="#">제목</a></td>
-					<td>2021-08-25~2021-08-27</td>
-					<td>진행중</td>
-					<td>0</td>
+					<td><c:out value="${list.getIdx()}"/></td>
+					<td><c:out value="${list.getClassify()}"/></td>
+					<td><a href="register_view.do?idx=${list.getIdx()}&cur_page=${cur_page}">
+						<c:if test="${fn:length(list.getTitle()) > 15}">
+							${fn:substring(list.getTitle(),0,15)}...
+						</c:if> 
+						<c:if test="${fn:length(list.getTitle()) < 15}">
+							<c:out value="${list.getTitle()}"/>
+						</c:if> 
+					</a></td>
+					<td><c:out value="${list.getStart_date()}"/>~<c:out value="${list.getEnd_date()}"/></td>
+					<td><c:out value="${list.getDeal_state()}"/></td>
+					<td><c:out value="${list.getHits()}"/></td>
 				</tr>
+			</c:forEach>
 			</tbody>
 		</table>
 		<table class="search_table">

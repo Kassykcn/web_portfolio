@@ -1,24 +1,19 @@
-package web.my.dto;
+package web.my.bean;
 
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class RegisterBean {
-	int row_num, category, price, min_bid, win_bid, now_bid, final_bid, hits;
-	String row_date, start_date, end_date, deal_date;
+	int idx, price, min_bid, win_bid, now_bid, final_bid, hits;
+	String reg_date, start_date, end_date, deal_date;
+	String first, second, third; // 카테고리 대,중,소분류
 	String id, classify, classify_num, title, image, grade, details, deal_way, deal_state;
 	
-	public int getRow_num() {
-		return row_num;
+	public int getIdx() {
+		return idx;
 	}
-	public void setRow_num(int row_num) {
-		this.row_num = row_num;
-	}
-	public int getCategory() {
-		return category;
-	}
-	public void setCategory(int category) {
-		this.category = category;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	public int getPrice() {
 		return price;
@@ -56,11 +51,11 @@ public class RegisterBean {
 	public void setHits(int hits) {
 		this.hits = hits;
 	}
-	public String getRow_date() {
-		return row_date;
+	public String getReg_date() {
+		return reg_date;
 	}
-	public void setRow_date(String row_date) {
-		this.row_date = row_date;
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 	public String getStart_date() {
 		return start_date;
@@ -79,6 +74,24 @@ public class RegisterBean {
 	}
 	public void setDeal_date(String deal_date) {
 		this.deal_date = deal_date;
+	}
+	public String getFirst() {
+		return first;
+	}
+	public void setFirst(String first) {
+		this.first = first;
+	}
+	public String getSecond() {
+		return second;
+	}
+	public void setSecond(String second) {
+		this.second = second;
+	}
+	public String getThird() {
+		return third;
+	}
+	public void setThird(String third) {
+		this.third = third;
 	}
 	public String getId() {
 		return id;
@@ -134,5 +147,6 @@ public class RegisterBean {
 	public void setDeal_state(String deal_state) {
 		this.deal_state = deal_state;
 	}
+	
 	
 }

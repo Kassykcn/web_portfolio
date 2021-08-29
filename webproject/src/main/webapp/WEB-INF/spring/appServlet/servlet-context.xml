@@ -22,6 +22,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="soldesk.project.web" />
+	<context:component-scan base-package="web.my.bean, web.my.mapper, web.my.service, web.my.controller" />
 	
 	<default-servlet-handler/>
 	
