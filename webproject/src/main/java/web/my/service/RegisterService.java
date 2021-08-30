@@ -48,18 +48,33 @@ public class RegisterService implements RegisterMapper{
 	}
 	//조회수 올리지 않는 상세 페이지
 	@Override
-	public RegisterBean getView(String id) {
+	public RegisterBean getView(int id) {
 		return regMapper.getView(id);
 	}
 	//조회수 올리는 상세 페이지
 	@Override
-	public RegisterBean getViewHits(String id) {
+	public RegisterBean getViewHits(int id) {
 		regMapper.hitUp(id);
 		return regMapper.getView(id);
 	}
 
 	@Override
-	public void hitUp(String id) {
+	public void hitUp(int idx) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void updateRegister(RegisterBean rb) {
+		regMapper.updateRegister(rb.getIdx(), rb.getTitle(), rb.getFirst(), rb.getSecond(), 
+					   rb.getThird(), rb.getImage(), rb.getGrade(), rb.getDetails(), 
+					   rb.getStart_date(), rb.getEnd_date(), rb.getPrice(), 
+					   rb.getMin_bid(), rb.getWin_bid());
+		
+	}
+
+	@Override
+	public void updateRegister(int idx, String title, String first, String second, String third, String image,
+			String grade, String details, String start_date, String end_date, int price, int min_bid, int win_bid) {
 		// TODO Auto-generated method stub
 	}
 

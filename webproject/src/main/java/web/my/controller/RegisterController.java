@@ -48,7 +48,7 @@ public class RegisterController {
 	
 	//경매/구매 목록
 	@RequestMapping(value="/register_list.do")
-	public String register_list(@RequestParam("cur_page") String cur_page, 
+	public String register_list(@RequestParam("cur_page") int cur_page, 
 								Model model) {
 		
 		model.addAttribute("totalCnt", new Integer(regService.getTotalCnt()));
@@ -60,8 +60,8 @@ public class RegisterController {
 	
 	//경매/구매 상세페이지
 	@RequestMapping(value="/register_view.do")
-	public String register_view(@RequestParam("idx") String idx, 
-								@RequestParam("cur_page") String cur_page, 
+	public String register_view(@RequestParam("idx") int idx, 
+								@RequestParam("cur_page") int cur_page, 
 								Model model) {
 		
 		model.addAttribute("idx", idx);
@@ -69,6 +69,38 @@ public class RegisterController {
 		model.addAttribute("regData", regService.getViewHits(idx));
 		
 		return "register/register_view";
+	}
+	
+	// 경매/구매 수정폼으로 이동
+	@RequestMapping(value="/register_update.do", method = RequestMethod.GET)
+	public String register_update(@RequestParam("idx") int idx, 
+								@RequestParam("cur_page") int cur_page, 
+								Model model) {
+		
+		model.addAttribute("idx", idx);
+		model.addAttribute("cur_page", cur_page);
+		model.addAttribute("regData", regService.getView(idx));
+		System.out.println("register_update end --------------------");
+		return "register/register_update";
+	}
+	
+	// 경매/구매 수정
+	@RequestMapping(value="/register_update_ok.do", method = RequestMethod.POST)
+	public String register_update_ok(RegisterBean rb, 
+									 @RequestParam("idx") int idx, 
+									 @RequestParam("cur_page") int cur_page, 
+									 Model model) {
+		System.out.println("register_update_ok --------------------");
+		System.out.println("-------------------------idx"+idx);
+		//등록
+		regService.updateRegister(rb);
+		model.addAttribute("result", 1);
+		
+		model.addAttribute("idx", idx);
+		model.addAttribute("cur_page", cur_page);
+		model.addAttribute("regData", regService.getView(idx));
+		
+		return "register/register_update_ok";
 	}
 	
 }

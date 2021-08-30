@@ -44,35 +44,19 @@ $(document).ready(function (){
 	date = date < 10 ? '0' + date.toString() : date.toString();
 	var today = year+month+date;
 	
-	/*** 파일명을 찾고 write나 update에 따라 표시값 변경 ***/
-	//현재 파일명 찾기
-	var path = window.location.pathname;
-	var fileName = path.split("/").pop();
-	//alert(fileName);
-	
-	//파일명에 write나  update가 있을 때 구분과 카테고리 숨김/표시
-	if(fileName.match("write")){
-		// 구분 값 선택 전 <tr>태그 숨김
-		$("#buy_tr").css("display","none");
-		$("#auction_tr1").css("display","none");
-		$("#auction_tr2").css("display","none");
-		// 카테고리 중분류 소분류 숨김
-		$("#category_second").css("display","none");
-		$("#category_third").css("display","none");
-		// 시작일에 오늘 날짜 입력
-		$("#start_date").val(today);
-		
-	}else if(fileName.match("update")) {
-		/* $("#min_bid")[0]는 document.getElementById("min_bid")와 동일한 값을 가진다. */
-		//add_comma($("#price").val());
-		//add_comma($("#min_bid").val());
-		//add_comma($("#win_bid").val());
-	}
+	// 구분 값 선택 전 <tr>태그 숨김
+	$("#buy_tr").css("display","none");
+	$("#auction_tr1").css("display","none");
+	$("#auction_tr2").css("display","none");
+	// 카테고리 중분류 소분류 숨김
+	$("#category_second").css("display","none");
+	$("#category_third").css("display","none");
+	// 시작일에 오늘 날짜 입력
+	$("#start_date").val(today);
 	
 	/*** 구분 값(구매/경매) ***/
 	$("input[name=classify]").click(function(){
 		var classify = $("input[name=classify]:checked").val();
-
 		//값이 0이 아닐때에만 동작, 구분 값에 따라 <tr>태그 숨김/표시
 		if(classify == "경매"){
 			$("#buy_tr").css("display","none");
@@ -117,13 +101,12 @@ $(document).ready(function (){
 	/*** 유효성 검사 ***/ 
 	//등록이나 수정버튼 클릭 시
 	$("#submit_btn").click(function(){
-		if(fileName.match("write")){
-			//구분
-			if(!$("input[name=classify]").is(":checked")){
-				alert("구분 중 하나를 선택해주세요");
-				return false;
-			}
+		//구분
+		if(!$("input[name=classify]").is(":checked")){
+			alert("구분 중 하나를 선택해주세요");
+			return false;
 		}
+		
 		//카테고리
 		if($("#category_first").val() == 0 || $("#category_second").val() == 0 || $("#category_third").val() == 0 ){
 			alert("카테고리를 소분류까지 선택해주세요");
@@ -147,14 +130,6 @@ $(document).ready(function (){
 			$("#end_date").focus();
 			return false;
 		}else{
-			if(fileName.match("write")){
-				//시작일이 오늘날짜보다 작지 않도록
-				if($("#start_date").val() < today){
-					alert("경매 시작일은 지난 날짜로 입력할 수 없습니다");
-					$("#start_date").focus();
-					return false;
-				}
-			}
 			//종료일이 시작일보다 작지 않도록 
 			if($("#end_date").val() < $("#start_date").val()){
 				alert("경매 종료일은 경매시작일보다 작을 수 없습니다");

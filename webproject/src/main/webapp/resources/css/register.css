@@ -31,7 +31,7 @@ body{
 .input_short{
 	width: 80px;
 }
-#submit_btn{
+#submit_btn, .btn1{
 	background-color:white;
 	border: 2px solid black;
 	font-weight: bold;

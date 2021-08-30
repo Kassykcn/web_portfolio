@@ -11,9 +11,10 @@ body{
 	display:inline-block;
 	float: right;
 	padding: 7px;
+	font-size: 9pt;
 }
 .sort div{
-	width:95px;
+	width:85px;
 	text-align:center;
 	float: left;
 }
@@ -27,7 +28,6 @@ body{
 }
 /* table, th, td */
 .table2{
-	border: 1px solid black;
 	text-align: center;
 	width: 100%;
 	height: 100%;

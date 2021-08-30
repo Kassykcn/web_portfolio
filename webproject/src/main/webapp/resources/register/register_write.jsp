@@ -10,12 +10,12 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/register.css"/>'>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src='<c:url value="/resources/js/register.js"/>' charset="UTF-8"></script>
+<script type="text/javascript" src='<c:url value="/resources/js/register_write.js"/>' charset="UTF-8"></script>
 </head>
 <body>
 
 <!-- div의 css태그들은 frame.css 참조, 틀 위치잡기용  -->
-<div id="head"></div>
+<%@ include file="../Top.jsp" %>
 <div id="left"></div>
 <div id="content">
 	<h2>경매/구매 등록</h2>
@@ -36,11 +36,11 @@
 					<sf:options items="${categotyFirst}" />
 				</sf:select>
 				<sf:select path="second" id="category_second">
-					<option value="0">대분류</option>
+					<option value="0">중분류</option>
 					<sf:options items="${categotySecond}" />
 				</sf:select>
 				<sf:select path="third" id="category_third">
-					<option value="0">대분류</option>
+					<option value="0">소분류</option>
 					<sf:options items="${categotyThird}" />
 				</sf:select>
 			</td>
@@ -117,7 +117,7 @@
 	</table>
 	</sf:form>
 </div>
-<div id="foot"></div>
 
+<%@ include file="../Bottom.jsp" %>
 </body>
 </html>

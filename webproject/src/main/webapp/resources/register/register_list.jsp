@@ -15,7 +15,7 @@
 </head>
 <body>
 <!-- div의 css태그들은 frame.css 참조, 틀 위치잡기용  -->
-<div id="head"></div>
+<%@ include file="../Top.jsp" %>
 <div id="left"></div>
 <div id="content">
 <h2>경매/구매 목록</h2>
@@ -96,7 +96,7 @@
 		</table>
 	</form>
 </div>
-<div id="foot"></div>
+<%@ include file="../Bottom.jsp" %>
 
 </body>
 </html>

@@ -4,30 +4,29 @@ body{
 
 /* table, td */
 .table1{
-	border: 1px solid black;
 	text-align: center;
 	width: 90%;
 	height: 100%;
+	margin: auto;
 }
 .table1_td{
-	border: 1px solid black;
 	height: 100px;
 }
 .table2{
-	border: 1px solid black;
 	text-align: center;
 	width: 100%;
+	margin: auto;
 }
 .td_top{
 	height: 20px;
 }
 .td_title{
 	/* width:25%; */
-	height: 40px;
+	height: 45px;
 	font-weight: bold;
 }
 .td_content{
-	height: 40px;
+	height: 45px;
 }
 
 /* span */
@@ -46,6 +45,11 @@ body{
 	font-weight: bold;
 	height:25px;
 }
+#like_btn{
+	text-align:center;
+	vertical-align:middle;
+	height:30px;
+}
 .QnA_btn{
 	background-color:white;
 	border: 2px solid black;
@@ -55,8 +59,8 @@ body{
 
 /* img */
 .like_img{
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 }
 .title_img{
 	width: 350px;
@@ -67,18 +71,22 @@ body{
 	height: 12px;
 }
 /* div */
-#state{
+div{
+	vertical-align: middle;
+}
+#state, #deadline{
 	font-weight: bold;
 	font-size: 15pt;
 	display: inline-block;
 	padding: 10px 15px;
 }
 #deadline{
-	font-weight: bold;
-	font-size: 15pt;
 	color:#ff0000;
+}
+#like{
+	float:right;
 	display: inline-block;
-	padding: 10px 5px;
+	padding: 7px 10px;
 }
 #QnA_div{
 	position: relative;
@@ -87,12 +95,12 @@ body{
 	position: absolute;
 	width:auto;
 	padding: 3px;
-	bottom: 0px;
+	bottom: 10px;
 	right: 10px;
 }
 /* textarea */
 .tarea1{
-	width: 99%;
+	width: 100%;
 	height: 100px;
 	overflow: hidden;
 }

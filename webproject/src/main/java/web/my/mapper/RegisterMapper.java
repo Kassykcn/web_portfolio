@@ -71,11 +71,28 @@ public interface RegisterMapper {
 	final String SELECT_PAGE = "select * from register where idx=#{idx}";
 	@Select(SELECT_PAGE) 
 	@ResultMap("selectList")
-	RegisterBean getView(@Param("idx") String idx); 
-	RegisterBean getViewHits(@Param("idx") String idx); 
+	RegisterBean getView(@Param("idx") int idx); 
+	RegisterBean getViewHits(@Param("idx") int idx); 
 	
 	//조회수 증가
 	final String HIT_UP = "update register set hits=hits+1 where idx=#{idx}";
 	@Update(HIT_UP)
-	void hitUp(@Param("idx") String idx);
+	void hitUp(@Param("idx") int idx);
+	
+	//수정
+	final String UPDATE = "update register set "
+							+"title=#{title}, first=#{first}, second=#{second}, "
+							+"third=#{third}, image=#{image}, grade=#{grade}, "
+							+"details=#{details}, start_date=#{start_date}, end_date=#{end_date}, "
+							+"price=#{price}, min_bid=#{min_bid}, win_bid=#{win_bid} "
+							+"where idx=#{idx}";
+	@Update(UPDATE)
+	void updateRegister(@Param("idx") int idx, @Param("title") String title, 
+					 @Param("first") String first, @Param("second") String second,
+					 @Param("third") String third, @Param("image") String image,
+					 @Param("grade") String grade, @Param("details") String details,
+					 @Param("start_date") String start_date, @Param("end_date") String end_date,
+					 @Param("price") int price, @Param("min_bid") int min_bid, 
+					 @Param("win_bid") int win_bid );
+	void updateRegister(RegisterBean rb);
 }
