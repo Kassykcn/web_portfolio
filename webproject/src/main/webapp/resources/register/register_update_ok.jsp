@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<title>WriteForm</title>
+<title>UPDATE</title>
 <c:if test="${result == 1}">
 	<script type="text/javascript">
 		alert("수정되었습니다.");

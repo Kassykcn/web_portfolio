@@ -78,6 +78,11 @@ public class RegisterService implements RegisterMapper{
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	public void deleteRegister(int idx) {
+		regMapper.deleteRegister(idx);
+	}
+
 
 	
 	

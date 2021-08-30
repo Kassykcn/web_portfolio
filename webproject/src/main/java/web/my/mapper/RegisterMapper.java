@@ -2,6 +2,7 @@ package web.my.mapper;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Results;
@@ -95,4 +96,9 @@ public interface RegisterMapper {
 					 @Param("price") int price, @Param("min_bid") int min_bid, 
 					 @Param("win_bid") int win_bid );
 	void updateRegister(RegisterBean rb);
+	
+	//글 삭제
+	final String DELETE = "delete from register where idx=#{idx}";
+	@Delete(DELETE)
+	void deleteRegister(@Param("idx") int idx);
 }

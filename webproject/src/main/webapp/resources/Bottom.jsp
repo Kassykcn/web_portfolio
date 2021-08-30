@@ -4,7 +4,7 @@
     
 <!-- 상단바 -->
 <div align="center"; style="padding-bottom: 20px; padding-top: 20px;">
-<hr size="1px" color="#e9e9e9" width="90%">
+<hr size="1px" color="#e9e9e9" width="100%">
 <a style="text-decoration: none; color:black" href="링크">회사소개</a> |
 <a style="text-decoration: none; color:black" href="링크">이용약관</a> |
 <a style="text-decoration: none; color:black" href="링크">운영정책</a> |
@@ -12,7 +12,7 @@
 <a style="text-decoration: none; color:black" href="링크">광고운영정책</a> |
 <a style="text-decoration: none; color:black" href="링크">청소년보호정책</a> |
 <a style="text-decoration: none; color:black" href="링크">위치기반서비스 이용약관</a>
-<hr size="1px" color="#e9e9e9" width="90%">
+<hr size="1px" color="#e9e9e9" width="100%">
 </div>
 
 <div style="width:90%">

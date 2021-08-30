@@ -134,7 +134,7 @@
 		<tr>
 					<td class="td_content" colspan="4">
 						<input type="button" value="수정" class="btn1" onclick="location.href='register_update.do?idx=${regData.getIdx()}&cur_page=${cur_page}'">
-						<input type="button" value="삭제" class="btn1">
+						<input type="button" value="삭제" class="btn1" onclick="location.href='register_delete.do?idx=${regData.getIdx()}&cur_page=${cur_page}'">
 						<input type="button" value="목록" class="btn1" onclick="history.back()">
 					</td>
 					</tr>

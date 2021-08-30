@@ -90,9 +90,7 @@ public class RegisterController {
 									 @RequestParam("idx") int idx, 
 									 @RequestParam("cur_page") int cur_page, 
 									 Model model) {
-		System.out.println("register_update_ok --------------------");
-		System.out.println("-------------------------idx"+idx);
-		//등록
+		//수정
 		regService.updateRegister(rb);
 		model.addAttribute("result", 1);
 		
@@ -101,6 +99,22 @@ public class RegisterController {
 		model.addAttribute("regData", regService.getView(idx));
 		
 		return "register/register_update_ok";
+	}
+	
+	// 경매/구매 삭제
+	@RequestMapping(value="/register_delete.do", method = RequestMethod.GET)
+	public String register_delete(@RequestParam("idx") int idx, 
+									 @RequestParam("cur_page") int cur_page, 
+									 Model model) {
+		//삭제
+		regService.deleteRegister(idx);
+		model.addAttribute("result", 1);
+		
+		model.addAttribute("totalCnt", new Integer(regService.getTotalCnt()));
+		model.addAttribute("cur_page", cur_page);
+		model.addAttribute("regList", regService.getList());
+		
+		return "register/register_delete_ok";
 	}
 	
 }

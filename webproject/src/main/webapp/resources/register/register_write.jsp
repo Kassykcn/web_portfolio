@@ -18,9 +18,12 @@
 <%@ include file="../Top.jsp" %>
 <div id="left"></div>
 <div id="content">
-	<h2>경매/구매 등록</h2>
+	
 	<sf:form modelAttribute="regBean" method="post" action="${formUrl}" > <!-- enctype="multipart/form-data" -->
 	<table class="table1">
+		<tr>
+			<td class="align_left" colspan="2"><h2>경매/구매 등록</h2></td>
+		</tr>
 		<tr>
 			<th class="table1th">구분</th>
 			<td class="table1td">
@@ -112,6 +115,7 @@
 		<tr>
 			<td colspan="2" class="table1td">
 				<input type="button" id="submit_btn" value="등록">
+				<input type="button" class="btn1" value="목록" onclick="history.back()">
 			</td>
 		</tr>
 	</table>

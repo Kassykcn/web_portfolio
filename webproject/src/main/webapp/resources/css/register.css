@@ -4,10 +4,10 @@ body{
 }
 /* table, th, td */
 .table1{
-	border: 1px solid black;
 	text-align: center;
 	width: 90%;
 	height: 100%;
+	margin: auto;
 }
 .table1th{
 	width: 15%;
@@ -46,4 +46,9 @@ input:invalid{
 .tarea1{
 	width: 80%;
 	height: 80px;
+}
+
+/* text-align */
+.align_left{
+	text-align: left;
 }

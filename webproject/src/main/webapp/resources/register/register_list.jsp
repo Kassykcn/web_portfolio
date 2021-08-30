@@ -18,7 +18,12 @@
 <%@ include file="../Top.jsp" %>
 <div id="left"></div>
 <div id="content">
-<h2>경매/구매 목록</h2>
+<table class="table1">
+	<tr>
+		<td class="align_left"><h2>경매/구매 목록</h2></td>
+	</tr>
+</table>
+
 	<div class="cntPage">
 		<span>총 게시물 수 : <c:out value="${totalCnt}"/> </span>
 	</div>
