@@ -48,54 +48,35 @@ public interface RegisterMapper {
 	
 	@Insert(INSERT)
 	void insertRegister(RegisterBean rb);
+
 	
+	//목록 - 정렬, 필터, 검색 통합
+	final String LIST_SEARCH_SORT_CNT = "select count(1) from register ${filter} ${search}";
+	@Select(LIST_SEARCH_SORT_CNT)
+	int getSearchSortCnt(@Param("filter") String filter, @Param("search") String search);
 	
-	//전체 글 개수 조회
-	final String SELECT_CNT_ALL = "select count(1) from register";
-	@Select(SELECT_CNT_ALL)
-	int getTotalCnt();
-	
-	
-	//목록
-	final String SELECT_LIST = "select a.* from ("
-									+"select * from register "
-									+"order by reg_date desc, idx desc) a "
-								+"limit ${lenPage} offset ${page}";
-	
-	@Select(SELECT_LIST) //아래 내용은 DB컬럼과 동일하게 #{ } 지정
+	//정렬 - a태그 (시작일 낮은순, 시작일 높은순, 조회수 높은순)
+	//필터 - select box(거래종류, 거래상태)
+	final String LIST_SEARCH_SORT = "select a.* from ("
+								+"select * from register "
+								+"${filter} "
+								+"${search} "
+								+"order by ${sort}, idx desc) a "
+							+"limit ${lenPage} offset ${page}";		  
+	@Select(LIST_SEARCH_SORT)
 	@Results( id= "selectList", value= {
-		@Result(property = "idx", column = "idx"),
-		@Result(property = "classify", column = "classify"),
-		@Result(property = "title", column = "title"),
-		@Result(property = "start_date", column = "start_date"),
-		@Result(property = "end_date", column = "end_date"),
-		@Result(property = "deal_state", column = "deal_state"),
-		@Result(property = "hits", column = "hits")
-	})
-	ArrayList<RegisterBean> getList(@Param("page") int page, @Param("lenPage") int lenPage); // 페이징
-	
-	
-	//검색 - 검색된 게시글 개수
-	final String SEARCH_CNT = "select count(1) from register "
-			+"where ${search_key} like '%${search_txt}%' ";
-	@Select(SEARCH_CNT)
-	int getSearchCnt(@Param("search_key") String search_key, @Param("search_txt") String search_txt);
-	
-	
-	//검색 - 검색된 게시글 내용
-	final String SEARCH_ROW = "select a.* from ("
-			  						+"select * from register "
-			  						+"where ${search_key} like '%${search_txt}%' "
-			  						+"order by reg_date desc, idx desc) a "
-			  					+"limit ${lenPage} offset ${page}";
-	  
-	@Select(SEARCH_ROW)
-	@ResultMap("selectList") 
-	ArrayList<RegisterBean> getSearchList(
-		@Param("page") int page,  // 페이징
-		@Param("lenPage") int lenPage,  // 페이징
-		@Param("search_key") String search_key, 
-		@Param("search_txt") String search_txt);
+			@Result(property = "idx", column = "idx"),
+			@Result(property = "classify", column = "classify"),
+			@Result(property = "title", column = "title"),
+			@Result(property = "start_date", column = "start_date"),
+			@Result(property = "end_date", column = "end_date"),
+			@Result(property = "deal_state", column = "deal_state"),
+			@Result(property = "hits", column = "hits")
+		})
+	ArrayList<RegisterBean> getListSearchSort(
+		@Param("page") int page, @Param("lenPage") int lenPage, // 페이징
+		@Param("search") String search, //검색
+		@Param("filter") String filter, @Param("sort") String sort); //필터, 정렬
 	
 	
 	//상세 페이지
@@ -136,24 +117,4 @@ public interface RegisterMapper {
 	void deleteRegister(@Param("idx") int idx);
 	
 
-	
-	//전체 글 개수 조회
-	final String SELECT_SORT_CNT = "select count(1) from register ${filter} ";
-	@Select(SELECT_SORT_CNT)
-	int getSortCnt(@Param("filter") String filter);
-	
-	//정렬 - a태그 (시작일 낮은순, 시작일 높은순, 조회수 높은순)
-	//필터 - select box(거래종류, 거래상태)
-	final String SELECT_SORT = "select a.* from ("
-								+"select * from register "
-								+"${filter} "
-								+"order by ${sort}, idx desc) a "
-							+"limit ${lenPage} offset ${page}";
-						  
-	@Select(SELECT_SORT)
-	@ResultMap("selectList") 
-	ArrayList<RegisterBean> getListSort(
-		@Param("page") int page, @Param("lenPage") int lenPage, // 페이징
-		@Param("filter") String filter, @Param("sort") String sort); //정렬
-	
 }

@@ -34,22 +34,17 @@ create table register(
 insert into register(idx, reg_date, id, classify, title,  first, second, third, 
 image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
 values(null, now(), 'aaa', '구매', 'aaa',  '기타', '전체', '전체', 
-null, 'S', 'aaaa', '2021-08-29', '2021-08-30', 10000, 0, 0, '진행중');
+null, 'S', 'aaaa', '2021-08-31', '2021-09-01', 10000, 0, 0, '진행중');
 
 insert into register(idx, reg_date, id, classify, title,  first, second, third, 
 image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
-values(null, now(), 'aaa', '구매', 'a111',  '기타', '전체', '전체', 
-null, 'S', 'aaaa', '2021-08-29', '2021-08-30', 10000, 0, 0, '진행중');
+values(null, now(), 'aaa', '경매', 'a111',  '기타', '전체', '전체', 
+null, 'S', 'aaaa', '2021-08-31', '2021-09-01', 10000, 0, 0, '진행중');
 
-insert into register(idx, reg_date, id, classify, title,  first, second, third, 
-image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
-values(null, now(), 'aaa', '경매', 'aa11',  '기타', '전체', '전체', 
-null, 'S', 'aaaa', '2021-08-29', '2021-08-30', 10000, 0, 0, '진행중');
 
-update register set deal_state='거래완료' where idx between 0 and 20
-
+delete from register ;
 -- 확인용
-select * from register order by idx desc;
+select * from register order by hits desc;
 select * from register order by start_date desc, idx desc;
 select * from register order by reg_date desc, idx desc;
 select count(1) from register;

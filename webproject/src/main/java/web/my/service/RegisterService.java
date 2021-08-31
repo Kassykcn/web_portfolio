@@ -18,33 +18,37 @@ public class RegisterService implements RegisterMapper{
 	public ArrayList<String> getCategoryFirst() {
 		return regMapper.getCategoryFirst();
 	}
-
 	@Override
 	public ArrayList<String> getCategorySecond() {
 		return regMapper.getCategorySecond();
 	}
-
 	@Override
 	public ArrayList<String> getCategoryThird() {
 		return regMapper.getCategoryThird();
 	}
 
+	
 	//등록
 	@Override 
 	public void insertRegister(RegisterBean rb) {
 		regMapper.insertRegister(rb);
 	}
 
-	//게시글 총 개수 조회
+
+	//목록 전체 개수 구하기 - 정렬, 필터, 검색 통합
 	@Override
-	public int getTotalCnt() {
-		return regMapper.getTotalCnt();
+	public int getSearchSortCnt(String filter, String search) {
+		// TODO Auto-generated method stub
+		return regMapper.getSearchSortCnt(filter, search);
 	}
-	//목록 불러오기
+	//목록 - 정렬, 필터, 검색 통합
 	@Override
-	public ArrayList<RegisterBean> getList(int page, int lenPage) {
-		return regMapper.getList(page, lenPage);
+	public ArrayList<RegisterBean> getListSearchSort(int page, int lenPage, String search, String filter, String sort) {
+		// TODO Auto-generated method stub
+		return regMapper.getListSearchSort(page, lenPage, search, filter, sort);
 	}
+
+	
 	//조회수 올리지 않는 상세 페이지
 	@Override
 	public RegisterBean getView(int id) {
@@ -56,11 +60,11 @@ public class RegisterService implements RegisterMapper{
 		regMapper.hitUp(id);
 		return regMapper.getView(id);
 	}
-
 	@Override
 	public void hitUp(int idx) {
 	}
-
+	
+	//수정
 	@Override
 	public void updateRegister(RegisterBean rb) {
 		regMapper.updateRegister(rb.getIdx(), rb.getTitle(), rb.getFirst(), rb.getSecond(), 
@@ -69,37 +73,15 @@ public class RegisterService implements RegisterMapper{
 					   rb.getMin_bid(), rb.getWin_bid());
 		
 	}
-
 	@Override
 	public void updateRegister(int idx, String title, String first, String second, String third, String image,
 			String grade, String details, String start_date, String end_date, int price, int min_bid, int win_bid) {
 	}
-
+	
+	//삭제
 	@Override
 	public void deleteRegister(int idx) {
 		regMapper.deleteRegister(idx);
 	}
-
-	@Override
-	public int getSearchCnt(String search_key, String search_txt) {
-		return regMapper.getSearchCnt(search_key, search_txt);
-	}
-
-	@Override
-	public ArrayList<RegisterBean> getSearchList(int page, int lenPage, String search_key, String search_txt) {
-		return regMapper.getSearchList(page, lenPage, search_key, search_txt);
-	}
-
-	@Override
-	public ArrayList<RegisterBean> getListSort(int page, int lenPage, String filter, String sort) {
-		return regMapper.getListSort(page, lenPage, filter, sort);
-	}
-
-	@Override
-	public int getSortCnt(String filter) {
-		return regMapper.getSortCnt(filter);
-	}
-
-	
 	
 }

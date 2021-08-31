@@ -5,7 +5,7 @@
 <c:if test="${result == 1}">
 	<script type="text/javascript">
 		alert("삭제되었습니다.");
-		location.href="register_list.do?cur_page=${cur_page}&totalCnt=${totalCnt}";
+		location.href="register_list.do?cur_page=${cur_page}";
 	</script>
 </c:if>
 <c:if test="${result != 1}">
