@@ -136,9 +136,17 @@ public interface RegisterMapper {
 	void deleteRegister(@Param("idx") int idx);
 	
 
+	
+	//전체 글 개수 조회
+	final String SELECT_SORT_CNT = "select count(1) from register ${filter} ";
+	@Select(SELECT_SORT_CNT)
+	int getSortCnt(@Param("filter") String filter);
+	
 	//정렬 - a태그 (시작일 낮은순, 시작일 높은순, 조회수 높은순)
+	//필터 - select box(거래종류, 거래상태)
 	final String SELECT_SORT = "select a.* from ("
 								+"select * from register "
+								+"${filter} "
 								+"order by ${sort}, idx desc) a "
 							+"limit ${lenPage} offset ${page}";
 						  
@@ -146,7 +154,6 @@ public interface RegisterMapper {
 	@ResultMap("selectList") 
 	ArrayList<RegisterBean> getListSort(
 		@Param("page") int page, @Param("lenPage") int lenPage, // 페이징
-		@Param("sort") String sort); //정렬
-	
+		@Param("filter") String filter, @Param("sort") String sort); //정렬
 	
 }

@@ -6,6 +6,9 @@
 <c:set var="cur_page" value="${cur_page}" />
 <c:set var="totalCnt" value="${totalCnt}" />  
 <c:set var="paging" value="${paging}" />
+<c:set var="sort_num" value="${sort_num}"/>
+<c:set var="filter_codeC" value="${filter_codeC}"/>
+<c:set var="filter_codeD" value="${filter_codeD}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,20 +37,29 @@
 	</div>
 	<div class="sort">
 		<div>
-			<select onchange="filterC()" id="classify">
-				<option value="0">거래종류</option>
-				<option value="c0">전체</option>
-				<option value="c1">경매</option>
-				<option value="c2">구매</option>
+			<select onchange="filter_classify()" id="classify">
+				<option value="0" <c:if test="${filter_codeC == '0' }">selected</c:if> >
+					거래종류</option>
+				<option value="c0" <c:if test="${filter_codeC == 'c0' }">selected</c:if> >
+					전체</option>
+				<option value="c1" <c:if test="${filter_codeC == 'c1' }">selected</c:if> >
+					경매</option>
+				<option value="c2" <c:if test="${filter_codeC == 'c2' }">selected</c:if> >
+					구매</option>
 			</select>
 		</div>
 		<div>
-			<select onchange="filterD()" id="deal_state">
-				<option value="0">거래상태</option>
-				<option value="d0">전체</option>
-				<option value="d1">진행중</option>
-				<option value="d2">기간만료</option>
-				<option value="d3">거래완료</option>
+			<select onchange="filter_state()" id="deal_state">
+				<option value="0" <c:if test="${filter_codeD == '0' }">selected</c:if> >
+				거래상태</option>
+				<option value="d0" <c:if test="${filter_codeD == 'd0' }">selected</c:if> >
+				전체</option>
+				<option value="d1" <c:if test="${filter_codeD == 'd1' }">selected</c:if> >
+				진행중</option>
+				<option value="d2" <c:if test="${filter_codeD == 'd2' }">selected</c:if> >
+				기간만료</option>
+				<option value="d3" <c:if test="${filter_codeD == 'd3' }">selected</c:if> >
+				거래완료</option>
 			</select>
 		</div>
 		<div><a href="#" onclick="sort_num1()">시작일 낮은순</a></div>
@@ -94,20 +106,20 @@
 		<tr>
 			<td>
 				<c:if test="${cur_page != 1}">
-					[<a href="register_list.do?cur_page=1">
+					[<a href="register_listSort.do?cur_page=1&sort_num=${sort_num}&filter_code=${filter_code}">
 					처음
 					</a>]
 				</c:if>
 				<c:forEach var="i" begin="1" end="${paging}">
 					
-					<a href="register_list.do?cur_page=${i}">
+					<a href="register_listSort.do?cur_page=${i}&sort_num=${sort_num}&filter_code=${filter_code}">
 					[<c:if test="${i == cur_page}"><b></c:if>
 					${i}
 					<c:if test="${i == cur_page}"></b></c:if>]
 					</a>
 				</c:forEach>
 				<c:if test="${cur_page != paging}">
-					[<a href="register_list.do?cur_page=${paging}">
+					[<a href="register_listSort.do?cur_page=${paging}&sort_num=${sort_num}&filter_code=${filter_code}">
 					마지막
 					</a>]
 				</c:if>

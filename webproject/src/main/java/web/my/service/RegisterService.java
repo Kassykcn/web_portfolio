@@ -91,11 +91,14 @@ public class RegisterService implements RegisterMapper{
 	}
 
 	@Override
-	public ArrayList<RegisterBean> getListSort(int page, int lenPage, String sort) {
-		// TODO Auto-generated method stub
-		return regMapper.getListSort(page, lenPage, sort);
+	public ArrayList<RegisterBean> getListSort(int page, int lenPage, String filter, String sort) {
+		return regMapper.getListSort(page, lenPage, filter, sort);
 	}
 
+	@Override
+	public int getSortCnt(String filter) {
+		return regMapper.getSortCnt(filter);
+	}
 
 	
 	

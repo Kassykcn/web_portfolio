@@ -46,9 +46,10 @@ image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state
 values(null, now(), 'aaa', '경매', 'aa11',  '기타', '전체', '전체', 
 null, 'S', 'aaaa', '2021-08-29', '2021-08-30', 10000, 0, 0, '진행중');
 
-update register set start_date='2021-08-19', end_date='2021-08-21' where idx between 31 and 34
+update register set deal_state='거래완료' where idx between 0 and 20
 
 -- 확인용
+select * from register order by idx desc;
 select * from register order by start_date desc, idx desc;
 select * from register order by reg_date desc, idx desc;
 select count(1) from register;
