@@ -37,23 +37,23 @@
 			<div>
 				<select>
 					<option value="0">거래종류</option>
-					<option value="all">전체</option>
-					<option value="auction">경매</option>
-					<option value="buy">구매</option>
+					<option value="전체">전체</option>
+					<option value="경매">경매</option>
+					<option value="구매">구매</option>
 				</select>
 			</div>
 			<div>
 				<select>
 					<option value="0">거래상태</option>
-					<option value="all">전체</option>
-					<option value="ongoing">진행 중</option>
-					<option value="close">기간 만료</option>
-					<option value="complete">거래 완료</option>
+					<option value="전체">전체</option>
+					<option value="진행중">진행중</option>
+					<option value="기간만료">기간만료</option>
+					<option value="거래완료">거래완료</option>
 				</select>
 			</div>
-			<div><a href="#">시작일 낮은순</a></div>
-			<div><a href="#">시작일 높은순</a></div>
-			<div><a href="#">조회수 높은순</a></div>
+			<div><a href="register_listSort.do?cur_page=1&sort_num=1">시작일 낮은순</a></div>
+			<div><a href="register_listSort.do?cur_page=1&sort_num=2">시작일 높은순</a></div>
+			<div><a href="register_listSort.do?cur_page=1&sort_num=3">조회수 높은순</a></div>
 		</form>
 	</div>
 	<form id="reg_list">

@@ -32,6 +32,7 @@ public interface RegisterMapper {
 	@Select(CATEGORY_THIRD)
 	ArrayList<String> getCategoryThird();
 	
+	
 	//등록
 	final String INSERT = "insert into register("
 								+"idx, reg_date, id, classify, title, "
@@ -44,6 +45,7 @@ public interface RegisterMapper {
 								+"#{grade}, #{details}, #{start_date}, #{end_date}, "
 								+"#{price}, #{min_bid}, #{win_bid}, '진행중')";
 
+	
 	@Insert(INSERT)
 	void insertRegister(RegisterBean rb);
 	
@@ -53,13 +55,14 @@ public interface RegisterMapper {
 	@Select(SELECT_CNT_ALL)
 	int getTotalCnt();
 	
+	
 	//목록
 	final String SELECT_LIST = "select a.* from ("
 									+"select * from register "
 									+"order by reg_date desc, idx desc) a "
 								+"limit ${lenPage} offset ${page}";
-	//DB컬럼과 동일하게 #{ } 지정
-	@Select(SELECT_LIST) 
+	
+	@Select(SELECT_LIST) //아래 내용은 DB컬럼과 동일하게 #{ } 지정
 	@Results( id= "selectList", value= {
 		@Result(property = "idx", column = "idx"),
 		@Result(property = "classify", column = "classify"),
@@ -69,13 +72,15 @@ public interface RegisterMapper {
 		@Result(property = "deal_state", column = "deal_state"),
 		@Result(property = "hits", column = "hits")
 	})
-	ArrayList<RegisterBean> getList(@Param("page") int page, @Param("lenPage") int lenPage); 
+	ArrayList<RegisterBean> getList(@Param("page") int page, @Param("lenPage") int lenPage); // 페이징
+	
 	
 	//검색 - 검색된 게시글 개수
 	final String SEARCH_CNT = "select count(1) from register "
 			+"where ${search_key} like '%${search_txt}%' ";
 	@Select(SEARCH_CNT)
 	int getSearchCnt(@Param("search_key") String search_key, @Param("search_txt") String search_txt);
+	
 	
 	//검색 - 검색된 게시글 내용
 	final String SEARCH_ROW = "select a.* from ("
@@ -87,11 +92,11 @@ public interface RegisterMapper {
 	@Select(SEARCH_ROW)
 	@ResultMap("selectList") 
 	ArrayList<RegisterBean> getSearchList(
-		@Param("page") int page, 
-		@Param("lenPage") int lenPage, 
+		@Param("page") int page,  // 페이징
+		@Param("lenPage") int lenPage,  // 페이징
 		@Param("search_key") String search_key, 
 		@Param("search_txt") String search_txt);
-	 
+	
 	
 	//상세 페이지
 	final String SELECT_PAGE = "select * from register where idx=#{idx}";
@@ -100,10 +105,12 @@ public interface RegisterMapper {
 	RegisterBean getView(@Param("idx") int idx); 
 	RegisterBean getViewHits(@Param("idx") int idx); 
 	
+	
 	//조회수 증가
 	final String HIT_UP = "update register set hits=hits+1 where idx=#{idx}";
 	@Update(HIT_UP)
 	void hitUp(@Param("idx") int idx);
+	
 	
 	//수정
 	final String UPDATE = "update register set "
@@ -122,10 +129,24 @@ public interface RegisterMapper {
 					 @Param("win_bid") int win_bid );
 	void updateRegister(RegisterBean rb);
 	
+	
 	//글 삭제
 	final String DELETE = "delete from register where idx=#{idx}";
 	@Delete(DELETE)
 	void deleteRegister(@Param("idx") int idx);
+	
+
+	//정렬
+	final String SELECT_SORT = "select a.* from ("
+								+"select * from register "
+								+"order by ${sort}, idx desc) a "
+							+"limit ${lenPage} offset ${page}";
+						  
+	@Select(SELECT_SORT)
+	@ResultMap("selectList") 
+	ArrayList<RegisterBean> getListSort(
+		@Param("page") int page, @Param("lenPage") int lenPage, // 페이징
+		@Param("sort") String sort); //정렬
 	
 	
 }

@@ -59,7 +59,6 @@ public class RegisterService implements RegisterMapper{
 
 	@Override
 	public void hitUp(int idx) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -74,7 +73,6 @@ public class RegisterService implements RegisterMapper{
 	@Override
 	public void updateRegister(int idx, String title, String first, String second, String third, String image,
 			String grade, String details, String start_date, String end_date, int price, int min_bid, int win_bid) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -90,6 +88,12 @@ public class RegisterService implements RegisterMapper{
 	@Override
 	public ArrayList<RegisterBean> getSearchList(int page, int lenPage, String search_key, String search_txt) {
 		return regMapper.getSearchList(page, lenPage, search_key, search_txt);
+	}
+
+	@Override
+	public ArrayList<RegisterBean> getListSort(int page, int lenPage, String sort) {
+		// TODO Auto-generated method stub
+		return regMapper.getListSort(page, lenPage, sort);
 	}
 
 

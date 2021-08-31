@@ -143,4 +143,31 @@ public class RegisterController {
 		return "register/register_delete_ok";
 	}
 	
-}
+	//경매/구매 정렬
+	@RequestMapping(value="/register_listSort.do", method = RequestMethod.GET)
+	public String register_listSort(@RequestParam("cur_page") int cur_page, 
+									@RequestParam("sort_num") int sort_num, 
+								Model model) {
+		
+		int totalCnt = regService.getTotalCnt();
+		int paging = (int)Math.ceil((double)totalCnt/lenPage);
+		String sort = "";
+		switch (sort_num) {
+			case 1: sort = "reg_date desc"; break;
+			case 2: sort = "reg_date asc"; break;
+			case 3: sort = "hits desc"; break;
+			default: sort = "reg_date desc"; break;
+		}
+		
+		model.addAttribute("totalCnt", totalCnt); //전체 글 개수
+		model.addAttribute("paging", paging); //페이징  수
+		model.addAttribute("cur_page", cur_page); //현재 페이지
+		model.addAttribute("searchVO", new searchVO()); //검색 폼 ValueObject
+		model.addAttribute("sort", sort); //정렬
+		model.addAttribute("regList", regService.getListSort(((cur_page-1)*lenPage), lenPage, sort));
+		
+		return "register/register_list";
+	}
+	
+	
+}// class end
