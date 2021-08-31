@@ -42,9 +42,8 @@ public class RegisterService implements RegisterMapper{
 	}
 	//목록 불러오기
 	@Override
-	public ArrayList<RegisterBean> getList() {
-		// TODO Auto-generated method stub
-		return regMapper.getList();
+	public ArrayList<RegisterBean> getList(int page, int lenPage) {
+		return regMapper.getList(page, lenPage);
 	}
 	//조회수 올리지 않는 상세 페이지
 	@Override
@@ -81,6 +80,16 @@ public class RegisterService implements RegisterMapper{
 	@Override
 	public void deleteRegister(int idx) {
 		regMapper.deleteRegister(idx);
+	}
+
+	@Override
+	public int getSearchCnt(String search_key, String search_txt) {
+		return regMapper.getSearchCnt(search_key, search_txt);
+	}
+
+	@Override
+	public ArrayList<RegisterBean> getSearchList(int page, int lenPage, String search_key, String search_txt) {
+		return regMapper.getSearchList(page, lenPage, search_key, search_txt);
 	}
 
 

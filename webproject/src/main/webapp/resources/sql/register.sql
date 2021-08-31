@@ -33,19 +33,31 @@ create table register(
 -- 매퍼 SQL 형태에 값 직접 입력
 insert into register(idx, reg_date, id, classify, title,  first, second, third, 
 image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
-values(null, now(), 'aaa', '구매', 'ㅁㅁㅁ',  '기타', '전체', '전체', 
+values(null, now(), 'aaa', '구매', 'aaa',  '기타', '전체', '전체', 
 null, 'S', 'aaaa', '2021-08-29', '2021-08-30', 10000, 0, 0, '진행중');
 
-delete from register;
+insert into register(idx, reg_date, id, classify, title,  first, second, third, 
+image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
+values(null, now(), 'aaa', '구매', 'a111',  '기타', '전체', '전체', 
+null, 'S', 'aaaa', '2021-08-29', '2021-08-30', 10000, 0, 0, '진행중');
+
+insert into register(idx, reg_date, id, classify, title,  first, second, third, 
+image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
+values(null, now(), 'aaa', '경매', 'aa11',  '기타', '전체', '전체', 
+null, 'S', 'aaaa', '2021-08-29', '2021-08-30', 10000, 0, 0, '진행중');
 
 -- 확인용
-select * from register;
+select * from register order by reg_date desc, idx desc;
 select count(1) from register;
----------------------------------------------------------------------------
-select * from 
-( select a.*, ceil(count(*) / 5) as page from 
-(select idx, classify, title, start_date, end_date, deal_state, hits
-from register order by start_date desc 
-) a ) b where b.page = '1';
+select ceil(count(1)/5) from register;
 
+---------------------------------------------------------------------------
+select a.* from ( select * from register where title like '%포토%' 
+				  order by reg_date desc, idx desc) a 
+limit 5 offset 0;
+
+select a.* from (select * from register order by reg_date desc, idx desc) a 
+limit 5 offset 0;
+-------------------------------------------
+select count(1) from register where title like '%포토%' ;
 

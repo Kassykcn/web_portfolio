@@ -54,7 +54,10 @@ public interface RegisterMapper {
 	int getTotalCnt();
 	
 	//목록
-	final String SELECT_LIST = "select * from register order by start_date desc, idx desc";
+	final String SELECT_LIST = "select a.* from ("
+									+"select * from register "
+									+"order by reg_date desc, idx desc) a "
+								+"limit ${lenPage} offset ${page}";
 	//DB컬럼과 동일하게 #{ } 지정
 	@Select(SELECT_LIST) 
 	@Results( id= "selectList", value= {
@@ -66,7 +69,29 @@ public interface RegisterMapper {
 		@Result(property = "deal_state", column = "deal_state"),
 		@Result(property = "hits", column = "hits")
 	})
-	ArrayList<RegisterBean> getList(); 
+	ArrayList<RegisterBean> getList(@Param("page") int page, @Param("lenPage") int lenPage); 
+	
+	//검색 - 검색된 게시글 개수
+	final String SEARCH_CNT = "select count(1) from register "
+			+"where ${search_key} like '%${search_txt}%' ";
+	@Select(SEARCH_CNT)
+	int getSearchCnt(@Param("search_key") String search_key, @Param("search_txt") String search_txt);
+	
+	//검색 - 검색된 게시글 내용
+	final String SEARCH_ROW = "select a.* from ("
+			  						+"select * from register "
+			  						+"where ${search_key} like '%${search_txt}%' "
+			  						+"order by reg_date desc, idx desc) a "
+			  					+"limit ${lenPage} offset ${page}";
+	  
+	@Select(SEARCH_ROW)
+	@ResultMap("selectList") 
+	ArrayList<RegisterBean> getSearchList(
+		@Param("page") int page, 
+		@Param("lenPage") int lenPage, 
+		@Param("search_key") String search_key, 
+		@Param("search_txt") String search_txt);
+	 
 	
 	//상세 페이지
 	final String SELECT_PAGE = "select * from register where idx=#{idx}";
@@ -101,4 +126,6 @@ public interface RegisterMapper {
 	final String DELETE = "delete from register where idx=#{idx}";
 	@Delete(DELETE)
 	void deleteRegister(@Param("idx") int idx);
+	
+	
 }

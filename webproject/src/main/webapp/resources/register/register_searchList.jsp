@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="web.my.utils.PagingManager"%>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <c:set var="cur_page" value="${cur_page}" />
-<c:set var="totalCnt" value="${totalCnt}" />  
-<c:set var="paging" value="${paging}" />
+<c:set var="searchCnt" value="${searchCnt}" /> 
+<c:set var="searchPages" value="${searchPages}" /> 
+<c:set var="search_key" value="${search_key}" /> 
+<c:set var="search_txt" value="${search_txt}" />  
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +31,7 @@
 </table>
 
 	<div class="cntPage">
-		<span>총 게시물 수 : <c:out value="${totalCnt}"/> </span>
+		<span>검색된 게시물 수 : <c:out value="${searchCnt}"/> </span>
 	</div>
 	<div class="write_link">
 		<input type="button" id="write_link" class="btn1" value="등록">
@@ -69,7 +73,7 @@
 				</tr>
 			</thead>
 			<tbody class="table2td">
-			<c:forEach var="list" items="${regList}">
+			<c:forEach var="list" items="${searchList}">
 				<tr>
 					<td><c:out value="${list.getIdx()}"/></td>
 					<td><c:out value="${list.getClassify()}"/></td>
@@ -88,31 +92,31 @@
 			</c:forEach>
 			</tbody>
 		</table>
+		<table class="search_table">
+			<tr>
+				<td>
+					<c:if test="${cur_page != 1}">
+						[<a href="register_serchList.do?cur_page=1&search_key=${search_key}&search_txt=${search_txt}">
+						처음
+						</a>]
+					</c:if>
+					<c:forEach var="i" begin="1" end="${searchPages}">
+						
+						<a href="register_serchList.do?cur_page=${i}&search_key=${search_key}&search_txt=${search_txt}">
+						[<c:if test="${i == cur_page}"><b></c:if>
+						${i}
+						<c:if test="${i == cur_page}"></b></c:if>]
+						</a>
+					</c:forEach>
+					<c:if test="${cur_page != searchPages}">
+						[<a href="register_serchList.do?cur_page=${searchPages}&search_key=${search_key}&search_txt=${search_txt}">
+						마지막
+						</a>]
+					</c:if>
+				</td>
+			</tr>
+		</table>
 	</form>
-	<table class="search_table">
-		<tr>
-			<td>
-				<c:if test="${cur_page != 1}">
-					[<a href="register_list.do?cur_page=1">
-					처음
-					</a>]
-				</c:if>
-				<c:forEach var="i" begin="1" end="${paging}">
-					
-					<a href="register_list.do?cur_page=${i}">
-					[<c:if test="${i == cur_page}"><b></c:if>
-					${i}
-					<c:if test="${i == cur_page}"></b></c:if>]
-					</a>
-				</c:forEach>
-				<c:if test="${cur_page != paging}">
-					[<a href="register_list.do?cur_page=${paging}">
-					마지막
-					</a>]
-				</c:if>
-			</td>
-		</tr>
-	</table>
 	<sf:form modelAttribute="searchVO" method="post" action="register_serchList.do"> 
 		<input type="hidden" name="cur_page" value="${cur_page}">
 		<div class="search_table">
@@ -124,7 +128,7 @@
 				<option value="id" <c:if test="${search_key == 'id'}">selected</c:if>>
 					작성자</option>
 			</select>
-			<sf:input path="search_txt" id="search_txt" placeholder="검색어를 입력하세요"/>
+			<sf:input path="search_txt" id="search_txt" value="${search_txt}" placeholder="검색어를 입력하세요"/>
 			<input type="submit" class="btn1" value="검색">
 		</div>
 	</sf:form>
