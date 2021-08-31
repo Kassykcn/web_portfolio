@@ -30,15 +30,8 @@ function sort_num3(){
 }
 
 
-function filterC(){
+function filter(){
 	var classify_value = $("#classify").val();
 	var state_value = $("#deal_state").val();
-	alert(classify_value+"/"+state_value);
-	location.href='register_listSort.do?cur_page=1&sort_num=0&filter_codeC='+classify_value+"&filter_codeD="+state_value;
-}
-function filterD(){
-	var classify_value = $("#classify").val();
-	var state_value = $("#deal_state").val();
-	alert(classify_value+"/"+state_value);
 	location.href='register_listSort.do?cur_page=1&sort_num=0&filter_codeC='+classify_value+"&filter_codeD="+state_value;
 }

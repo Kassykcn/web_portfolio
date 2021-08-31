@@ -37,7 +37,7 @@
 	</div>
 	<div class="sort">
 		<div>
-			<select onchange="filter_classify()" id="classify">
+			<select onchange="filter()" id="classify">
 				<option value="0" <c:if test="${filter_codeC == '0' }">selected</c:if> >
 					거래종류</option>
 				<option value="c0" <c:if test="${filter_codeC == 'c0' }">selected</c:if> >
@@ -49,7 +49,7 @@
 			</select>
 		</div>
 		<div>
-			<select onchange="filter_state()" id="deal_state">
+			<select onchange="filter()" id="deal_state">
 				<option value="0" <c:if test="${filter_codeD == '0' }">selected</c:if> >
 				거래상태</option>
 				<option value="d0" <c:if test="${filter_codeD == 'd0' }">selected</c:if> >
@@ -106,20 +106,20 @@
 		<tr>
 			<td>
 				<c:if test="${cur_page != 1}">
-					[<a href="register_listSort.do?cur_page=1&sort_num=${sort_num}&filter_code=${filter_code}">
+					[<a href="register_listSort.do?cur_page=1&sort_num=${sort_num}&filter_codeC=${filter_codeC}&filter_codeD=${filter_codeD}">
 					처음
 					</a>]
 				</c:if>
 				<c:forEach var="i" begin="1" end="${paging}">
 					
-					<a href="register_listSort.do?cur_page=${i}&sort_num=${sort_num}&filter_code=${filter_code}">
+					<a href="register_listSort.do?cur_page=${i}&sort_num=${sort_num}&filter_codeC=${filter_codeC}&filter_codeD=${filter_codeD}">
 					[<c:if test="${i == cur_page}"><b></c:if>
 					${i}
 					<c:if test="${i == cur_page}"></b></c:if>]
 					</a>
 				</c:forEach>
 				<c:if test="${cur_page != paging}">
-					[<a href="register_listSort.do?cur_page=${paging}&sort_num=${sort_num}&filter_code=${filter_code}">
+					[<a href="register_listSort.do?cur_page=${paging}&sort_num=${sort_num}&filter_codeC=${filter_codeC}&filter_codeD=${filter_codeD}">
 					마지막
 					</a>]
 				</c:if>

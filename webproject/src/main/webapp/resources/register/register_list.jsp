@@ -34,7 +34,7 @@
 	</div>
 	<div class="sort">
 		<div>
-			<select onchange="filterC()" id="classify">
+			<select onchange="filter()" id="classify">
 				<option value="0">거래종류</option>
 				<option value="c0">전체</option>
 				<option value="c1">경매</option>
@@ -42,7 +42,7 @@
 			</select>
 		</div>
 		<div>
-			<select onchange="filterD()" id="deal_state">
+			<select onchange="filter()" id="deal_state">
 				<option value="0">거래상태</option>
 				<option value="d0">전체</option>
 				<option value="d1">진행중</option>
