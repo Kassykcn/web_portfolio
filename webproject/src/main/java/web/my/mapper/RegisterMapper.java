@@ -136,7 +136,7 @@ public interface RegisterMapper {
 	void deleteRegister(@Param("idx") int idx);
 	
 
-	//정렬
+	//정렬 - a태그 (시작일 낮은순, 시작일 높은순, 조회수 높은순)
 	final String SELECT_SORT = "select a.* from ("
 								+"select * from register "
 								+"order by ${sort}, idx desc) a "

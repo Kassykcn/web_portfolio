@@ -153,8 +153,8 @@ public class RegisterController {
 		int paging = (int)Math.ceil((double)totalCnt/lenPage);
 		String sort = "";
 		switch (sort_num) {
-			case 1: sort = "reg_date desc"; break;
-			case 2: sort = "reg_date asc"; break;
+			case 1: sort = "start_date desc"; break;
+			case 2: sort = "start_date asc"; break;
 			case 3: sort = "hits desc"; break;
 			default: sort = "reg_date desc"; break;
 		}
