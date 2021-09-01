@@ -12,7 +12,11 @@ tr{
 	height: 100%;
 	margin: auto;
 }
-.table1_td{
+.table1_td1{
+	width:40%;
+	height: 100px;
+}
+.table1_td2{
 	height: 100px;
 }
 .table2{
@@ -101,23 +105,30 @@ div{
 #deadline{
 	color:#ff0000;
 }
-#like{
+.report{
+	right:0px;
+	display: inline-block;
+	padding: 7px 5px;
+	right: 0px;
+}
+.like{
+	position:absolute;
 	float:right;
 	display: inline-block;
 	padding: 7px 10px;
 }
-#QnA_div{
+.QnA_div{
 	position: relative;
 	display:block;
 }
-#QnA_inner_div{
+.QnA_inner_div{
 	position: absolute;
 	width:auto;
 	padding: 3px;
 	bottom: 10px;
 	right: 10px;
 }
-#QnA_outer_div{
+.QnA_outer_div{
 	position: absolute;
 	width:auto;
 	text-align: right;
@@ -134,6 +145,17 @@ div{
 /* text-align */
 .align_left{
 	text-align: left;
+}
+
+/* a */
+a:hover, a:active {
+	text-decoration: underline;
+	font-weight: bold;
+	color:black;
+}
+a:link, a:visited {
+	text-decoration: underline;
+	color:black;
 }
 
 /* tooltip */

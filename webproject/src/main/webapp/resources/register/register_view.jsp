@@ -23,7 +23,7 @@
 			<td class="align_left"><h2>경매/구매 상세페이지</h2></td>
 		</tr>
 		<tr>
-			<td class="table1_td">
+			<td class="table1_td1">
 				<c:if test="${regData.getImage() == null}">
 					<img alt="image" class="title_img" src='<c:url value="/resources/images/img_ready.png"/>'>
 				</c:if>
@@ -32,7 +32,7 @@
 				</c:if>
 				
 			</td>
-			<td class="table1_td" colspan="2">
+			<td class="table1_td2" colspan="2">
 				<div>
 					<div id="state">
 						<c:set var="classify" value="${regData.getClassify()}"/>
@@ -43,7 +43,10 @@
 						<c:set var="endDate" value="${fn:replace(fn:substring(regData.getEnd_date(),5,10),'-','')}"/>
 							D-${endDate-startDate}
 					</div>
-					<div id="like">
+					<div class="report">
+						<a href="#" id="report">신고</a>
+					</div>
+					<div class="like">
 						<button type="button" id="like_btn" class="btn1">
 							<img alt="찜" class="like_img" src='<c:url value="/resources/images/heart_empty.png"/>'>
 						</button>
@@ -145,7 +148,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<div id="QnA_div">
+				<div class="QnA_div">
 					<form method="post" action="register_view.do">
 						<input type="hidden"  name="cur_page" value="${cur_page}" >
 						<input type="hidden" name="idx" value="${regData.getIdx()}">
@@ -153,10 +156,10 @@
 						<input type="hidden" name="QnA_type" value="Q">
 						<input type="hidden" name="QnA_state" value="답변대기">
 						<textarea class="tarea1" id="QnA_text" name="QnA_text" placeholder="최대 200자까지 입력가능합니다" maxlength="200"></textarea>
-						<div id="QnA_inner_div">
+						<div class="QnA_inner_div">
 							<span id="QnA_length"></span>/200자
 						</div>
-						<div id="QnA_outer_div">
+						<div class="QnA_outer_div">
 							<input type="checkbox" id="secretCk" class="QnA_btn">비공개 여부
 							<input type="hidden" name="QnA_secret" id="QnA_secret" value="N">
 							&nbsp;&nbsp;

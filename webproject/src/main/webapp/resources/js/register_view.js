@@ -54,5 +54,9 @@ $(document).ready(function (){
 		}
 	});
 	
+	$("#report").click(function(){
+		confirm("신고하시겠습니까?");
+	});
+	
 });
 
