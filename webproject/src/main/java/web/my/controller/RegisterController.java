@@ -1,11 +1,18 @@
 package web.my.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import web.my.bean.RegisterBean;
 import web.my.bean.RegisterQnABean;
@@ -36,13 +43,60 @@ public class RegisterController {
 		return "register/register_write";
 	}
 	//경매/구매 등록 확인
-	@RequestMapping(value="/register_write_ok.do", method = RequestMethod.POST)
+	/*
+	 @RequestMapping(value="/register_write_ok.do", method = RequestMethod.POST)
 	public String register_write_ok(RegisterBean rb, Model model,
 			@RequestParam(value="file", required=false) String file) {
 		
 		if(file.isEmpty()) { //파일에서 넘어온 값이 빈 값인 경우 null 처리 
 			System.out.println("----------file is empty");
 			rb.setFile(null);
+		}
+		
+		regService.insertRegister(rb); //등록
+		model.addAttribute("result", 1);
+
+		return "register/register_write_ok";
+	}
+	 */
+	@RequestMapping(value="/register_write_ok.do", method = RequestMethod.POST)
+	public String register_write_ok(RegisterBean rb, Model model,
+			HttpServletRequest req) {
+		
+		//이미지 파일 업로드
+		String uploadPath = "D:\\soldesk_project\\git\\web_portfolio\\webproject\\src\\main\\webapp\\resources\\uploads\\";
+		
+		try {
+			MultipartRequest multi = 
+					new MultipartRequest(req, uploadPath, 5*1024*1024, "UTF-8", 
+							new DefaultFileRenamePolicy());
+			
+			String fileName =  multi.getFilesystemName("file");
+			
+			if(fileName == null || fileName.isEmpty()) { 
+				rb.setFile(null);
+			}else {
+				rb.setFile(fileName);
+			}
+			System.out.println("----------fileName: "+fileName);
+			
+			rb.setId(multi.getParameter("id"));
+			rb.setClassify(multi.getParameter("classify"));
+			rb.setTitle(multi.getParameter("title"));
+			rb.setFirst(multi.getParameter("first"));
+			rb.setSecond(multi.getParameter("second"));
+			rb.setThird(multi.getParameter("third"));
+			rb.setGrade(multi.getParameter("grade"));
+			rb.setDetails(multi.getParameter("details"));
+			rb.setPrice(Integer.parseInt(multi.getParameter("price")));
+			rb.setStart_date(multi.getParameter("start_date"));
+			rb.setEnd_date(multi.getParameter("end_date"));
+			rb.setMin_bid(Integer.parseInt(multi.getParameter("min_bid")));
+			rb.setWin_bid(Integer.parseInt(multi.getParameter("win_bid")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		regService.insertRegister(rb); //등록

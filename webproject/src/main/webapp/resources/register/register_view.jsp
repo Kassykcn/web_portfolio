@@ -28,7 +28,7 @@
 					<img alt="ready_image" class="title_img" src='<c:url value="/resources/images/img_ready.png"/>'>
 				</c:if>
 				<c:if test="${regData.getFile() != null}">
-					<img alt="upload_image" class="title_img" src="${regData.getFile()}">
+					<img alt="upload_image" class="title_img" src='<c:url value="/resources/uploads/${regData.getFile()}"/>'>
 				</c:if>
 				
 			</td>

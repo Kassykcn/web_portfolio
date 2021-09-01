@@ -35,7 +35,7 @@ create table register(
 --alter table register change file image varchar(20);
 desc register;
 --
---delete from register ;
+--delete from register where idx in(6,7);
 --update register set file = null where file = '';
 -- 확인용
 select file from register where file != 'NUll';

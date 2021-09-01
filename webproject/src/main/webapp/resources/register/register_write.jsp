@@ -19,7 +19,7 @@
 <div id="left"></div>
 <div id="content">
 	
-	<sf:form modelAttribute="regBean" method="post" action="${formUrl}" > <!-- enctype="multipart/form-data" -->
+	<sf:form modelAttribute="regBean" method="post" action="${formUrl}" enctype="multipart/form-data"> <!--  -->
 	<table class="table1">
 		<tr>
 			<td class="align_left" colspan="2"><h2>경매/구매 등록</h2></td>

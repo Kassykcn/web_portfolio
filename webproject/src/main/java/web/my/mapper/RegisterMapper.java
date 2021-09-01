@@ -36,11 +36,16 @@ public interface RegisterMapper {
 	ArrayList<String> getCategoryThird();
 
 	// 등록
-	final String INSERT = "insert into register(" + "idx, reg_date, id, classify, title, "
-			+ "first, second, third, file, " + "grade, details, start_date, end_date, "
-			+ "price, min_bid, win_bid, deal_state ) " + "values(" + "null, now(), #{id}, #{classify}, #{title}, "
-			+ "#{first}, #{second}, #{third}, #{file}, " + "#{grade}, #{details}, #{start_date}, #{end_date}, "
-			+ "#{price}, #{min_bid}, #{win_bid}, '진행중')";
+	final String INSERT = "insert into register(" 
+				+ "idx, reg_date, id, classify, title, "
+				+ "first, second, third, file, " 
+				+ "grade, details, start_date, end_date, "
+				+ "price, min_bid, win_bid, deal_state ) " 
+			+ "values(" 
+				+ "null, now(), #{id}, #{classify}, #{title}, "
+				+ "#{first}, #{second}, #{third}, #{file}, " 
+				+ "#{grade}, #{details}, #{start_date}, #{end_date}, "
+				+ "#{price}, #{min_bid}, #{win_bid}, '진행중')";
 
 	@Insert(INSERT)
 	void insertRegister(RegisterBean rb);
@@ -64,7 +69,7 @@ public interface RegisterMapper {
 			@Result(property = "end_date", column = "end_date"),
 			@Result(property = "deal_state", column = "deal_state"), 
 			@Result(property = "hits", column = "hits") })
-	
+
 	ArrayList<RegisterBean> getListSearchSort(@Param("page") int page, 
 			@Param("lenPage") int lenPage, // 페이징
 			@Param("search") String search, // 검색
@@ -112,17 +117,17 @@ public interface RegisterMapper {
 
 	@Insert(INSERT_QnA)
 	void insertQnA(RegisterQnABean qnaBean);
-	
+
 	//Q&A 답변완료 처리
 	//final String UPDATE_QNA_STATE = "update registerQnA set QnA_state='답변완료' where A_idx=#{Q_idx}";
 	//@Update(UPDATE_QNA_STATE)
 	//void update_QnA_state(@Param("idx") int idx);
-	
+
 	//Q&A 문의 수
 	final String SELECT_QnA_CNT = "select count(1) from registerQnA where idx=#{idx} ";
 	@Select(SELECT_QnA_CNT)
 	int getQnACnt(@Param("idx") int idx);
-	
+
 	//Q&A 내용
 	final String SELECT_QnA = "select * from registerQnA where idx=#{idx} order by Q_idx desc";
 	@Select(SELECT_QnA)
