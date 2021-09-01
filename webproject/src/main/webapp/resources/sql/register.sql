@@ -1,6 +1,7 @@
 -- 작성일 2021.08.25 LMJ 
--- 수정일 2021.08.26
--- 수정 08.29 각각의 카테고리 컬럼 추가
+-- 수정일 2021.09.01
+-- 08.29 각각의 카테고리 컬럼 추가
+-- 09.01 image -> file 컬럼명 변경
 drop table register;
 
 create table register(
@@ -13,7 +14,7 @@ create table register(
 	first varchar(20), -- 카테고리 대분류
 	second varchar(20), -- 카테고리 중분류
 	third varchar(20), -- 카테고리 소분류
-	image varchar(20), -- 이미지 파일
+	file varchar(20) default null, -- 이미지 파일
 	grade varchar(5), -- 등급
 	details varchar(500), -- 상세설명 : 한글 2바이트 * 200자
 	price int(10), -- 가격 - 구매일때만 사용
@@ -29,42 +30,15 @@ create table register(
 	hits int(10) default 0 -- 조회수 - 상세페이지에서 사용
 )engine=innodb default charset=UTF8;
 
-
--- 매퍼 SQL 형태에 값 직접 입력
-
-insert into register(idx, reg_date, id, classify, title,  first, second, third, 
-image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
-values(null, now(), 'aaa', '구매', 'aaa',  '기타', '전체', '전체', 
-null, 'S', 'aaaa', '2021-08-01', '2021-08-03', 10000, 0, 0, '거래완료');
-
-insert into register(idx, reg_date, id, classify, title,  first, second, third, 
-image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
-values(null, now(), 'aaa', '경매', 'a111',  '기타', '전체', '전체', 
-null, 'S', 'aaaa', '2021-08-02', '2021-08-04', 10000, 0, 0, '기간만료');
-
-insert into register(idx, reg_date, id, classify, title,  first, second, third, 
-image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
-values(null, now(), 'aaa', '구매', 'aaa',  '기타', '전체', '전체', 
-null, 'S', 'aaaa', '2021-08-19', '2021-08-21', 10000, 0, 0, '기간만료');
-
-insert into register(idx, reg_date, id, classify, title,  first, second, third, 
-image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
-values(null, now(), 'aaa', '경매', 'a111',  '기타', '전체', '전체', 
-null, 'S', 'aaaa', '2021-08-16', '2021-09-18', 10000, 0, 0, '거래완료');
-
-insert into register(idx, reg_date, id, classify, title,  first, second, third, 
-image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
-values(null, now(), 'aaa', '구매', 'aaa',  '기타', '전체', '전체', 
-null, 'S', 'aaaa', '2021-08-31', '2021-09-01', 10000, 0, 0, '진행중');
-
-insert into register(idx, reg_date, id, classify, title,  first, second, third, 
-image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
-values(null, now(), 'aaa', '경매', 'a111',  '기타', '전체', '전체', 
-null, 'S', 'aaaa', '2021-08-31', '2021-09-01', 10000, 0, 0, '진행중');
-
-
-delete from register ;
+-- 컬럼명 변경
+--alter table register change image file varchar(20);
+--alter table register change file image varchar(20);
+desc register;
+--
+--delete from register ;
+--update register set file = null where file = '';
 -- 확인용
+select file from register where file != 'NUll';
 select * from register order by hits desc;
 select * from register order by start_date desc, idx desc;
 select * from register order by reg_date desc, idx desc;

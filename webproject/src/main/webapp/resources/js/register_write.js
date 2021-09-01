@@ -184,9 +184,9 @@ $(document).ready(function (){
 		}
 
 		//이미지
-		/*if($("#image").val() == ""){
+		/*if($("#file").val() == ""){
 			alert("이미지를 추가해주세요");
-			$("#image").focus();
+			$("#file").focus();
 			return false;
 		}*/
 		

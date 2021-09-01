@@ -109,7 +109,7 @@
 		<tr>
 			<th class="table1th">이미지</th>
 			<td class="table1td">
-				<input type="file" id="image">
+				<input type="file" name="file" id="image">
 			</td>
 		</tr>
 		<tr>

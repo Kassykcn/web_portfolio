@@ -37,9 +37,9 @@ public interface RegisterMapper {
 
 	// 등록
 	final String INSERT = "insert into register(" + "idx, reg_date, id, classify, title, "
-			+ "first, second, third, image, " + "grade, details, start_date, end_date, "
+			+ "first, second, third, file, " + "grade, details, start_date, end_date, "
 			+ "price, min_bid, win_bid, deal_state ) " + "values(" + "null, now(), #{id}, #{classify}, #{title}, "
-			+ "#{first}, #{second}, #{third}, #{image}, " + "#{grade}, #{details}, #{start_date}, #{end_date}, "
+			+ "#{first}, #{second}, #{third}, #{file}, " + "#{grade}, #{details}, #{start_date}, #{end_date}, "
 			+ "#{price}, #{min_bid}, #{win_bid}, '진행중')";
 
 	@Insert(INSERT)
@@ -87,13 +87,13 @@ public interface RegisterMapper {
 
 	// 수정
 	final String UPDATE = "update register set " + "title=#{title}, first=#{first}, second=#{second}, "
-			+ "third=#{third}, image=#{image}, grade=#{grade}, "
+			+ "third=#{third}, file=#{file}, grade=#{grade}, "
 			+ "details=#{details}, start_date=#{start_date}, end_date=#{end_date}, "
 			+ "price=#{price}, min_bid=#{min_bid}, win_bid=#{win_bid} " + "where idx=#{idx}";
 
 	@Update(UPDATE)
 	void updateRegister(@Param("idx") int idx, @Param("title") String title, @Param("first") String first,
-			@Param("second") String second, @Param("third") String third, @Param("image") String image,
+			@Param("second") String second, @Param("third") String third, @Param("file") String file,
 			@Param("grade") String grade, @Param("details") String details, @Param("start_date") String start_date,
 			@Param("end_date") String end_date, @Param("price") int price, @Param("min_bid") int min_bid,
 			@Param("win_bid") int win_bid);

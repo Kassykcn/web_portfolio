@@ -21,6 +21,16 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 2021.09.01 추가 이미지업로드용 : 
+		출처: https://ktko.tistory.com/entry/Spring-단일파일-다중파일-업로드하기 [KTKO 개발 블로그와 여행 일기] -->
+	<beans:bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="maxUploadSize" value="5242880" /> <!--약 5MB 제한, 최대 업로드 가능한 바이트 크기 -->
+        <beans:property name="maxInMemorySize" value="1048576" /> <!-- 1MB, 메모리에 보관할 수 있는 최대 바이트 크기 -->
+        <beans:property name="defaultEncoding" value="utf-8" />    <!-- 인코딩 -->
+    </beans:bean>
+	
+	
 	<context:component-scan base-package="soldesk.project.web" />
 	<context:component-scan base-package="web.my.bean, web.my.mapper, web.my.service, web.my.controller" />
 	

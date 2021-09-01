@@ -37,8 +37,14 @@ public class RegisterController {
 	}
 	//경매/구매 등록 확인
 	@RequestMapping(value="/register_write_ok.do", method = RequestMethod.POST)
-	public String register_write_ok(RegisterBean rb, Model model) {
-
+	public String register_write_ok(RegisterBean rb, Model model,
+			@RequestParam(value="file", required=false) String file) {
+		
+		if(file.isEmpty()) { //파일에서 넘어온 값이 빈 값인 경우 null 처리 
+			System.out.println("----------file is empty");
+			rb.setFile(null);
+		}
+		
 		regService.insertRegister(rb); //등록
 		model.addAttribute("result", 1);
 

@@ -67,13 +67,13 @@ public class RegisterService implements RegisterMapper{
 	@Override
 	public void updateRegister(RegisterBean rb) {
 		regMapper.updateRegister(rb.getIdx(), rb.getTitle(), rb.getFirst(), rb.getSecond(), 
-					   rb.getThird(), rb.getImage(), rb.getGrade(), rb.getDetails(), 
+					   rb.getThird(), rb.getFile(), rb.getGrade(), rb.getDetails(), 
 					   rb.getStart_date(), rb.getEnd_date(), rb.getPrice(), 
 					   rb.getMin_bid(), rb.getWin_bid());
 		
 	}
 	@Override
-	public void updateRegister(int idx, String title, String first, String second, String third, String image,
+	public void updateRegister(int idx, String title, String first, String second, String third, String file,
 			String grade, String details, String start_date, String end_date, int price, int min_bid, int win_bid) {
 	}
 	
