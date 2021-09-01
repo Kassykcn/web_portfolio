@@ -171,14 +171,9 @@ public class RegisterController {
 			regService.insertQnA(qnaBean); //문의 등록 DB 저장
 			model.addAttribute("regData", regService.getView(idx));
 		}else {
-			int QnACnt = regService.getQnACnt(idx); //Q&A가 하나라도 있으면 조회수를 올리지않는 메서드 사용
-			if(QnACnt >= 1) {
-				model.addAttribute("QnAData", regService.getQnAList(idx));
-				model.addAttribute("regData", regService.getView(idx));
-			}else {
-				model.addAttribute("regData", regService.getViewHits(idx));
-			}
+			model.addAttribute("regData", regService.getViewHits(idx));
 		}
+		model.addAttribute("QnAData", regService.getQnAList(idx));
 		
 		return "register/register_view";
 	}

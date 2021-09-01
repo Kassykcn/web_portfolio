@@ -115,7 +115,7 @@
 		<tr>
 			<td colspan="2" class="table1td">
 				<input type="button" id="submit_btn" value="등록">
-				<input type="button" class="btn1" value="목록" onclick="history.back()">
+				<input type="button" class="btn1" value="목록" onclick="location.href='register_list.do?cur_page=${cur_page}'">
 			</td>
 		</tr>
 	</table>

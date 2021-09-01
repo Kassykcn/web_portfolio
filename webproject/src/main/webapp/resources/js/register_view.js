@@ -42,7 +42,7 @@ $(document).ready(function (){
 	
 	//QnA <textarea> 글자 수 세기
 	$("#QnA_text").keydown(function(){
-		$("#QnA_length").text($("#QnA").val().length);
+		$("#QnA_length").text($("#QnA_text").val().length);
 	});
 	
 	//비공개 여부 클릭
