@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import web.my.bean.RegisterBean;
+import web.my.bean.RegisterQnABean;
 import web.my.service.RegisterService;
 import web.my.utils.PagingManager;
 import web.my.utils.searchVO;
@@ -133,6 +134,7 @@ public class RegisterController {
 	}
 	
 	//경매/구매 상세페이지
+	/*
 	@RequestMapping(value="/register_view.do")
 	public String register_view(@RequestParam("idx") int idx, 
 			@RequestParam("cur_page") int cur_page, 
@@ -142,6 +144,36 @@ public class RegisterController {
 		model.addAttribute("cur_page", cur_page); //현재 페이지
 		model.addAttribute("regData", regService.getViewHits(idx));
 
+		return "register/register_view";
+	}*/
+	@RequestMapping(value="/register_view.do")
+	public String register_view(@RequestParam("idx") int idx, 
+			@RequestParam("cur_page") int cur_page, 
+			@RequestParam(value="id", required=false) String id, 
+			@RequestParam(value="QnA_type", required=false) String QnA_type, 
+			@RequestParam(value="QnA_state", required=false) String QnA_state, 
+			@RequestParam(value="QnA_text", required=false) String QnA_text, 
+			@RequestParam(value="QnA_secret", required=false) String QnA_secret, 
+			RegisterQnABean qnaBean, 
+			Model model) {
+		
+		
+		model.addAttribute("idx", idx); //글번호
+		model.addAttribute("cur_page", cur_page); //현재 페이지
+		
+		if(QnA_text != null) {
+			regService.insertQnA(qnaBean); //문의 등록 DB 저장
+			model.addAttribute("regData", regService.getView(idx));
+		}else {
+			int QnACnt = regService.getQnACnt(idx); //Q&A가 하나라도 있으면 조회수를 올리지않는 메서드 사용
+			if(QnACnt >= 1) {
+				model.addAttribute("QnAData", regService.getQnAList(idx));
+				model.addAttribute("regData", regService.getView(idx));
+			}else {
+				model.addAttribute("regData", regService.getViewHits(idx));
+			}
+		}
+		
 		return "register/register_view";
 	}
 
@@ -193,5 +225,28 @@ public class RegisterController {
 		return "register/register_delete_ok";
 	}
 
+	//상세페이지 Q&A
+	@RequestMapping(value="/registerQnA.do", method = RequestMethod.POST)
+	public String registerQnA(
+			@RequestParam("cur_page") int cur_page, 
+			@RequestParam("idx") int idx,  //글번호
+			@RequestParam(value="id", required=false) String id, 
+			@RequestParam(value="QnA_type", required=false) String QnA_type, 
+			@RequestParam(value="QnA_state", required=false) String QnA_state, 
+			@RequestParam(value="QnA_text", required=false) String QnA_text, 
+			@RequestParam(value="QnA_secret", required=false) String QnA_secret, 
+			RegisterQnABean qnaBean, 
+			Model model) {
+		
+		//DB 저장
+		regService.insertQnA(qnaBean); //문의 등록
+
+		model.addAttribute("idx", idx);
+		model.addAttribute("cur_page", cur_page); //현재 페이지
+		model.addAttribute("regData", regService.getView(idx));
+		model.addAttribute("QnAData", regService.getQnAList(idx));
+		
+		return "register/register_view";
+	}
 
 }// class end

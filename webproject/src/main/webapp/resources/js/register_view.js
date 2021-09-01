@@ -41,10 +41,18 @@ $(document).ready(function (){
 	});
 	
 	//QnA <textarea> 글자 수 세기
-	$("#QnA").keyup(function(){
+	$("#QnA_text").keydown(function(){
 		$("#QnA_length").text($("#QnA").val().length);
 	});
 	
+	//비공개 여부 클릭
+	$("#secretCk").click(function(){
+		if($("#secretCk").is(":checked") == true){
+			$("#QnA_secret").val("Y");
+		}else{
+			$("#QnA_secret").val("N");
+		}
+	});
 	
 });
 

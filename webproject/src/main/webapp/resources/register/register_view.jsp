@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<c:set var="cur_page" value="${cur_page}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,23 +136,70 @@
 						<input type="button" value="삭제" class="btn1" onclick="location.href='register_delete.do?idx=${regData.getIdx()}&cur_page=${cur_page}'">
 						<input type="button" value="목록" class="btn1" onclick="history.back()">
 					</td>
-					</tr>
+		</tr>
+	</table>		
+	</form>
+	<table class="table1">
 		<tr>
-			<td colspan="2" class="align_left"><b>Q&amp;A</b></td>
+			<td colspan="2" class="align_left"><b>Q&amp;A 작성하기</b></td>
 		</tr>
 		<tr>
 			<td colspan="2">
 				<div id="QnA_div">
-					<textarea class="tarea1" id="QnA" placeholder="최대 200자까지 입력가능합니다" maxlength="200"></textarea>
-					<div id="QnA_inner_div">
-						<span id="QnA_length"></span>/200자
-						<input type="button" class="QnA_btn" value="등록하기">
-					</div>
+					<form method="post" action="register_view.do">
+						<input type="hidden"  name="cur_page" value="${cur_page}" >
+						<input type="hidden" name="idx" value="${regData.getIdx()}">
+						<input type="hidden" name="id" value="${regData.getId()}">
+						<input type="hidden" name="QnA_type" value="Q">
+						<input type="hidden" name="QnA_state" value="답변대기">
+						<textarea class="tarea1" id="QnA_text" name="QnA_text" placeholder="최대 200자까지 입력가능합니다" maxlength="200"></textarea>
+						<div id="QnA_inner_div">
+							<span id="QnA_length"></span>/200자
+						</div>
+						<div id="QnA_outer_div">
+							<input type="checkbox" id="secretCk" class="QnA_btn">비공개 여부
+							<input type="hidden" name="QnA_secret" id="QnA_secret" value="N">
+							&nbsp;&nbsp;
+							<input type="submit" id="QnA" value="작성하기" class="QnA_btn">
+						</div>
+					</form>
 				</div>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="align_left"><b>Q&amp;A</b></td>
+		</tr>
+		<tr>
+			<td>
+				<table class="table3">
+					<tr>
+						<th class="table3_th1">상태</th>
+						<th>질문/답변</th>
+						<th class="table3_th1">작성자</th>
+						<th class="table3_th1">작성일</th>
+					</tr>
+					<c:forEach var="data" items="${QnAData}">
+					<tr>
+						<td class="table3_left"><c:out value="${data.getQnA_state()}"/></td>
+						<td><c:out value="${data.getQnA_text()}"/></td>
+						<td class="table3_left"><c:out value="${data.getId()}"/></td>
+						<td class="table3_left"><c:out value="${data.getQnA_date()}"/></td>
+					</tr>
+					<c:if test="${data.getA_idx() ==  data.getQ_idx()}">
+					<tr>
+						<td></td>
+						<td>ㄴ<c:out value="${data.getQnA_text()}"/></td>
+						<td><c:out value="${data.getId()}"/></td>
+						<td><c:out value="${data.getQnA_date()}"/></td>
+					</tr>
+					</c:if>
+					</c:forEach>
+				</table>
 			</td>
 		</tr>
 	</table>
-	</form>
+
 </div>
 <%@ include file="../Bottom.jsp" %>
 

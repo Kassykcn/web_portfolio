@@ -15,7 +15,7 @@ create table register(
 	third varchar(20), -- 카테고리 소분류
 	image varchar(20), -- 이미지 파일
 	grade varchar(5), -- 등급
-	details varchar(200), -- 상세설명
+	details varchar(500), -- 상세설명 : 한글 2바이트 * 200자
 	price int(10), -- 가격 - 구매일때만 사용
 	start_date date, -- 시작일 - 경매일때만 사용
 	end_date date, -- 종료일 - 경매일때만 사용
@@ -31,6 +31,27 @@ create table register(
 
 
 -- 매퍼 SQL 형태에 값 직접 입력
+
+insert into register(idx, reg_date, id, classify, title,  first, second, third, 
+image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
+values(null, now(), 'aaa', '구매', 'aaa',  '기타', '전체', '전체', 
+null, 'S', 'aaaa', '2021-08-01', '2021-08-03', 10000, 0, 0, '거래완료');
+
+insert into register(idx, reg_date, id, classify, title,  first, second, third, 
+image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
+values(null, now(), 'aaa', '경매', 'a111',  '기타', '전체', '전체', 
+null, 'S', 'aaaa', '2021-08-02', '2021-08-04', 10000, 0, 0, '기간만료');
+
+insert into register(idx, reg_date, id, classify, title,  first, second, third, 
+image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
+values(null, now(), 'aaa', '구매', 'aaa',  '기타', '전체', '전체', 
+null, 'S', 'aaaa', '2021-08-19', '2021-08-21', 10000, 0, 0, '기간만료');
+
+insert into register(idx, reg_date, id, classify, title,  first, second, third, 
+image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
+values(null, now(), 'aaa', '경매', 'a111',  '기타', '전체', '전체', 
+null, 'S', 'aaaa', '2021-08-16', '2021-09-18', 10000, 0, 0, '거래완료');
+
 insert into register(idx, reg_date, id, classify, title,  first, second, third, 
 image, grade, details, start_date, end_date, price, min_bid, win_bid, deal_state ) 
 values(null, now(), 'aaa', '구매', 'aaa',  '기타', '전체', '전체', 
