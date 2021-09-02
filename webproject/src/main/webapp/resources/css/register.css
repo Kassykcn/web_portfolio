@@ -52,3 +52,10 @@ input:invalid{
 .align_left{
 	text-align: left;
 }
+
+/* image */
+.update_img{
+	margin: 5px;
+	width: 100px;
+	height: 100px;
+}

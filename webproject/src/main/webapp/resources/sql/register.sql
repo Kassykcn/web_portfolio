@@ -2,6 +2,7 @@
 -- 수정일 2021.09.01
 -- 08.29 각각의 카테고리 컬럼 추가
 -- 09.01 image -> file 컬럼명 변경
+-- 09.02 file -> image 컬럼명 변경
 drop table register;
 
 create table register(
@@ -14,7 +15,7 @@ create table register(
 	first varchar(20), -- 카테고리 대분류
 	second varchar(20), -- 카테고리 중분류
 	third varchar(20), -- 카테고리 소분류
-	file varchar(20) default null, -- 이미지 파일
+	image varchar(20) default null, -- 이미지 파일
 	grade varchar(5), -- 등급
 	details varchar(500), -- 상세설명 : 한글 2바이트 * 200자
 	price int(10), -- 가격 - 구매일때만 사용

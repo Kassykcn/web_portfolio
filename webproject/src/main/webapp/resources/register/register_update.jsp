@@ -19,7 +19,7 @@
 <div id="left"></div>
 <div id="content">
 	
-	<sf:form modelAttribute="regData" method="post" action="${formUrl}" > <!-- enctype="multipart/form-data" -->
+	<sf:form modelAttribute="regData" method="post" action="${formUrl}" enctype="multipart/form-data"> <!--  -->
 		<input type="hidden" name="cur_page" value="${cur_page}">
 		<input type="hidden" name="idx" value="${regData.getIdx()}" >
 		
@@ -111,13 +111,19 @@
 			<tr>
 				<th class="table1th">이미지</th>
 				<td class="table1td">
-					<input type="file" id="image">
+					<input type="file" name="image" id="image"><br>
+					<c:if test="${regData.getImage() == null}">
+						파일이 없습니다.
+					</c:if>
+					<c:if test="${regData.getImage() != null}">
+						<img alt="upload_image" class="update_img" src='<c:url value="/resources/uploads/${regData.getImage()}"/>'>
+					</c:if>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" class="table1td">
 					<input type="button" id="submit_btn" value="수정">
-					<input type="button" value="목록" class="btn1" onclick="history.back()">
+					<input type="button" value="뒤로" class="btn1" onclick="history.back()">
 				</td>
 			</tr>
 		</table>

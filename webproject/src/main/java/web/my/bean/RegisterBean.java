@@ -8,7 +8,7 @@ public class RegisterBean {
 	String reg_date, start_date, end_date, deal_date;
 	String first, second, third; // 카테고리 대,중,소분류
 	String id, classify, classify_num, title, grade, details, deal_way, deal_state;
-	String file;
+	String image;
 	
 	public int getIdx() {
 		return idx;
@@ -142,11 +142,11 @@ public class RegisterBean {
 	public void setDeal_state(String deal_state) {
 		this.deal_state = deal_state;
 	}
-	public String getFile() {
-		return file;
+	public String getImage() {
+		return image;
 	}
-	public void setFile(String file) {
-		this.file = file;
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 }

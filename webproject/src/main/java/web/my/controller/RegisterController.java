@@ -1,6 +1,10 @@
 package web.my.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,10 +28,15 @@ import web.my.utils.searchVO;
 public class RegisterController {
 	@Autowired
 	RegisterService regService;
-
-	private int lenPage = 5; // 한페이지당 보여줄 게시글 수
+	
+	// 한페이지당 보여줄 게시글 수
+	private int lenPage = 5;
+	
+	//이미지 파일 업로드 경로
+	String uploadPath = "D:\\soldesk_project\\git\\web_portfolio\\webproject\\src\\main\\webapp\\resources\\uploads\\";
+	
+	
 	// ,method = RequestMethod.POST 를 지정하지않으면 post, get방식 모두 지원
-
 	// 경매/구매 등록 폼 
 	@RequestMapping(value="/register_write.do")
 	public String register_write(Model model) {
@@ -43,42 +52,44 @@ public class RegisterController {
 		return "register/register_write";
 	}
 	//경매/구매 등록 확인
-	/*
-	 @RequestMapping(value="/register_write_ok.do", method = RequestMethod.POST)
-	public String register_write_ok(RegisterBean rb, Model model,
-			@RequestParam(value="file", required=false) String file) {
-		
-		if(file.isEmpty()) { //파일에서 넘어온 값이 빈 값인 경우 null 처리 
-			System.out.println("----------file is empty");
-			rb.setFile(null);
-		}
-		
-		regService.insertRegister(rb); //등록
-		model.addAttribute("result", 1);
-
-		return "register/register_write_ok";
-	}
-	 */
 	@RequestMapping(value="/register_write_ok.do", method = RequestMethod.POST)
 	public String register_write_ok(RegisterBean rb, Model model,
 			HttpServletRequest req) {
-		
-		//이미지 파일 업로드
-		String uploadPath = "D:\\soldesk_project\\git\\web_portfolio\\webproject\\src\\main\\webapp\\resources\\uploads\\";
 		
 		try {
 			MultipartRequest multi = 
 					new MultipartRequest(req, uploadPath, 5*1024*1024, "UTF-8", 
 							new DefaultFileRenamePolicy());
 			
-			String fileName =  multi.getFilesystemName("file");
+			String fileName =  multi.getFilesystemName("image");
 			
 			if(fileName == null || fileName.isEmpty()) { 
-				rb.setFile(null);
+				rb.setImage(null);
+				System.out.println("----------fileName: "+fileName);
 			}else {
-				rb.setFile(fileName);
+				//날짜시간 구하기
+				Date date = new Date();
+				Locale currentLocale = new Locale("KOREAN", "KOREA");
+				String pattern = "yyyyMMddHHmmss"; 
+				SimpleDateFormat formatter = new SimpleDateFormat(pattern, currentLocale);
+				String today = formatter.format(date);
+				System.out.println("----------today: "+today);
+				
+				//기존파일명에서 확장자 잘라내기
+				String extension = fileName.substring(fileName.length()-4,fileName.length());
+				System.out.println("----------extension: "+extension);
+				
+				//파일명을 날짜시간으로 변경
+				String fileName2 = today+extension;
+				System.out.println("----------fileName2: "+fileName2);
+				
+				//파일명 변경
+				File oldFile = new File(uploadPath+fileName);
+				File newFile = new File(uploadPath+fileName2);
+				oldFile.renameTo(newFile);
+				
+				rb.setImage(fileName2);
 			}
-			System.out.println("----------fileName: "+fileName);
 			
 			rb.setId(multi.getParameter("id"));
 			rb.setClassify(multi.getParameter("classify"));
@@ -194,18 +205,6 @@ public class RegisterController {
 	}
 	
 	//경매/구매 상세페이지
-	/*
-	@RequestMapping(value="/register_view.do")
-	public String register_view(@RequestParam("idx") int idx, 
-			@RequestParam("cur_page") int cur_page, 
-			Model model) {
-
-		model.addAttribute("idx", idx); //글번호
-		model.addAttribute("cur_page", cur_page); //현재 페이지
-		model.addAttribute("regData", regService.getViewHits(idx));
-
-		return "register/register_view";
-	}*/
 	@RequestMapping(value="/register_view.do")
 	public String register_view(@RequestParam("idx") int idx, 
 			@RequestParam("cur_page") int cur_page, 
@@ -252,6 +251,7 @@ public class RegisterController {
 			@RequestParam("cur_page") int cur_page, 
 			Model model) {
 		
+			
 		regService.updateRegister(rb); //수정
 		model.addAttribute("result", 1);
 

@@ -24,11 +24,11 @@
 		</tr>
 		<tr>
 			<td class="table1_td1">
-				<c:if test="${regData.getFile() == null}">
+				<c:if test="${regData.getImage() == null}">
 					<img alt="ready_image" class="title_img" src='<c:url value="/resources/images/img_ready.png"/>'>
 				</c:if>
-				<c:if test="${regData.getFile() != null}">
-					<img alt="upload_image" class="title_img" src='<c:url value="/resources/uploads/${regData.getFile()}"/>'>
+				<c:if test="${regData.getImage() != null}">
+					<img alt="upload_image" class="title_img" src='<c:url value="/resources/uploads/${regData.getImage()}"/>'>
 				</c:if>
 				
 			</td>
