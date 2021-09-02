@@ -39,8 +39,7 @@ desc register;
 --delete from register where idx in(6,7);
 --update register set file = null where file = '';
 -- 확인용
-select file from register where file != 'NUll';
-select * from register order by hits desc;
+select * from register order by idx desc;
 select * from register order by start_date desc, idx desc;
 select * from register order by reg_date desc, idx desc;
 select count(1) from register;

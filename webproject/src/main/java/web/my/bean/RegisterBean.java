@@ -1,6 +1,7 @@
 package web.my.bean;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 @Repository
 public class RegisterBean {

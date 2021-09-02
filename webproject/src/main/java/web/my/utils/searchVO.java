@@ -1,5 +1,8 @@
 package web.my.utils;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class searchVO {
 	private String search_key, search_txt;
 

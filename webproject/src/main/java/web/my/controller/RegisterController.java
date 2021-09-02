@@ -2,6 +2,7 @@ package web.my.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -14,13 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import org.springframework.web.multipart.MultipartFile;
 
 import web.my.bean.RegisterBean;
 import web.my.bean.RegisterQnABean;
 import web.my.service.RegisterService;
+import web.my.utils.FileUploadService;
 import web.my.utils.PagingManager;
 import web.my.utils.searchVO;
 
@@ -54,61 +54,23 @@ public class RegisterController {
 	//경매/구매 등록 확인
 	@RequestMapping(value="/register_write_ok.do", method = RequestMethod.POST)
 	public String register_write_ok(RegisterBean rb, Model model,
-			HttpServletRequest req) {
+			@RequestParam(value="imageFile", required=false) MultipartFile imageFile) {
 		
 		try {
-			MultipartRequest multi = 
-					new MultipartRequest(req, uploadPath, 5*1024*1024, "UTF-8", 
-							new DefaultFileRenamePolicy());
-			
-			String fileName =  multi.getFilesystemName("image");
-			
-			if(fileName == null || fileName.isEmpty()) { 
-				rb.setImage(null);
-				System.out.println("----------fileName: "+fileName);
+			System.out.println("-----------------imageFile: "+imageFile);
+			if(imageFile != null) {
+				FileUploadService fileUploadService = new FileUploadService();
+				String fileName = fileUploadService.upload(imageFile);
+				System.out.println("-----------------fileName: "+fileName);
+				rb.setImage(fileName);
 			}else {
-				//날짜시간 구하기
-				Date date = new Date();
-				Locale currentLocale = new Locale("KOREAN", "KOREA");
-				String pattern = "yyyyMMddHHmmss"; 
-				SimpleDateFormat formatter = new SimpleDateFormat(pattern, currentLocale);
-				String today = formatter.format(date);
-				System.out.println("----------today: "+today);
-				
-				//기존파일명에서 확장자 잘라내기
-				String extension = fileName.substring(fileName.length()-4,fileName.length());
-				System.out.println("----------extension: "+extension);
-				
-				//파일명을 날짜시간으로 변경
-				String fileName2 = today+extension;
-				System.out.println("----------fileName2: "+fileName2);
-				
-				//파일명 변경
-				File oldFile = new File(uploadPath+fileName);
-				File newFile = new File(uploadPath+fileName2);
-				oldFile.renameTo(newFile);
-				
-				rb.setImage(fileName2);
+				rb.setImage(null);
 			}
-			
-			rb.setId(multi.getParameter("id"));
-			rb.setClassify(multi.getParameter("classify"));
-			rb.setTitle(multi.getParameter("title"));
-			rb.setFirst(multi.getParameter("first"));
-			rb.setSecond(multi.getParameter("second"));
-			rb.setThird(multi.getParameter("third"));
-			rb.setGrade(multi.getParameter("grade"));
-			rb.setDetails(multi.getParameter("details"));
-			rb.setPrice(Integer.parseInt(multi.getParameter("price")));
-			rb.setStart_date(multi.getParameter("start_date"));
-			rb.setEnd_date(multi.getParameter("end_date"));
-			rb.setMin_bid(Integer.parseInt(multi.getParameter("min_bid")));
-			rb.setWin_bid(Integer.parseInt(multi.getParameter("win_bid")));
-		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
+			System.out.println("[ERROR]===================imageFile");
 			e.printStackTrace();
 		}
+		
 		
 		regService.insertRegister(rb); //등록
 		model.addAttribute("result", 1);
@@ -249,7 +211,21 @@ public class RegisterController {
 	public String register_update_ok(RegisterBean rb, 
 			@RequestParam("idx") int idx, 
 			@RequestParam("cur_page") int cur_page, 
-			Model model) {
+			Model model,
+			@RequestParam(value="imageFile", required=false) MultipartFile imageFile) {
+		
+		try {
+			System.out.println("-----------------imageFile: "+imageFile);
+			if(imageFile != null) {
+				FileUploadService fileUploadService = new FileUploadService();
+				String fileName = fileUploadService.upload(imageFile);
+				System.out.println("-----------------fileName: "+fileName);
+				rb.setImage(fileName);
+			}
+		} catch (Exception e) {
+			System.out.println("[ERROR]===================imageFile");
+			e.printStackTrace();
+		}
 		
 			
 		regService.updateRegister(rb); //수정

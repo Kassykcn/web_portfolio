@@ -111,7 +111,7 @@
 			<tr>
 				<th class="table1th">이미지</th>
 				<td class="table1td">
-					<input type="file" name="image" id="image"><br>
+					<input type="file" name="imageFile" id="image"><br>
 					<c:if test="${regData.getImage() == null}">
 						파일이 없습니다.
 					</c:if>

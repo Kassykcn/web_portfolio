@@ -1,6 +1,9 @@
 package web.my.utils;
 
+import org.springframework.stereotype.Repository;
+
 //페이징 처리 유틸 파일
+@Repository
 public class PagingManager {
 	private static final PagingManager pageNumberingManager = new PagingManager();
 
