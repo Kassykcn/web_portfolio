@@ -1,14 +1,5 @@
 package web.my.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +12,7 @@ import web.my.bean.RegisterBean;
 import web.my.bean.RegisterQnABean;
 import web.my.service.RegisterService;
 import web.my.utils.FileUploadService;
-import web.my.utils.PagingManager;
+import web.my.utils.SortFilterSearch;
 import web.my.utils.searchVO;
 
 @Controller
@@ -57,11 +48,11 @@ public class RegisterController {
 			@RequestParam(value="imageFile", required=false) MultipartFile imageFile) {
 		
 		try {
-			System.out.println("-----------------imageFile: "+imageFile);
+			//System.out.println("-----------------imageFile: "+imageFile);
 			if(imageFile != null) {
 				FileUploadService fileUploadService = new FileUploadService();
 				String fileName = fileUploadService.upload(imageFile);
-				System.out.println("-----------------fileName: "+fileName);
+				//System.out.println("-----------------fileName: "+fileName);
 				rb.setImage(fileName);
 			}else {
 				rb.setImage(null);
@@ -89,61 +80,15 @@ public class RegisterController {
 			@RequestParam(value="search_txt", required=false) String search_txt, 
 			Model model) {
 
-		/*** 정렬 및 필터 설정 ***/
-		String sort = ""; //정렬 기준(order by 값)
-		switch (sort_num) {
-			case 0: sort = "reg_date desc"; break;
-			case 1: sort = "start_date asc"; break;
-			case 2: sort = "start_date desc"; break;
-			case 3: sort = "hits desc"; break;
-			default: sort = "reg_date desc"; break;
-		}
 		
-		String word = "where "; // where or and
-
-		String filterC = ""; // 거래종류 필터 (where 값)
-		String filterD = "";
-		if(filter_codeC != null) {
-			switch (filter_codeC) {
-				case "0": filterC = ""; break;
-				case "c0": filterC = ""; break;
-				case "c1": filterC = word+"classify='경매'"; break;
-				case "c2": filterC = word+"classify='구매'"; break;
-			}
-			
-			if(filterC == "" || filterC == "c0") {
-				word = "where ";
-			}else {
-				word = " and ";
-			}
-		}
-		if(filter_codeD != null) {
-			switch (filter_codeD) {
-				case "0": filterD = ""; break;
-				case "d0": filterD = ""; break;
-				case "d1": filterD = word+"deal_state='진행중'"; break;
-				case "d2": filterD = word+"deal_state='기간만료'"; break;
-				case "d3": filterD = word+"deal_state='거래완료'"; break;
-				default: filterD = ""; break;
-			}
-		}
-		String filter = filterC + filterD;
+		SortFilterSearch sfs = new SortFilterSearch();
 		
-		/*** 검색 ***/
-		if(word != "and") {
-			word = "where ";
-		}else {
-			word = " and ";
-		}
+		String sort = sfs.getSort(sort_num);
+		String filter = sfs.getFilter(filter_codeC, filter_codeD);
 		
-		String search = "";
-		if(search_key != null && search_txt != null) {
-			search = word + search_key+ " like '%"+ search_txt+ "%'";
-		}
 		
-		System.out.println("-----------------search_key: "+search_key);
-		System.out.println("-----------------search_txt: "+search_txt);
-		System.out.println("-----------------search: "+search);
+		String search = sfs.getSearch(search_key, search_txt);
+		
 		
 		int totalCnt = regService.getSearchSortCnt(filter, search); //필터된 글 개수
 		int paging = (int)Math.ceil((double)totalCnt/lenPage); //페이징 수
