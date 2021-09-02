@@ -111,13 +111,19 @@
 			<tr>
 				<th class="table1th">이미지</th>
 				<td class="table1td">
-					<input type="file" name="imageFile" id="image"><br>
+				<div class="imgDiv">
 					<c:if test="${regData.getImage() == null}">
 						파일이 없습니다.
 					</c:if>
 					<c:if test="${regData.getImage() != null}">
 						<img alt="upload_image" class="update_img" src='<c:url value="/resources/uploads/${regData.getImage()}"/>'>
 					</c:if>
+					<input type="hidden" name="oldFile" value="${regData.getImage()}">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<!-- <label for="image" class="image_customBtn">이미지 추가</label> -->
+					<input type="file" name="imageFile" id="image" accept=".jpg, .jpeg, .png">
+					<input type="hidden" name="newFile_length" id="newFile_length" >
+					</div>
 				</td>
 			</tr>
 			<tr>

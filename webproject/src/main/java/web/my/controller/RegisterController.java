@@ -212,15 +212,26 @@ public class RegisterController {
 			@RequestParam("idx") int idx, 
 			@RequestParam("cur_page") int cur_page, 
 			Model model,
-			@RequestParam(value="imageFile", required=false) MultipartFile imageFile) {
+			@RequestParam(value="imageFile", required=false) MultipartFile imageFile,
+			@RequestParam(value="oldFile", required=false) String oldFile,
+			@RequestParam(value="newFile_length", required=false) int newFile_length) {
 		
 		try {
-			System.out.println("-----------------imageFile: "+imageFile);
-			if(imageFile != null) {
+			System.out.println("-----------------oldFile: "+oldFile);
+			System.out.println("-----------------newFile_length: "+newFile_length);
+			
+			if(newFile_length != 0 || newFile_length > 1) {
 				FileUploadService fileUploadService = new FileUploadService();
 				String fileName = fileUploadService.upload(imageFile);
 				System.out.println("-----------------fileName: "+fileName);
+				
+				
 				rb.setImage(fileName);
+			}else {
+				if(oldFile == null) 
+					rb.setImage(null);
+				else
+					rb.setImage(oldFile);
 			}
 		} catch (Exception e) {
 			System.out.println("[ERROR]===================imageFile");

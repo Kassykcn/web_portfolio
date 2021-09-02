@@ -26,16 +26,17 @@ public class FileUploadService {
 			// 파일 정보
 			String originFilename = multipartFile.getOriginalFilename();
 			String extName = originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
-			Long size = multipartFile.getSize();
+			//Long size = multipartFile.getSize();
 			
 			// 서버에서 저장 할 파일 이름
 			saveFileName = SaveFileName(extName);
+			/*
 			System.out.println("=======================================");
 			System.out.println("originFilename : " + originFilename);
 			System.out.println("extensionName : " + extName);
 			System.out.println("size : " + size);
 			System.out.println("saveFileName : " + saveFileName);
-			
+			*/
 			writeFile(multipartFile, saveFileName);
 			url = PREFIX_URL + saveFileName;
 			System.out.println("url : " + url);

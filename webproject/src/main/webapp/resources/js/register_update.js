@@ -170,11 +170,11 @@ $(document).ready(function (){
 		}
 
 		//이미지
-		/*if($("#image").val() == ""){
-			alert("이미지를 추가해주세요");
-			$("#image").focus();
-			return false;
-		}*/
+		var newFile_length = $("#image").val().length;
+		if(newFile_length != 0 || newFile_length > 1)
+			$("#newFile_length").val(newFile_length);
+		else
+			$("#newFile_length").val(0);
 		
 		/*** 금액에 , 제거 ***/
 		if(classify == "경매"){

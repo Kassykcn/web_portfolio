@@ -109,7 +109,8 @@
 		<tr>
 			<th class="table1th">이미지</th>
 			<td class="table1td">
-				<input type="file" name="imageFile" id="image">
+				<!-- <label for="image" class="image_customBtn">이미지 추가</label> -->
+				<input type="file" name="imageFile" id="image" accept=".jpg, .jpeg, .png">
 			</td>
 		</tr>
 		<tr>

@@ -37,7 +37,7 @@ create table register(
 desc register;
 --
 --delete from register where idx in(6,7);
---update register set file = null where file = '';
+--update register set deal_state = '진행중' where idx = 33;
 -- 확인용
 select * from register order by idx desc;
 select * from register order by start_date desc, idx desc;
