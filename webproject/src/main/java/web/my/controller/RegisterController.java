@@ -1,5 +1,8 @@
 package web.my.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,19 +34,24 @@ public class RegisterController {
 	// 경매/구매 등록 폼 
 	@RequestMapping(value="/register_write.do")
 	public String register_write(Model model, 
-			@RequestParam(value="first", required=false, defaultValue="0") String first,
-			@RequestParam(value="second", required=false, defaultValue="0") String second,
-			@RequestParam(value="third", required=false, defaultValue="0") String third) {
+			@RequestParam(value="first", required=false) String first,
+			@RequestParam(value="second", required=false) String second,
+			@RequestParam(value="third", required=false) String third) {
 
+		//category
+		model.addAttribute("categotyFirst", regService.getCategoryFirst());
+		model.addAttribute("categotySecond", regService.getCategorySecond(first));
+		model.addAttribute("categotyThird", regService.getCategoryThird(second));
 		
+		//자동 디코드 되어 디코딩이 필요없다.
 		System.out.println("----------------first:"+first);
 		System.out.println("----------------second:"+second);
 		System.out.println("----------------third:"+third);
 		
-		//category
-		model.addAttribute("categotyFirst", regService.getCategoryFirst());
-		model.addAttribute("categotySecond", regService.getCategorySecond());
-		model.addAttribute("categotyThird", regService.getCategoryThird());
+		model.addAttribute("first", first);
+		model.addAttribute("second", second);
+		model.addAttribute("third", third);
+		
 		
 		//<sf:form modelAttribute="값">과 동일해야한다.
 		model.addAttribute("regBean", new RegisterBean());
@@ -61,14 +69,14 @@ public class RegisterController {
 				FileUploadService fileUploadService = new FileUploadService();
 				String fileName = fileUploadService.upload(imageFile1);
 				rb.setImage1(fileName);
+			}else {
+				rb.setImage1(null);
 			}
 			if(imageFile2 != null){
 				FileUploadService fileUploadService = new FileUploadService();
 				String fileName = fileUploadService.upload2(imageFile2);
 				rb.setImage2(fileName);
-			}
-			if(imageFile1 == null && imageFile2 == null){
-				rb.setImage1(null);
+			}else {
 				rb.setImage2(null);
 			}
 		} catch (Exception e) {

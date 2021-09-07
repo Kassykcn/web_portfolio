@@ -25,15 +25,15 @@ public interface RegisterMapper {
 	@Select(CATEGORY_FIRST)
 	ArrayList<String> getCategoryFirst();
 
-	final String CATEGORY_SECOND = "select distinct second from category";
+	final String CATEGORY_SECOND = "select distinct second from category where first=#{first}";
 
 	@Select(CATEGORY_SECOND)
-	ArrayList<String> getCategorySecond();
+	ArrayList<String> getCategorySecond(@Param("first") String first);
 
-	final String CATEGORY_THIRD = "select distinct third from category";
+	final String CATEGORY_THIRD = "select distinct third from category where second=#{second}";
 
 	@Select(CATEGORY_THIRD)
-	ArrayList<String> getCategoryThird();
+	ArrayList<String> getCategoryThird(@Param("second") String second);
 
 	// 등록
 	final String INSERT = "insert into register(" 

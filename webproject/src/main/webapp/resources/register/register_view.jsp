@@ -14,7 +14,8 @@
 </head>
 <body>
 <!-- div의 css태그들은 frame.css 참조, 틀 위치잡기용  -->
-<%@ include file="../Top.jsp" %>
+<c:import url="/resources/Top.jsp"/>
+
 <div id="left"></div>
 <div id="content">
 	<form id="reg_view">
@@ -28,9 +29,11 @@
 					<img alt="ready_image" class="title_img" src='<c:url value="/resources/images/img_ready.png"/>'>
 				</c:if>
 				<c:if test="${regData.getImage1() != null}">
-					<img alt="upload_image" class="title_img" src='<c:url value="/resources/uploads/${regData.getImage1()}"/>'>
+					<img alt="upload_image1" class="title_img" src='<c:url value="/resources/uploads/${regData.getImage1()}"/>'>
 				</c:if>
-				
+				<c:if test="${regData.getImage2() != null}">
+					<img alt="upload_image2" class="sub_img" src='<c:url value="/resources/uploads/${regData.getImage2()}"/>'>
+				</c:if>
 			</td>
 			<td class="table1_td2" colspan="2">
 				<div>
@@ -240,7 +243,8 @@
 	</table>
 
 </div>
-<%@ include file="../Bottom.jsp" %>
+
+<c:import url="/resources/Bottom.jsp"/>
 
 </body>
 </html>

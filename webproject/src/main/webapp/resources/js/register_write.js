@@ -69,20 +69,35 @@ $(document).ready(function (){
 		}
 	});
 	
-	/*** 카테고리 ***/
-	// 대분류 클릭시 중분류 표시, 중분류 클릭 시 소분류 표시	
+	/*** 카테고리 ***/ // 대분류 클릭시 중분류 표시, 중분류 클릭 시 소분류 표시	
+	
+	
+	//대분류 선택 시 중분류 표시
+	
 	$("#category_first").change(function(){
-		//대분류 선택 시 중분류 표시
-		if($("#category_first").val() != 0){
-			$("#category_second").css("display","");
+		var first = $("#category_first").val();
+		if(first != null && first != '0' && first != ''){
+			location.href="register_write.do?first="+encodeURIComponent(first);
+		}else{
+			$("#category_second").css("display","none");
+			$("#category_third").css("display","none");
 		}
 	});
+	if($("#category_first").val() != 0){
+		$("#category_second").css("display","");
+	}
+	
+	//중분류 선택 시 소분류 표시
 	$("#category_second").change(function(){
-		//중분류 선택 시 소분류 표시
-		if($("#category_second").val() != 0){
-			$("#category_third").css("display","");
+		var first = $("#category_first").val();
+		var second = $("#category_second").val();
+		if(second != null && second != '0' && second != ''){
+			location.href="register_write.do?first="+encodeURIComponent(first)+"&second="+encodeURIComponent(second);
 		}
 	});
+	if($("#category_second").val() != 0){
+		$("#category_third").css("display","");
+	}
 	
 	/*** 금액에 , 추가 ***/
 	$("#price").blur(function(){

@@ -37,15 +37,27 @@
 			<td class="table1td">
 				<sf:select path="first" id="category_first">
 					<option value="0">대분류</option>
-					<sf:options items="${categotyFirst}" />
+					<c:forEach var="category1" items="${categotyFirst}">
+						<option value="${category1}" ${category1 == first ? "selected" : "" }>
+							${category1}
+						</option>
+					</c:forEach>
 				</sf:select>
 				<sf:select path="second" id="category_second">
 					<option value="0">중분류</option>
-					<sf:options items="${categotySecond}" />
+					<c:forEach var="category2" items="${categotySecond}">
+						<option value="${category2}" ${category2 == second ? "selected" : "" }>
+							${category2}
+						</option>
+					</c:forEach>
 				</sf:select>
 				<sf:select path="third" id="category_third">
 					<option value="0">소분류</option>
-					<sf:options items="${categotyThird}" />
+					<c:forEach var="category3" items="${categotyThird}">
+						<option value="${category3}" ${category3 == third ? "selected" : "" }>
+							${category3}
+						</option>
+					</c:forEach>
 				</sf:select>
 			</td>
 		</tr>

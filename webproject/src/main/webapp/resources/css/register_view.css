@@ -87,6 +87,10 @@ input { vertical-align: middle; }
 	width: 350px;
 	height: 350px;
 }
+.sub_img{
+	width: 90px;
+	height: 90px;
+}
 .grade_help_img{
 	width:12px;
 	height: 12px;

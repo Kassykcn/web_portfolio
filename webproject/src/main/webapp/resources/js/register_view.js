@@ -8,6 +8,26 @@ javascript, jquery
 */
 
 $(document).ready(function (){
+	//서브 이미지 클릭 시 큰 이미지로 변경
+	$(".sub_img").click(function(){
+		var image1 = $(".title_img").attr("src");
+		var image2 = $(".sub_img").attr("src");
+		$(".title_img").attr("src", function(index, attr){
+			if(attr.match(image1)){
+				return attr.replace(image1, image2);
+			}else{
+				return attr.replace(image2, image1);
+			}
+		});
+		$(".sub_img").attr("src", function(index, attr){
+			if(attr.match(image1)){
+				return attr.replace(image1, image2);
+			}else{
+				return attr.replace(image2, image1);
+			}
+		});
+	});
+	
 	//찜 버튼 클릭 시 하트 이미지 변경
 	$("#like_btn").click(function(){
 		$(".like_img").attr("src", function(index, attr){

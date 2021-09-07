@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import web.my.bean.RegisterBean;
 import web.my.bean.RegisterQnABean;
@@ -21,12 +20,12 @@ public class RegisterService implements RegisterMapper{
 		return regMapper.getCategoryFirst();
 	}
 	@Override
-	public ArrayList<String> getCategorySecond() {
-		return regMapper.getCategorySecond();
+	public ArrayList<String> getCategorySecond(String first) {
+		return regMapper.getCategorySecond(first);
 	}
 	@Override
-	public ArrayList<String> getCategoryThird() {
-		return regMapper.getCategoryThird();
+	public ArrayList<String> getCategoryThird(String second) {
+		return regMapper.getCategoryThird(second);
 	}
 
 	

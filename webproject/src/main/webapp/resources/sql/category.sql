@@ -26,3 +26,5 @@ desc category;
 select * from category;
 select distinct first from category ;
 select distinct first,second, third from category ;
+
+select distinct second from category where first="연예인/아이돌" ;
