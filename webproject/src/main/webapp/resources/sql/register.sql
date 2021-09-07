@@ -15,7 +15,8 @@ create table register(
 	first varchar(20), -- 카테고리 대분류
 	second varchar(20), -- 카테고리 중분류
 	third varchar(20), -- 카테고리 소분류
-	image varchar(20) default null, -- 이미지 파일
+	image1 varchar(20) default null, -- 이미지 파일1
+	image2 varchar(20) default null, -- 이미지 파일2
 	grade varchar(5), -- 등급
 	details varchar(500), -- 상세설명 : 한글 2바이트 * 200자
 	price int(10), -- 가격 - 구매일때만 사용

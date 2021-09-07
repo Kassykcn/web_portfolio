@@ -30,32 +30,46 @@ public class RegisterController {
 	// ,method = RequestMethod.POST 를 지정하지않으면 post, get방식 모두 지원
 	// 경매/구매 등록 폼 
 	@RequestMapping(value="/register_write.do")
-	public String register_write(Model model) {
+	public String register_write(Model model, 
+			@RequestParam(value="first", required=false, defaultValue="0") String first,
+			@RequestParam(value="second", required=false, defaultValue="0") String second,
+			@RequestParam(value="third", required=false, defaultValue="0") String third) {
 
-		//<sf:form modelAttribute="값">과 동일해야한다.
-		model.addAttribute("regBean", new RegisterBean());
-
+		
+		System.out.println("----------------first:"+first);
+		System.out.println("----------------second:"+second);
+		System.out.println("----------------third:"+third);
+		
 		//category
 		model.addAttribute("categotyFirst", regService.getCategoryFirst());
 		model.addAttribute("categotySecond", regService.getCategorySecond());
 		model.addAttribute("categotyThird", regService.getCategoryThird());
+		
+		//<sf:form modelAttribute="값">과 동일해야한다.
+		model.addAttribute("regBean", new RegisterBean());
 
 		return "register/register_write";
 	}
 	//경매/구매 등록 확인
 	@RequestMapping(value="/register_write_ok.do", method = RequestMethod.POST)
 	public String register_write_ok(RegisterBean rb, Model model,
-			@RequestParam(value="imageFile", required=false) MultipartFile imageFile) {
+			@RequestParam(value="imageFile1", required=false) MultipartFile imageFile1,
+			@RequestParam(value="imageFile2", required=false) MultipartFile imageFile2) {
 		
 		try {
-			//System.out.println("-----------------imageFile: "+imageFile);
-			if(imageFile != null) {
+			if(imageFile1 != null) {
 				FileUploadService fileUploadService = new FileUploadService();
-				String fileName = fileUploadService.upload(imageFile);
-				//System.out.println("-----------------fileName: "+fileName);
-				rb.setImage(fileName);
-			}else {
-				rb.setImage(null);
+				String fileName = fileUploadService.upload(imageFile1);
+				rb.setImage1(fileName);
+			}
+			if(imageFile2 != null){
+				FileUploadService fileUploadService = new FileUploadService();
+				String fileName = fileUploadService.upload2(imageFile2);
+				rb.setImage2(fileName);
+			}
+			if(imageFile1 == null && imageFile2 == null){
+				rb.setImage1(null);
+				rb.setImage2(null);
 			}
 		} catch (Exception e) {
 			System.out.println("[ERROR]===================imageFile");
@@ -126,8 +140,6 @@ public class RegisterController {
 		model.addAttribute("idx", idx); //글번호
 		model.addAttribute("cur_page", cur_page); //현재 페이지
 		
-		System.out.println("---------------Q_idx :"+Q_idx);
-		System.out.println("---------------QnA :"+QnA);
 		if(QnA != null) {
 			if(QnA.equals("Q")) {
 				System.out.println("------------------------문의");
@@ -144,7 +156,6 @@ public class RegisterController {
 		}
 		
 		int QnA_cnt = regService.getQnACnt(idx);
-		System.out.println("---------------QnA_cnt :"+QnA_cnt);
 		if(QnA_cnt != 0) {
 			model.addAttribute("Q_secret", Q_secret); //비공개 여부
 			model.addAttribute("QnAData", regService.getQnAList(idx));
@@ -172,26 +183,42 @@ public class RegisterController {
 			@RequestParam("idx") int idx, 
 			@RequestParam("cur_page") int cur_page, 
 			Model model,
-			@RequestParam(value="imageFile", required=false) MultipartFile imageFile,
-			@RequestParam(value="oldFile", required=false) String oldFile,
-			@RequestParam(value="newFile_length", required=false) int newFile_length) {
+			@RequestParam(value="imageFile1", required=false) MultipartFile imageFile1,
+			@RequestParam(value="oldFile1", required=false) String oldFile1,
+			@RequestParam(value="newFile_length1", required=false) int newFile_length1,
+			@RequestParam(value="imageFile2", required=false) MultipartFile imageFile2,
+			@RequestParam(value="oldFile2", required=false) String oldFile2,
+			@RequestParam(value="newFile_length2", required=false) int newFile_length2) {
 		
 		try {
-			System.out.println("-----------------oldFile: "+oldFile);
-			System.out.println("-----------------newFile_length: "+newFile_length);
+			System.out.println("-----------------oldFile1: "+oldFile1);
+			System.out.println("-----------------oldFile2: "+oldFile2);
+			System.out.println("-----------------newFile_length1: "+newFile_length1);
+			System.out.println("-----------------newFile_length2: "+newFile_length2);
 			
-			if(newFile_length != 0 || newFile_length > 1) {
+			if(newFile_length1 != 0 || newFile_length1 > 1) {
 				FileUploadService fileUploadService = new FileUploadService();
-				String fileName = fileUploadService.upload(imageFile);
-				System.out.println("-----------------fileName: "+fileName);
+				String fileName = fileUploadService.upload(imageFile1);
+				System.out.println("-----------------fileName1: "+fileName);
 				
-				
-				rb.setImage(fileName);
-			}else {
-				if(oldFile == null) 
-					rb.setImage(null);
-				else
-					rb.setImage(oldFile);
+				rb.setImage1(fileName);
+			}
+			if(newFile_length2 != 0 || newFile_length2 > 1) {
+				FileUploadService fileUploadService = new FileUploadService();
+				String fileName = fileUploadService.upload2(imageFile2);
+				System.out.println("-----------------fileName2: "+fileName);
+
+				rb.setImage2(fileName);
+			}
+			if(newFile_length1 < 1 && newFile_length2 < 1) {
+				if(oldFile1 == null) 
+					rb.setImage1(null);
+				if(oldFile2 == null) 
+					rb.setImage2(null);
+				if(oldFile1 != null && oldFile2 != null) {
+					rb.setImage1(oldFile1);
+					rb.setImage2(oldFile2);
+				}
 			}
 		} catch (Exception e) {
 			System.out.println("[ERROR]===================imageFile");

@@ -39,7 +39,37 @@ public class FileUploadService {
 			*/
 			writeFile(multipartFile, saveFileName);
 			url = PREFIX_URL + saveFileName;
-			System.out.println("url : " + url);
+		}
+		catch (IOException e) {
+			// 원래라면 RuntimeException 을 상속받은 예외가 처리되어야 하지만
+			// 편의상 RuntimeException을 던진다.
+			// throw new FileUploadException();	
+			throw new RuntimeException(e);
+		}
+		return saveFileName;
+	}
+	
+	public String upload2(MultipartFile multipartFile) {
+		String url = null;
+		String saveFileName = null;
+		
+		try {
+			// 파일 정보
+			String originFilename = multipartFile.getOriginalFilename();
+			String extName = originFilename.substring(originFilename.lastIndexOf("."), originFilename.length());
+			//Long size = multipartFile.getSize();
+			
+			// 서버에서 저장 할 파일 이름
+			saveFileName = SaveFileName2(extName);
+			/*
+			System.out.println("=======================================");
+			System.out.println("originFilename : " + originFilename);
+			System.out.println("extensionName : " + extName);
+			System.out.println("size : " + size);
+			System.out.println("saveFileName : " + saveFileName);
+			*/
+			writeFile(multipartFile, saveFileName);
+			url = PREFIX_URL + saveFileName;
 		}
 		catch (IOException e) {
 			// 원래라면 RuntimeException 을 상속받은 예외가 처리되어야 하지만
@@ -60,6 +90,19 @@ public class FileUploadService {
 		String pattern = "yyyyMMddHHmmss"; 
 		SimpleDateFormat formatter = new SimpleDateFormat(pattern, currentLocale);
 		fileName = formatter.format(date);
+		fileName += extName;
+		
+		return fileName;
+	}
+	
+	private String SaveFileName2(String extName) {
+		String fileName = "";
+		
+		Date date = new Date();
+		Locale currentLocale = new Locale("KOREAN", "KOREA");
+		String pattern = "yyyyMMddHHmmss"; 
+		SimpleDateFormat formatter = new SimpleDateFormat(pattern, currentLocale);
+		fileName = formatter.format(date)+1;
 		fileName += extName;
 		
 		return fileName;

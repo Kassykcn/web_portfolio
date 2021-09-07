@@ -9,7 +9,7 @@ public class RegisterBean {
 	String reg_date, start_date, end_date, deal_date;
 	String first, second, third; // 카테고리 대,중,소분류
 	String id, classify, classify_num, title, grade, details, deal_way, deal_state;
-	String image;
+	String image1, image2;
 	
 	public int getIdx() {
 		return idx;
@@ -143,11 +143,17 @@ public class RegisterBean {
 	public void setDeal_state(String deal_state) {
 		this.deal_state = deal_state;
 	}
-	public String getImage() {
-		return image;
+	public String getImage1() {
+		return image1;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setImage1(String image1) {
+		this.image1 = image1;
+	}
+	public String getImage2() {
+		return image2;
+	}
+	public void setImage2(String image2) {
+		this.image2 = image2;
 	}
 	
 }

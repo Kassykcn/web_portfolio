@@ -15,7 +15,8 @@
 <body>
 
 <!-- div의 css태그들은 frame.css 참조, 틀 위치잡기용  -->
-<%@ include file="../Top.jsp" %>
+<c:import url="/resources/Top.jsp"/>
+
 <div id="left"></div>
 <div id="content">
 	
@@ -110,7 +111,9 @@
 			<th class="table1th">이미지</th>
 			<td class="table1td">
 				<!-- <label for="image" class="image_customBtn">이미지 추가</label> -->
-				<input type="file" name="imageFile" id="image" accept=".jpg, .jpeg, .png">
+				<input type="file" name="imageFile1" id="image" accept=".jpg, .jpeg, .png">
+				<br>
+				<input type="file" name="imageFile2" id="image" accept=".jpg, .jpeg, .png">
 			</td>
 		</tr>
 		<tr>
@@ -123,6 +126,7 @@
 	</sf:form>
 </div>
 
-<%@ include file="../Bottom.jsp" %>
+<c:import url="/resources/Bottom.jsp"/>
+
 </body>
 </html>

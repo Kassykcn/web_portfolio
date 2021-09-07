@@ -15,7 +15,8 @@
 <body>
 
 <!-- div의 css태그들은 frame.css 참조, 틀 위치잡기용  -->
-<%@ include file="../Top.jsp" %>
+<c:import url="/resources/Top.jsp"/>
+
 <div id="left"></div>
 <div id="content">
 	
@@ -112,17 +113,27 @@
 				<th class="table1th">이미지</th>
 				<td class="table1td">
 				<div class="imgDiv">
-					<c:if test="${regData.getImage() == null}">
+					<c:if test="${regData.getImage1() == null}">
 						파일이 없습니다.
 					</c:if>
-					<c:if test="${regData.getImage() != null}">
-						<img alt="upload_image" class="update_img" src='<c:url value="/resources/uploads/${regData.getImage()}"/>'>
+					<c:if test="${regData.getImage1() != null}">
+						<img alt="upload_image1" class="update_img" src='<c:url value="/resources/uploads/${regData.getImage1()}"/>'>
 					</c:if>
-					<input type="hidden" name="oldFile" value="${regData.getImage()}">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<c:if test="${regData.getImage2() == null}">
+						파일이 없습니다.
+					</c:if>
+					<c:if test="${regData.getImage2() != null}">
+						<img alt="upload_image2" class="update_img" src='<c:url value="/resources/uploads/${regData.getImage2()}"/>'>
+					</c:if>
+					<input type="hidden" name="oldFile1" value="${regData.getImage1()}">
+					<input type="hidden" name="oldFile2" value="${regData.getImage2()}">
+					<br>
 					<!-- <label for="image" class="image_customBtn">이미지 추가</label> -->
-					<input type="file" name="imageFile" id="image" accept=".jpg, .jpeg, .png">
-					<input type="hidden" name="newFile_length" id="newFile_length" >
+					<input type="file" name="imageFile1" id="image1" accept=".jpg, .jpeg, .png">
+					<br>
+					<input type="file" name="imageFile2" id="image2" accept=".jpg, .jpeg, .png">
+					<input type="hidden" name="newFile_length1" id="newFile_length1" >
+					<input type="hidden" name="newFile_length2" id="newFile_length2" >
 					</div>
 				</td>
 			</tr>
@@ -136,6 +147,7 @@
 	</sf:form>
 </div>
 
-<%@ include file="../Bottom.jsp" %>
+<c:import url="/resources/Bottom.jsp"/>
+
 </body>
 </html>

@@ -170,11 +170,17 @@ $(document).ready(function (){
 		}
 
 		//이미지
-		var newFile_length = $("#image").val().length;
-		if(newFile_length != 0 || newFile_length > 1)
-			$("#newFile_length").val(newFile_length);
+		var newFile_length1 = $("#image1").val().length;
+		if(newFile_length1 != 0 || newFile_length1 > 1)
+			$("#newFile_length1").val(newFile_length1);
 		else
-			$("#newFile_length").val(0);
+			$("#newFile_length1").val(0);
+		
+		var newFile_length2 = $("#image2").val().length;
+		if(newFile_length2 != 0 || newFile_length2 > 1)
+			$("#newFile_length2").val(newFile_length2);
+		else
+			$("#newFile_length2").val(0);
 		
 		/*** 금액에 , 제거 ***/
 		if(classify == "경매"){
