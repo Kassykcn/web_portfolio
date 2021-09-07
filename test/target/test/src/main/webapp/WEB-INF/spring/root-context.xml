@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:p="http://www.springframework.org/schema/p"
+   xmlns:c="http://www.springframework.org/schema/c"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+   <!-- Root Context: defines shared resources visible to all other web components -->
+
+   
+    <!--     <bean class="org.apache.commons.dbcp.BasicDataSource" 
+      id="dataSource"
+      p:driverClassName="com.mysql.jdbc.Driver"
+      p:url="jdbc:mysql://20.194.33.177:3306/yangju?/load_infile=1&amp;useUnicode=true&amp;characterEncoding=utf-8"
+      p:username="root"
+      p:password="yangju2020" />
+      -->
+   <bean class="org.apache.commons.dbcp.BasicDataSource" 
+      id="dataSource"
+      p:driverClassName="com.mysql.jdbc.Driver"
+      p:url="jdbc:mysql://localhost:3306/jspdb?/useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
+      p:username="jspuser"
+      p:password="1234" />
+      
+      <bean id="sqlSessionTemplate"
+      name="sqlSessionTemplate" 
+      class="org.mybatis.spring.SqlSessionTemplate"
+      c:sqlSessionFactory-ref="sqlSessionFactory"
+      destroy-method="clearCache"> </bean>
+   
+      
+      <!-- my batis  -->
+      <bean class="org.mybatis.spring.SqlSessionFactoryBean"
+      name="sqlSessionFactory"
+      id="sqlSessionFactory"
+      p:dataSource-ref="dataSource"
+      p:mapperLocations="/WEB-INF/spring/mapper/*-application.xml"></bean>
+      
+      
+      
+  <!--<bean id="fileProc" class="com.yangju.app.setting.fileProc"/>
+      <bean id="csvUploadFile" class="com.yangju.app.setting.csvUploadFile"/>
+      <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+          <property name="maxUploadSize" value="2048000" />
+      </bean>
+		-->
+
+</beans>
+
+
+   
+   
