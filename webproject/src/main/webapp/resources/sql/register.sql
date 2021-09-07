@@ -7,7 +7,7 @@ drop table register;
 
 create table register(
 	idx int(10) not null primary key auto_increment, -- 글 번호
-	reg_date timestamp, -- 글 등록일
+	reg_date datetime, -- 글 등록일
 	id varchar(20), -- 회원 id
 	classify varchar(10), -- 구분(구매 / 경매 / 입찰 / 낙찰)
 	classify_num int(10) default 0, -- 구분값이 입찰이나 낙찰일 때 해당 상품의 글번호
@@ -34,6 +34,8 @@ create table register(
 -- 컬럼명 변경
 --alter table register change image file varchar(20);
 --alter table register change file image varchar(20);
+-- 컬럼타입 변경
+--alter table register modify reg_date datetime;
 desc register;
 --
 --delete from register where idx in(6,7);

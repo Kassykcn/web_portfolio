@@ -91,10 +91,12 @@ public interface RegisterMapper {
 	void hitUp(@Param("idx") int idx);
 
 	// 수정
-	final String UPDATE = "update register set " + "title=#{title}, first=#{first}, second=#{second}, "
+	final String UPDATE = "update register set " 
+			+ "title=#{title}, first=#{first}, second=#{second}, "
 			+ "third=#{third}, image=#{image}, grade=#{grade}, "
 			+ "details=#{details}, start_date=#{start_date}, end_date=#{end_date}, "
-			+ "price=#{price}, min_bid=#{min_bid}, win_bid=#{win_bid} " + "where idx=#{idx}";
+			+ "price=#{price}, min_bid=#{min_bid}, win_bid=#{win_bid} " 
+			+ "where idx=#{idx}";
 
 	@Update(UPDATE)
 	void updateRegister(@Param("idx") int idx, @Param("title") String title, @Param("first") String first,
@@ -136,7 +138,9 @@ public interface RegisterMapper {
 	//Q&A 내용
 	//final String SELECT_QnA = "select * from registerQ where idx=#{idx} order by Q_idx desc";
 	final String SELECT_QnA = 
-			"select * from registerQ q left join registerA a on q.Q_idx = a.Q_idx where idx=#{idx}";
+			"select * from registerQ q left join registerA a "
+			+ "on q.Q_idx = a.Q_idx where idx=#{idx} "
+			+ "order by q.Q_idx desc";
 
 	@Select(SELECT_QnA)
 	@Results(id = "selectQList", value = { 

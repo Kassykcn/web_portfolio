@@ -39,5 +39,8 @@ from (select * from registerQ where idx=34) q, registerA a
 where  q.Q_idx = a.Q_idx;
 
 
-select * from registerQ q left join registerA a on idx=34 and q.Q_idx = a.Q_idx;
-select * from registerQ q left join registerA a on q.Q_idx = a.Q_idx where idx=33;
+select * from registerQ q left join registerA a 
+on idx=34 and q.Q_idx = a.Q_idx;
+
+select * from registerQ q left join registerA a 
+on q.Q_idx = a.Q_idx where idx=34 order by q.Q_idx desc;

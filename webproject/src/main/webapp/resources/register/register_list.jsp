@@ -22,7 +22,9 @@
 </head>
 <body>
 <!-- div의 css태그들은 frame.css 참조, 틀 위치잡기용  -->
-<%@ include file="../Top.jsp" %>
+
+<c:import url="/resources/Top.jsp"/>
+
 <div id="left"></div>
 <div id="content">
 <input type="hidden" id="search_key" value="${search_key}">
@@ -40,35 +42,7 @@
 		<input type="button" id="write_link" class="btn1" value="등록">
 	</div>
 	<div class="sort">
-		<div>
-			<select onchange="filter()" id="classify">
-				<option value="0" <c:if test="${filter_codeC == '0' }">selected</c:if> >
-					거래종류</option>
-				<option value="c0" <c:if test="${filter_codeC == 'c0' }">selected</c:if> >
-					전체</option>
-				<option value="c1" <c:if test="${filter_codeC == 'c1' }">selected</c:if> >
-					경매</option>
-				<option value="c2" <c:if test="${filter_codeC == 'c2' }">selected</c:if> >
-					구매</option>
-			</select>
-		</div>
-		<div>
-			<select onchange="filter()" id="deal_state">
-				<option value="0" <c:if test="${filter_codeD == '0' }">selected</c:if> >
-				거래상태</option>
-				<option value="d0" <c:if test="${filter_codeD == 'd0' }">selected</c:if> >
-				전체</option>
-				<option value="d1" <c:if test="${filter_codeD == 'd1' }">selected</c:if> >
-				진행중</option>
-				<option value="d2" <c:if test="${filter_codeD == 'd2' }">selected</c:if> >
-				기간만료</option>
-				<option value="d3" <c:if test="${filter_codeD == 'd3' }">selected</c:if> >
-				거래완료</option>
-			</select>
-		</div>
-		<div><a onclick="sort_num1()">시작일 낮은순</a></div>
-		<div><a onclick="sort_num2()">시작일 높은순</a></div>
-		<div><a onclick="sort_num3()">조회수 높은순</a></div>
+		<c:import url="/resources/register/register_listSortFilter.jsp"/>
 	</div>
 	
 	<table class="table2">
@@ -99,7 +73,7 @@
 						<c:if test="${fn:length(list.getTitle()) > 15}">
 							${fn:substring(list.getTitle(),0,15)}...
 						</c:if> 
-						<c:if test="${fn:length(list.getTitle()) < 15}">
+						<c:if test="${fn:length(list.getTitle()) <= 15}">
 							<c:out value="${list.getTitle()}"/>
 						</c:if> 
 					</a></td>
@@ -112,10 +86,11 @@
 		</tbody>
 	</table>
 	
-	<%@ include file="register_listBottom.jsp" %>
+	<c:import url="/resources/register/register_listBottom.jsp"/>
 
 </div>
-<%@ include file="../Bottom.jsp" %>
+
+<c:import url="/resources/Bottom.jsp"/>
 
 </body>
 </html>
