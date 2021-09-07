@@ -41,22 +41,29 @@ $(document).ready(function (){
 	});
 	
 	//QnA <textarea> 글자 수 세기
-	$("#QnA_text").keydown(function(){
-		$("#QnA_length").text($("#QnA_text").val().length);
+	$("#Q_text").keydown(function(){
+		$("#Q_length").text($("#Q_text").val().length);
 	});
 	
 	//비공개 여부 클릭
 	$("#secretCk").click(function(){
 		if($("#secretCk").is(":checked") == true){
-			$("#QnA_secret").val("Y");
+			$("#Q_secret").val("Y");
 		}else{
-			$("#QnA_secret").val("N");
+			$("#Q_secret").val("N");
 		}
 	});
 	
 	$("#report").click(function(){
 		confirm("신고하시겠습니까?");
 	});
+	
+	//답변달기는 숨김처리했다가 클릭되면 답변달기
+	$(".answer").css('display','none');
+	$(".write_answer").click(function(){
+		$(".answer").css('display','');
+	});
+	
 	
 });
 

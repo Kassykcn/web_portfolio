@@ -84,11 +84,12 @@ public class RegisterService implements RegisterMapper{
 		regMapper.deleteRegister(idx);
 	}
 	
-	//상세페이지 QnA 등록
+	//상세페이지 QnA 문의 등록
 	@Override
-	public void insertQnA(RegisterQnABean qnaBean) {
-		regMapper.insertQnA(qnaBean);
+	public void insertQ(RegisterQnABean qnaBean) {
+		regMapper.insertQ(qnaBean);
 	}
+	
 	//QnA 보기
 	@Override
 	public ArrayList<RegisterQnABean> getQnAList(int idx) {
@@ -98,5 +99,16 @@ public class RegisterService implements RegisterMapper{
 	public int getQnACnt(int idx) {
 		return regMapper.getQnACnt(idx);
 	}
+	
+	//QnA 답변 등록
+	@Override
+	public void insertA(RegisterQnABean qnaBean) {
+		regMapper.insertA(qnaBean);
+	}
+	@Override
+	public void update_QnA_state(int Q_idx) {
+		regMapper.update_QnA_state(Q_idx);
+	}
+	
 	
 }

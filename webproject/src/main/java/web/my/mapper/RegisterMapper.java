@@ -112,35 +112,44 @@ public interface RegisterMapper {
 	void deleteRegister(@Param("idx") int idx);
 
 	//상세페이지 Q&A 등록
-	final String INSERT_QnA = "insert into registerQnA values(null, 0, now(), "
-			+ "#{idx}, #{id}, #{QnA_secret}, #{QnA_type}, #{QnA_state}, #{QnA_text})";
+	final String INSERT_Q = "insert into registerQ values(null, now(), "
+			+ "#{idx}, #{id}, #{Q_secret}, #{Q_state}, #{Q_text})";
+	final String INSERT_A = "insert into registerA values(null, now(), "
+			+ "#{Q_idx}, #{id}, #{A_secret}, #{A_text})";
 
-	@Insert(INSERT_QnA)
-	void insertQnA(RegisterQnABean qnaBean);
+	@Insert(INSERT_Q)
+	void insertQ(RegisterQnABean qnaBean);
+	@Insert(INSERT_A)
+	void insertA(RegisterQnABean qnaBean);
 
 	//Q&A 답변완료 처리
-	//final String UPDATE_QNA_STATE = "update registerQnA set QnA_state='답변완료' where A_idx=#{Q_idx}";
-	//@Update(UPDATE_QNA_STATE)
-	//void update_QnA_state(@Param("idx") int idx);
+	final String UPDATE_QNA_STATE = "update registerQ set Q_state='답변완료' where Q_idx=#{Q_idx} ";
+	@Update(UPDATE_QNA_STATE)
+	void update_QnA_state(@Param("Q_idx") int Q_idx);
 
 	//Q&A 문의 수
-	final String SELECT_QnA_CNT = "select count(1) from registerQnA where idx=#{idx} ";
+	final String SELECT_QnA_CNT = "select count(1) from registerQ where idx=#{idx} ";
 	@Select(SELECT_QnA_CNT)
 	int getQnACnt(@Param("idx") int idx);
+	
 
 	//Q&A 내용
-	final String SELECT_QnA = "select * from registerQnA where idx=#{idx} order by Q_idx desc";
+	//final String SELECT_QnA = "select * from registerQ where idx=#{idx} order by Q_idx desc";
+	final String SELECT_QnA = 
+			"select * from registerQ q left join registerA a on q.Q_idx = a.Q_idx where idx=#{idx}";
+
 	@Select(SELECT_QnA)
-	@Results(id = "selectQnAList", value = { 
+	@Results(id = "selectQList", value = { 
 			@Result(property = "Q_idx", column = "Q_idx"),
-			@Result(property = "A_idx", column = "A_idx"),
-			@Result(property = "QnA_date", column = "QnA_date"), 
+			@Result(property = "Q_date", column = "Q_date"), 
 			@Result(property = "idx", column = "idx"),
 			@Result(property = "id", column = "id"), 
-			@Result(property = "QnA_secret", column = "QnA_secret"),
-			@Result(property = "QnA_type", column = "QnA_type"),
-			@Result(property = "QnA_state", column = "QnA_state"),
-			@Result(property = "QnA_text", column = "QnA_text")})
+			@Result(property = "Q_secret", column = "Q_secret"),
+			@Result(property = "Q_state", column = "Q_state"),
+			@Result(property = "Q_text", column = "Q_text"),
+			@Result(property = "A_date", column = "A_date"),
+			@Result(property = "A_secret", column = "A_secret"),
+			@Result(property = "A_text", column = "A_text")})
 	ArrayList<RegisterQnABean> getQnAList(@Param("idx") int idx);
 
 }

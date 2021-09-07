@@ -116,10 +116,9 @@ public class RegisterController {
 	public String register_view(@RequestParam("idx") int idx, 
 			@RequestParam("cur_page") int cur_page, 
 			@RequestParam(value="id", required=false) String id, 
-			@RequestParam(value="QnA_type", required=false) String QnA_type, 
-			@RequestParam(value="QnA_state", required=false) String QnA_state, 
-			@RequestParam(value="QnA_text", required=false) String QnA_text, 
-			@RequestParam(value="QnA_secret", required=false) String QnA_secret, 
+			@RequestParam(value="Q_idx", required=false) String Q_idx, 
+			@RequestParam(value="QnA", required=false) String QnA, 
+			@RequestParam(value="Q_secret", required=false) String Q_secret, 
 			RegisterQnABean qnaBean, 
 			Model model) {
 		
@@ -127,13 +126,29 @@ public class RegisterController {
 		model.addAttribute("idx", idx); //글번호
 		model.addAttribute("cur_page", cur_page); //현재 페이지
 		
-		if(QnA_text != null) {
-			regService.insertQnA(qnaBean); //문의 등록 DB 저장
-			model.addAttribute("regData", regService.getView(idx));
+		System.out.println("---------------Q_idx :"+Q_idx);
+		System.out.println("---------------QnA :"+QnA);
+		if(QnA != null) {
+			if(QnA.equals("Q")) {
+				System.out.println("------------------------문의");
+				regService.insertQ(qnaBean); //문의 등록 DB 저장
+				model.addAttribute("regData", regService.getView(idx));
+			}else if(QnA.equals("A") && Q_idx != null) {
+				System.out.println("------------------------답변");
+				regService.insertA(qnaBean); //답변 등록 DB 저장
+				regService.update_QnA_state(Integer.parseInt(Q_idx)); // 답변 상태 변경
+			}
+			model.addAttribute("regData", regService.getView(idx));	
 		}else {
 			model.addAttribute("regData", regService.getViewHits(idx));
 		}
-		model.addAttribute("QnAData", regService.getQnAList(idx));
+		
+		int QnA_cnt = regService.getQnACnt(idx);
+		System.out.println("---------------QnA_cnt :"+QnA_cnt);
+		if(QnA_cnt != 0) {
+			model.addAttribute("Q_secret", Q_secret); //비공개 여부
+			model.addAttribute("QnAData", regService.getQnAList(idx));
+		}
 		
 		return "register/register_view";
 	}
@@ -210,30 +225,6 @@ public class RegisterController {
 		model.addAttribute("regList", regService.getListSearchSort(((cur_page-1)*lenPage), lenPage, null, null, "reg_date desc"));
 
 		return "register/register_delete_ok";
-	}
-
-	//상세페이지 Q&A
-	@RequestMapping(value="/registerQnA.do", method = RequestMethod.POST)
-	public String registerQnA(
-			@RequestParam("cur_page") int cur_page, 
-			@RequestParam("idx") int idx,  //글번호
-			@RequestParam(value="id", required=false) String id, 
-			@RequestParam(value="QnA_type", required=false) String QnA_type, 
-			@RequestParam(value="QnA_state", required=false) String QnA_state, 
-			@RequestParam(value="QnA_text", required=false) String QnA_text, 
-			@RequestParam(value="QnA_secret", required=false) String QnA_secret, 
-			RegisterQnABean qnaBean, 
-			Model model) {
-		
-		//DB 저장
-		regService.insertQnA(qnaBean); //문의 등록
-
-		model.addAttribute("idx", idx);
-		model.addAttribute("cur_page", cur_page); //현재 페이지
-		model.addAttribute("regData", regService.getView(idx));
-		model.addAttribute("QnAData", regService.getQnAList(idx));
-		
-		return "register/register_view";
 	}
 
 }// class end

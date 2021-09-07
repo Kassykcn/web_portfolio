@@ -153,15 +153,15 @@
 						<input type="hidden"  name="cur_page" value="${cur_page}" >
 						<input type="hidden" name="idx" value="${regData.getIdx()}">
 						<input type="hidden" name="id" value="${regData.getId()}">
-						<input type="hidden" name="QnA_type" value="Q">
-						<input type="hidden" name="QnA_state" value="답변대기">
-						<textarea class="tarea1" id="QnA_text" name="QnA_text" placeholder="최대 200자까지 입력가능합니다" maxlength="200"></textarea>
+						<input type="hidden" name="Q_state" value="답변대기">
+						<input type="hidden" name="QnA" value="Q">
+						<textarea class="tarea1" id="Q_text" name="Q_text" placeholder="최대 200자까지 입력가능합니다" maxlength="200"></textarea>
 						<div class="QnA_inner_div">
-							<span id="QnA_length"></span>/200자
+							<span id="Q_length"></span>/200자
 						</div>
 						<div class="QnA_outer_div">
 							<input type="checkbox" id="secretCk" class="QnA_btn">비공개 여부
-							<input type="hidden" name="QnA_secret" id="QnA_secret" value="N">
+							<input type="hidden" name="Q_secret" id="Q_secret" value="N">
 							&nbsp;&nbsp;
 							<input type="submit" id="QnA" value="작성하기" class="QnA_btn">
 						</div>
@@ -184,19 +184,55 @@
 					</tr>
 					<c:forEach var="data" items="${QnAData}">
 					<tr>
-						<td class="table3_left"><c:out value="${data.getQnA_state()}"/></td>
-						<td><c:out value="${data.getQnA_text()}"/></td>
+						<td class="table3_left">
+							<c:out value="${data.getQ_state()}"/><br>
+							<c:if test="${data.getQ_state() == '답변대기'}">
+								<a href="#none" class="write_answer">답변 달기</a>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${data.getQ_secret() == 'N'}">
+								<c:out value="${data.getQ_text()}"/>
+							</c:if>
+							<c:if test="${data.getQ_secret() == 'Y'}">
+								<c:out value="비밀글입니다."/>
+							</c:if>
+						</td>
 						<td class="table3_left"><c:out value="${data.getId()}"/></td>
-						<td class="table3_left"><c:out value="${data.getQnA_date()}"/></td>
+						<td class="table3_left"><c:out value="${data.getQ_date()}"/></td>
 					</tr>
-					<c:if test="${data.getA_idx() ==  data.getQ_idx()}">
+					<c:if test="${data.getQ_state() == '답변완료'}">
 					<tr>
-						<td></td>
-						<td>ㄴ<c:out value="${data.getQnA_text()}"/></td>
-						<td><c:out value="${data.getId()}"/></td>
-						<td><c:out value="${data.getQnA_date()}"/></td>
+						<td class="table3_left"></td>
+						<td>
+							<c:if test="${data.getA_secret() == 'N'}">
+								<c:out value="${data.getA_text()}"/>
+							</c:if>
+							<c:if test="${data.getA_secret() == 'Y'}">
+								<c:out value="비밀글입니다."/>
+							</c:if>
+						</td>
+						<td class="table3_left"><c:out value="${data.getId()}"/></td>
+						<td class="table3_left"><c:out value="${data.getA_date()}"/></td>
 					</tr>
 					</c:if>
+					<!-- 글 등록자와 같은 아이디일때만 표시 -->
+					<tr class="answer">
+						<td class="table3_left"></td>
+						<td colspan="3">
+							<form method="post" action="register_view.do">
+								<input type="hidden"  name="cur_page" value="${cur_page}" >
+								<input type="hidden" name="idx" value="${regData.getIdx()}">
+								<input type="hidden" name="Q_idx" value="${data.getQ_idx()}">
+								<input type="hidden" name="id" value="${regData.getId()}">
+								<input type="hidden" name="A_secret" id="A_secret" value="${data.getQ_secret()}">
+								<input type="hidden" name="QnA" value="A">
+								<textarea class="tarea1" id="A_text" name="A_text" placeholder="최대 200자까지 입력가능합니다" maxlength="200"></textarea>
+								&nbsp;&nbsp;
+								<input type="submit" id="QnA" value="작성하기" class="QnA_btn">
+							</form>
+						</td>
+					</tr>
 					</c:forEach>
 				</table>
 			</td>
