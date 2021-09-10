@@ -157,4 +157,20 @@ public interface RegisterMapper {
 			@Result(property = "A_text", column = "A_text")})
 	ArrayList<RegisterQnABean> getQnAList(@Param("idx") int idx);
 
+	//상세페이지 입찰 처리
+	final String UPDATE_NOW_BID = "update register set "
+			+ "deal_classify='입찰', deal_id=#{id}, deal_idx=#{idx}, now_bid=#{now_bid} where idx=#{idx}";
+	@Update(UPDATE_NOW_BID)
+	void update_now_bid(RegisterBean rb);
+	//상세페이지 즉시낙찰 처리
+	final String UPDATE_WIN_BID = "update register set "
+			+ "deal_classify='낙찰', deal_id=#{id}, deal_idx=#{idx}, win_bid=#{win_bid}, deal_state = '거래완료' where idx=#{idx}";
+	@Update(UPDATE_WIN_BID)
+	void update_win_bid(RegisterBean rb);
+	//상세페이지 구매 처리
+	final String UPDATE_BUY = "update register set "
+			+ "deal_id=#{id}, deal_idx=#{idx}, deal_state = '거래완료' where idx=#{idx}";
+	@Update(UPDATE_BUY)
+	void update_buy(RegisterBean rb);
+	
 }

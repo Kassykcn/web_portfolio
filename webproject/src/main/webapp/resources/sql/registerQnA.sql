@@ -24,6 +24,7 @@ create table registerA(
 	A_text varchar(500) -- 문의 내용 : 한글이나 영어 2바이트 * 200자 지원
 )engine=innodb default charset=UTF8;
 
+
 select * from registerQ where idx=34 order by Q_idx desc
 select * from registerA order by Q_idx desc
 select * from registerQ where idx=34 and Q_idx = (select Q_idx from registerA)

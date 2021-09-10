@@ -37,17 +37,13 @@ public class RegisterController {
 			@RequestParam(value="first", required=false) String first,
 			@RequestParam(value="second", required=false) String second,
 			@RequestParam(value="third", required=false) String third) {
-
+		
 		//category
 		model.addAttribute("categotyFirst", regService.getCategoryFirst());
 		model.addAttribute("categotySecond", regService.getCategorySecond(first));
 		model.addAttribute("categotyThird", regService.getCategoryThird(second));
 		
 		//자동 디코드 되어 디코딩이 필요없다.
-		System.out.println("----------------first:"+first);
-		System.out.println("----------------second:"+second);
-		System.out.println("----------------third:"+third);
-		
 		model.addAttribute("first", first);
 		model.addAttribute("second", second);
 		model.addAttribute("third", third);
@@ -65,14 +61,14 @@ public class RegisterController {
 			@RequestParam(value="imageFile2", required=false) MultipartFile imageFile2) {
 		
 		try {
-			if(imageFile1 != null) {
+			if(!imageFile1.isEmpty()) {
 				FileUploadService fileUploadService = new FileUploadService();
 				String fileName = fileUploadService.upload(imageFile1);
 				rb.setImage1(fileName);
 			}else {
 				rb.setImage1(null);
 			}
-			if(imageFile2 != null){
+			if(!imageFile2.isEmpty()){
 				FileUploadService fileUploadService = new FileUploadService();
 				String fileName = fileUploadService.upload2(imageFile2);
 				rb.setImage2(fileName);
@@ -135,42 +131,63 @@ public class RegisterController {
 	
 	//경매/구매 상세페이지
 	@RequestMapping(value="/register_view.do")
-	public String register_view(@RequestParam("idx") int idx, 
+	public String register_view(
+			@RequestParam("idx") int idx, 
 			@RequestParam("cur_page") int cur_page, 
 			@RequestParam(value="id", required=false) String id, 
 			@RequestParam(value="Q_idx", required=false) String Q_idx, 
 			@RequestParam(value="QnA", required=false) String QnA, 
 			@RequestParam(value="Q_secret", required=false) String Q_secret, 
+			@RequestParam(value="type", required=false) String type, 
 			RegisterQnABean qnaBean, 
+			RegisterBean rb, 
 			Model model) {
 		
+		String returning = "register/register_view";
 		
 		model.addAttribute("idx", idx); //글번호
 		model.addAttribute("cur_page", cur_page); //현재 페이지
 		
-		if(QnA != null) {
-			if(QnA.equals("Q")) {
-				System.out.println("------------------------문의");
-				regService.insertQ(qnaBean); //문의 등록 DB 저장
-				model.addAttribute("regData", regService.getView(idx));
-			}else if(QnA.equals("A") && Q_idx != null) {
-				System.out.println("------------------------답변");
-				regService.insertA(qnaBean); //답변 등록 DB 저장
-				regService.update_QnA_state(Integer.parseInt(Q_idx)); // 답변 상태 변경
+		System.out.println("----------type: "+type);
+		if(type != null) {
+			if(type.equals("now")) {
+				System.out.println("-----------현재입찰가 업데이트");
+				regService.update_now_bid(rb);
+			}else if(type.equals("win")){
+				System.out.println("-----------즉시 낙찰 처리");
+				regService.update_win_bid(rb);
+			}else if(type.equals("buy")){
+				System.out.println("-----------구매 완료 처리");
+				regService.update_buy(rb);
 			}
-			model.addAttribute("regData", regService.getView(idx));	
-		}else {
-			model.addAttribute("regData", regService.getViewHits(idx));
+			returning = "redirect:/register_view.do";
 		}
 		
+		//QnA 목록 출력
 		int QnA_cnt = regService.getQnACnt(idx);
 		if(QnA_cnt != 0) {
 			model.addAttribute("Q_secret", Q_secret); //비공개 여부
 			model.addAttribute("QnAData", regService.getQnAList(idx));
 		}
+		//QnA 등록
+		if(QnA != null) {
+			if(QnA.equals("Q")) {
+				regService.insertQ(qnaBean); //문의 등록 DB 저장
+				model.addAttribute("regData", regService.getView(idx));
+			}else if(QnA.equals("A") && Q_idx != null) {
+				regService.insertA(qnaBean); //답변 등록 DB 저장
+				regService.update_QnA_state(Integer.parseInt(Q_idx)); // 답변 상태 변경
+			}
+			model.addAttribute("regData", regService.getView(idx));	
+			returning = "redirect:/register_view.do";
+		}else {//QnA등록에 해당되지 않을 때
+			model.addAttribute("regData", regService.getViewHits(idx));
+		}
 		
-		return "register/register_view";
+		System.out.println("------------------returning: "+returning);
+		return returning;
 	}
+	
 
 	// 경매/구매 수정폼으로 이동
 	@RequestMapping(value="/register_update.do", method = RequestMethod.GET)
@@ -193,40 +210,36 @@ public class RegisterController {
 			Model model,
 			@RequestParam(value="imageFile1", required=false) MultipartFile imageFile1,
 			@RequestParam(value="oldFile1", required=false) String oldFile1,
-			@RequestParam(value="newFile_length1", required=false) int newFile_length1,
 			@RequestParam(value="imageFile2", required=false) MultipartFile imageFile2,
-			@RequestParam(value="oldFile2", required=false) String oldFile2,
-			@RequestParam(value="newFile_length2", required=false) int newFile_length2) {
+			@RequestParam(value="oldFile2", required=false) String oldFile2) {
 		
 		try {
 			System.out.println("-----------------oldFile1: "+oldFile1);
 			System.out.println("-----------------oldFile2: "+oldFile2);
-			System.out.println("-----------------newFile_length1: "+newFile_length1);
-			System.out.println("-----------------newFile_length2: "+newFile_length2);
 			
-			if(newFile_length1 != 0 || newFile_length1 > 1) {
+			if(!imageFile1.isEmpty()) {
 				FileUploadService fileUploadService = new FileUploadService();
 				String fileName = fileUploadService.upload(imageFile1);
 				System.out.println("-----------------fileName1: "+fileName);
 				
 				rb.setImage1(fileName);
+			}else {
+				if(oldFile1.length() < 1) 
+					rb.setImage1(null);
+				else
+					rb.setImage1(oldFile1);
 			}
-			if(newFile_length2 != 0 || newFile_length2 > 1) {
+			if(!imageFile2.isEmpty()) {
 				FileUploadService fileUploadService = new FileUploadService();
 				String fileName = fileUploadService.upload2(imageFile2);
 				System.out.println("-----------------fileName2: "+fileName);
 
 				rb.setImage2(fileName);
-			}
-			if(newFile_length1 < 1 && newFile_length2 < 1) {
-				if(oldFile1 == null) 
-					rb.setImage1(null);
-				if(oldFile2 == null) 
+			}else {
+				if(oldFile2.length() < 1)  
 					rb.setImage2(null);
-				if(oldFile1 != null && oldFile2 != null) {
-					rb.setImage1(oldFile1);
+				else 
 					rb.setImage2(oldFile2);
-				}
 			}
 		} catch (Exception e) {
 			System.out.println("[ERROR]===================imageFile");

@@ -50,15 +50,31 @@ $(document).ready(function (){
 		});
 	});
 	
-	//즉시 낙찰 버튼 클릭
-	$("#win_bid_btn").click(function(){
-		confirm("즉시 낙찰하시겠습니까?");
+	//
+	$("#price_btn").click(function(){
+		confirm("구매하시겠습니까?");
+		$("#price_form").submit();
 	});
+	
 	
 	//입찰가 입력 및 버튼 클릭 시
 	$("#now_bid_btn").click(function(){
 		confirm("입찰하시겠습니까?");
+		if($("#now_bid").val() < $("#min_bid").val()){
+			alert("최소입찰가보다 적게 입력할 수 없습니다.");
+			$("#now_bid").empty();
+			$("#now_bid").focus();
+		}
+		$("#now_bid_form").submit();
 	});
+	
+	//즉시 낙찰 버튼 클릭
+	$("#win_bid_btn").click(function(){
+		confirm("즉시 낙찰하시겠습니까?");
+		$("#win_bid_form").submit();
+	});
+	
+	
 	
 	//QnA <textarea> 글자 수 세기
 	$("#Q_text").keydown(function(){

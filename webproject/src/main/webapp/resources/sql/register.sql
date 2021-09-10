@@ -1,5 +1,4 @@
--- 작성일 2021.08.25 LMJ 
--- 수정일 2021.09.01
+-- 작성일 2021.08.25 LMJ -- 수정일 2021.09.01
 -- 08.29 각각의 카테고리 컬럼 추가
 -- 09.01 image -> file 컬럼명 변경
 -- 09.02 file -> image 컬럼명 변경
@@ -9,8 +8,7 @@ create table register(
 	idx int(10) not null primary key auto_increment, -- 글 번호
 	reg_date datetime, -- 글 등록일
 	id varchar(20), -- 회원 id
-	classify varchar(10), -- 구분(구매 / 경매 / 입찰 / 낙찰)
-	classify_num int(10) default 0, -- 구분값이 입찰이나 낙찰일 때 해당 상품의 글번호
+	classify varchar(10), -- 구분(구매 / 경매)
 	title varchar(20), -- 글 제목
 	first varchar(20), -- 카테고리 대분류
 	second varchar(20), -- 카테고리 중분류
@@ -22,6 +20,9 @@ create table register(
 	price int(10), -- 가격 - 구매일때만 사용
 	start_date date, -- 시작일 - 경매일때만 사용
 	end_date date, -- 종료일 - 경매일때만 사용
+	deal_classify varchar(10) default null, -- 입찰 / 낙찰 -- 09.10 추가
+	deal_id varchar(20) default null, -- 거래자 id -- 09.10 추가
+	deal_idx int(10) default 0, -- 구분값이 입찰이나 낙찰일 때 해당 상품의 글번호 -- 09.10 추가
 	min_bid int(10), -- 최소 입찰가 - 경매일때만 사용
 	win_bid int(10), -- 즉시 낙찰가 - 경매일때만 사용
 	now_bid int(10) default 0, -- 현재 입찰가

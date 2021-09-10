@@ -26,13 +26,6 @@
 			<td class="align_left" colspan="2"><h2>경매/구매 등록</h2></td>
 		</tr>
 		<tr>
-			<th class="table1th">구분</th>
-			<td class="table1td">
-				<sf:radiobutton path="classify" value="경매" label="경매" />
-				<sf:radiobutton path="classify" value="구매" label="구매" />
-			</td>
-		</tr>
-		<tr>
 			<th class="table1th">카테고리</th>
 			<td class="table1td">
 				<sf:select path="first" id="category_first">
@@ -59,6 +52,13 @@
 						</option>
 					</c:forEach>
 				</sf:select>
+			</td>
+		</tr>
+		<tr>
+			<th class="table1th">구분</th>
+			<td class="table1td">
+				<sf:radiobutton path="classify" value="경매" label="경매" />
+				<sf:radiobutton path="classify" value="구매" label="구매" />
 			</td>
 		</tr>
 		<tr>

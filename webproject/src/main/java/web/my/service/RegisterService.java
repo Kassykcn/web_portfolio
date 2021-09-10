@@ -112,5 +112,19 @@ public class RegisterService implements RegisterMapper{
 		regMapper.update_QnA_state(Q_idx);
 	}
 	
+	//상세페이지 입찰/낙찰/구매 처리
+	@Override
+	public void update_now_bid(RegisterBean rb) {
+		regMapper.update_now_bid(rb);
+	}
+	@Override
+	public void update_win_bid(RegisterBean rb) {
+		regMapper.update_win_bid(rb);
+	}
+	@Override
+	public void update_buy(RegisterBean rb) {
+		regMapper.update_buy(rb);
+	}
+	
 	
 }

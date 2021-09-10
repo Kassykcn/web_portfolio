@@ -18,7 +18,6 @@
 
 <div id="left"></div>
 <div id="content">
-	<form id="reg_view">
 	<table class="table1">
 		<tr>
 			<td class="align_left"><h2>경매/구매 상세페이지</h2></td>
@@ -98,32 +97,58 @@
 					<c:if test='${classify == "구매"}'>
 					<tr>
 						<td class="td_title">가격</td>
-						<td class="td_content" colspan="2"><fmt:formatNumber value="${regData.getPrice()}" type="number"/>원</td>
-						<td class="td_content">
-							<input type="button" id="price_btn" class="btn1" value="거래하기">
+						<td class="td_content" colspan="3">
+							<form method="post" action="register_view.do" id="price_form">
+								<input type="hidden"  name="cur_page" value="${cur_page}" >
+								<input type="hidden" name="idx" value="${regData.getIdx()}">
+								<input type="hidden" name="id" value="${regData.getId()}">
+								<input type="hidden" name="type" value="buy">
+								<input type="hidden" name="price" value="${regData.getPrice()}">
+								<fmt:formatNumber value="${regData.getPrice()}" type="number"/>원
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="button" id="price_btn" class="btn1" value="거래하기">
+							</form>
 						</td>
 					</tr>	
 					</c:if>
 					<c:if test='${classify == "경매"}'>
 					<tr>
 						<td class="td_title">최소 입찰가</td>
-						<td class="td_content" colspan="3"><fmt:formatNumber value="${regData.getMin_bid()}" type="number"/>원</td>
+						<td class="td_content" colspan="3">
+							<input type="hidden" id="min_bid" value="${regData.getMin_bid()}">
+							<fmt:formatNumber value="${regData.getMin_bid()}" type="number"/>원
+						</td>
 						
 					</tr>
 					<tr>
+						
 						<td class="td_title">현재 입찰가</td>
-						<td class="td_content" colspan="2">
-							<input type="number" class="input_number" id="now_bid" value="<fmt:formatNumber value="${regData.getNow_bid()}"/>">원
+						<td class="td_content" colspan="3">
+							<form method="post" action="register_view.do" id="now_bid_form">
+								<input type="hidden"  name="cur_page" value="${cur_page}" >
+								<input type="hidden" name="idx" value="${regData.getIdx()}">
+								<input type="hidden" name="id" value="${regData.getId()}">
+								<input type="hidden" name="type" value="now">
+								<input type="number" class="input_number" id="now_bid" name="now_bid" value="<fmt:formatNumber value="${regData.getNow_bid()}"/>">원
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="button" id="now_bid_btn" class="btn1" value="입찰하기"> 
+							</form>
 						</td>
-						<td class="td_content">
-							<input type="button" id="now_bid_btn" class="btn1" value="입찰하기"> 
-						</td>
+						
 					</tr>
 					<tr class="auction_tr">
 						<td class="td_title">즉시 낙찰가</td>
-						<td class="td_content" colspan="2"><fmt:formatNumber value="${regData.getWin_bid()}" type="number"/>원</td>
-						<td class="td_content">
-							<input type="button" id="win_bid_btn" class="btn1" value="즉시 낙찰">
+						<td class="td_content" colspan="3">
+							<form method="post" action="register_view.do" id="win_bid_form">
+								<input type="hidden"  name="cur_page" value="${cur_page}" >
+								<input type="hidden" name="idx" value="${regData.getIdx()}">
+								<input type="hidden" name="id" value="${regData.getId()}">
+								<input type="hidden" name="type" value="win">
+								<input type="hidden" name="win_bid" value="${regData.getWin_bid()}">
+								<fmt:formatNumber value="${regData.getWin_bid()}" type="number"/>원
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="button" id="win_bid_btn" class="btn1" value="즉시 낙찰">
+							</form>
 						</td>
 					</tr>
 					</c:if>
@@ -144,7 +169,7 @@
 					</td>
 		</tr>
 	</table>		
-	</form>
+
 	<table class="table1">
 		<tr>
 			<td colspan="2" class="align_left"><b>Q&amp;A 작성하기</b></td>
