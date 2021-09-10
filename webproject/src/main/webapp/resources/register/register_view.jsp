@@ -106,7 +106,9 @@
 								<input type="hidden" name="price" value="${regData.getPrice()}">
 								<fmt:formatNumber value="${regData.getPrice()}" type="number"/>원
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="button" id="price_btn" class="btn1" value="거래하기">
+								<c:if test="${regData.getDeal_state() == '진행중'}">
+									<input type="button" id="price_btn" class="btn1" value="거래하기">
+								</c:if>
 							</form>
 						</td>
 					</tr>	

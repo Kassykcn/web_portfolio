@@ -148,7 +148,7 @@ public class RegisterController {
 		model.addAttribute("idx", idx); //글번호
 		model.addAttribute("cur_page", cur_page); //현재 페이지
 		
-		System.out.println("----------type: "+type);
+		//입찰.낙찰.구매 구분해서 업데이트 하기
 		if(type != null) {
 			if(type.equals("now")) {
 				System.out.println("-----------현재입찰가 업데이트");
@@ -159,6 +159,7 @@ public class RegisterController {
 			}else if(type.equals("buy")){
 				System.out.println("-----------구매 완료 처리");
 				regService.update_buy(rb);
+				
 			}
 			returning = "redirect:/register_view.do";
 		}
