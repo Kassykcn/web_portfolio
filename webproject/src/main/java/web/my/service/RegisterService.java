@@ -66,17 +66,7 @@ public class RegisterService implements RegisterMapper{
 	//수정
 	@Override
 	public void updateRegister(RegisterBean rb) {
-		regMapper.updateRegister(rb.getIdx(), rb.getTitle(), rb.getFirst(), rb.getSecond(), 
-					   rb.getThird(), rb.getImage1(), rb.getImage2(), rb.getGrade(), rb.getDetails(), 
-					   rb.getStart_date(), rb.getEnd_date(), rb.getPrice(), 
-					   rb.getMin_bid(), rb.getWin_bid());
-		
-	}
-	@Override
-	public void updateRegister(int idx, String title, String first, String second, String third, String image1,
-			String image2, String grade, String details, String start_date, String end_date, int price, int min_bid,
-			int win_bid) {
-		// TODO Auto-generated method stub
+		regMapper.updateRegister(rb);
 		
 	}
 	
