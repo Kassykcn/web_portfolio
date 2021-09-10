@@ -131,9 +131,16 @@
 								<input type="hidden" name="idx" value="${regData.getIdx()}">
 								<input type="hidden" name="id" value="${regData.getId()}">
 								<input type="hidden" name="type" value="now">
-								<input type="number" class="input_number" id="now_bid" name="now_bid" value="<fmt:formatNumber value="${regData.getNow_bid()}"/>">원
+								<c:if test="${regData.getDeal_state() == '진행중'}">
+									<input type="number" class="input_number" id="now_bid" name="now_bid" value="<fmt:formatNumber value="${regData.getNow_bid()}"/>">원
+								</c:if>
+								<c:if test="${regData.getDeal_state() != '진행중'}">
+									<fmt:formatNumber value="${regData.getNow_bid()}"/>원
+								</c:if>
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="button" id="now_bid_btn" class="btn1" value="입찰하기"> 
+								<c:if test="${regData.getDeal_state() == '진행중'}">
+									<input type="button" id="now_bid_btn" class="btn1" value="입찰하기"> 
+								</c:if>
 							</form>
 						</td>
 						
@@ -149,7 +156,9 @@
 								<input type="hidden" name="win_bid" value="${regData.getWin_bid()}">
 								<fmt:formatNumber value="${regData.getWin_bid()}" type="number"/>원
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="button" id="win_bid_btn" class="btn1" value="즉시 낙찰">
+								<c:if test="${regData.getDeal_state() == '진행중'}">
+									<input type="button" id="win_bid_btn" class="btn1" value="즉시 낙찰">
+								</c:if>
 							</form>
 						</td>
 					</tr>
