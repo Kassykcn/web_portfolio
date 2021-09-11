@@ -3,6 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
+	<!-- 2021.09.11 추가 : 인덱스 페이지 설정 -->
+	 <welcome-file-list>
+        <welcome-file>/resources/main.jsp</welcome-file>
+    </welcome-file-list>
+	
 	<!-- 2021.08.27 추가 : 한글 인코딩 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>

@@ -18,14 +18,13 @@ import web.my.utils.searchVO;
 @Controller
 public class RegisterController {
 	@Autowired
-	RegisterService regService;
+	private RegisterService regService;
 	
 	// 한페이지당 보여줄 게시글 수
 	private int lenPage = 5;
 	
 	//이미지 파일 업로드 경로
 	String uploadPath = "D:\\soldesk_project\\git\\web_portfolio\\webproject\\src\\main\\webapp\\resources\\uploads\\";
-	
 	
 	// ,method = RequestMethod.POST 를 지정하지않으면 post, get방식 모두 지원
 	// 경매/구매 등록 폼 

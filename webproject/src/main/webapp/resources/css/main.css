@@ -1,0 +1,70 @@
+/* */
+body{
+	font-size: 11pt;
+	background-color: #F7F6F2;
+	font-family: sans-serif;
+}
+
+#content{
+	width: 90%;
+	margin: auto;
+}
+
+.banner{
+	width:100%;
+	height: 200px;
+	border: 1px solid black;
+	text-align: center;
+	vertical-align: middle;
+	margin-bottom: 20px;
+}
+.auction, .buy{
+	width:100%;
+	height: auto;
+	display: block;
+}
+
+.cls_title{
+	color:#4B6587;
+	font-weight: bold;
+	font-size: 15pt;
+	display: inline-block;
+}
+.cls_more{
+	display: inline-block;
+	font-size: 9pt;
+	color:#4B6587;
+	float: right;
+	margin-top:3px;
+}
+/*참고 : https://www.biew.co.kr/entry/%EC%9B%B9%ED%8D%BC%EB%B8%94%EB%A6%AC%EC%85%94%EA%B0%80-%EC%95%8C%EA%B3%A0%EC%9E%88%EC%96%B4%EC%95%BC-%ED%95%A0-display-table-%EC%86%8D%EC%84%B1*/
+
+.cls_table{
+	width:100%;
+	line-height: 20px;
+	display: table;
+	table-layout: fixed;
+}
+.cls_table div, .cls_table td{
+	display: table-cell;
+	text-align: center;
+	padding-bottom:10px;
+}
+
+/* image */
+.main_img{
+	width:150px;
+	height: 150px;
+}
+
+/* a */
+a:hover, a:active {
+	text-decoration: underline;
+	color:inherit;
+	cursor: pointer;
+}
+a:link, a:visited {
+	text-decoration: none;
+	color:inherit;
+	cursor: pointer;
+}

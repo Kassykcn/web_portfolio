@@ -59,3 +59,6 @@ limit 5 offset 0;
 -------------------------------------------
 select count(1) from register where title like '%포토%' ;
 
+---------------------------------------------
+
+select image1, title, deal_state from register where classify='경매';

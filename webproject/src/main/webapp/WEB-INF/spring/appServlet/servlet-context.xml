@@ -29,8 +29,8 @@
         <beans:property name="defaultEncoding" value="utf-8" />   <!--  인코딩 -->
     </beans:bean>
 	
-	<context:component-scan base-package="soldesk.project.web" />
-	<context:component-scan base-package="web.my.bean, web.my.mapper, web.my.service, web.my.controller" />
+	<!-- 패키지 설정 -->
+	<context:component-scan base-package="web.my.*" />
 	
 	<default-servlet-handler/>
 	
