@@ -36,6 +36,7 @@
 		</tr>
 	</table>
 </c:if>
+<!-- 검색 -->
 <sf:form modelAttribute="searchVO" method="post"
 	action="register_list.do">
 	<input type="hidden" name="cur_page" value="${cur_page}">

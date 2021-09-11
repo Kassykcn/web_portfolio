@@ -1,45 +1,64 @@
-/* ��ü */
+/* 일괄 설정 */
 body{
 	font-size: 11pt;
+	background-color: #F7F6F2;
+	font-family: sans-serif;
 }
+
 #content{
 	width: 90%;
 	margin: auto;
 }
-/* div */
+/* 페이지 제목  */
+.page_title{
+	width: 100%;
+	color: #4B6587;
+}
+.page_title a{
+	cursor: pointer;
+}
+
+.cntPage{
+	padding: 7px;
+	display:inline-block;
+}
+
+.write_link{
+	padding: 7px;
+	display:inline-block;
+}
+
+/* sort */
 .sort{
 	width:auto;
 	display:inline-block;
 	float: right;
 	padding: 7px;
 	font-size: 9pt;
+	color: #4B6587;
 }
 .sort div{
 	width:85px;
 	text-align:center;
 	float: left;
 }
-.cntPage{
-	padding: 7px;
-	display:inline-block;
+.sort select{
+	font-size: 9pt;
+	color: #4B6587;
 }
-.write_link{
-	padding: 7px;
-	display:inline-block;
-}
-/* table, th, td */
+
+/* table */
 .table2{
 	text-align: center;
 	width: 100%;
 	height: 100%;
 	padding:0;
 	margin: 0;
+	line-height: 30px;
 }
-.bottom_table{
-	text-align: center;
-	height: 100%;
-	padding-top: 10px;
-	margin: auto;
+
+.table2th{
+	background-color: #F0E5CF;
 }
 .table2th1{
 	width: 10%;
@@ -49,8 +68,20 @@ body{
 }
 .table2th1, .table2th2, .table2th3, .table2td{
 	height: 35px;
-	border-bottom: 1px solid gray;
+	border-bottom: 1px solid #C8C6C6;
 }
+
+.bottom_table{
+	text-align: center;
+	height: 100%;
+	padding-top: 10px;
+	margin: auto;
+	color: #C8C6C6;
+}
+.bottom_table select{
+	color: #4B6587;
+}
+
 
 /* span */
 .small_txt{
@@ -73,14 +104,16 @@ body{
 }
 #submit_btn{
 	background-color:white;
-	border: 2px solid black;
+	border: 2px solid #4B6587;
+	color:#4B6587;
 	font-weight: bold;
 	width: 50px;
 	height:30px;
 }
 .btn1{
 	background-color:white;
-	border: 2px solid black;
+	border: 2px solid #4B6587;
+	color:#4B6587;
 	font-weight: bold;
 	height:25px;
 }
@@ -98,9 +131,11 @@ input:invalid{
 a:hover, a:active {
 	text-decoration: underline;
 	font-weight: bold;
-	color:black;
+	color:inherit;
+	cursor: pointer;
 }
 a:link, a:visited {
-	text-decoration: underline;
-	color:black;
+	text-decoration: none;
+	color:inherit;
+	cursor: pointer;
 }

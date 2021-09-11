@@ -27,13 +27,11 @@
 
 <div id="left"></div>
 <div id="content">
-<input type="hidden" id="search_key" value="${search_key}">
-<input type="hidden" id="search_txt" value="${search_txt}">
-<table class="table1">
-	<tr>
-		<td class="align_left"><h2><a onclick="list()">경매/구매 목록</a></h2></td>
-	</tr>
-</table>
+	<table class="page_title">
+		<tr>
+			<td class="align_left"><h2><a onclick="list()">경매/구매 목록</a></h2></td>
+		</tr>
+	</table>
 
 	<div class="cntPage">
 		<span>총 게시물 수 : <c:out value="${totalCnt}"/> </span>

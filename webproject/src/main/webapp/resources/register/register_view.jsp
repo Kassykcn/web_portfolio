@@ -18,10 +18,12 @@
 
 <div id="left"></div>
 <div id="content">
-	<table class="table1">
+	<table class="page_title">
 		<tr>
 			<td class="align_left"><h2>경매/구매 상세페이지</h2></td>
 		</tr>
+	</table>
+	<table class="table1">
 		<tr>
 			<td class="table1_td1">
 				<c:if test="${regData.getImage1() == null}">
@@ -35,7 +37,7 @@
 				</c:if>
 			</td>
 			<td class="table1_td2" colspan="2">
-				<div>
+				<div class="status">
 					<div id="state">
 						<c:set var="classify" value="${regData.getClassify()}"/>
 						<c:out value="${classify}"/>
@@ -117,8 +119,8 @@
 					<tr>
 						<td class="td_title">최소 입찰가</td>
 						<td class="td_content" colspan="3">
-							<input type="hidden" id="min_bid" value="${regData.getMin_bid()}">
 							<fmt:formatNumber value="${regData.getMin_bid()}" type="number"/>원
+							<input type="hidden" id="min_bid" value="${regData.getMin_bid()}">
 						</td>
 						
 					</tr>
@@ -163,15 +165,14 @@
 						</td>
 					</tr>
 					</c:if>
+					<tr>
+						<td class="td_title"><b>상세 내용</b></td>
+						<td class="td_content" colspan="3"><c:out value="${regData.getDetails()}"/></td>
+					</tr>
 				</table>
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2" class="align_left"><b>상세 내용</b></td>
-		</tr>
-		<tr>
-			<td colspan="2" class="align_left"><c:out value="${regData.getDetails()}"/></td>
-		</tr>
+		
 		<tr>
 					<td class="td_content" colspan="4">
 						<input type="button" value="수정" class="btn1" onclick="location.href='register_update.do?idx=${regData.getIdx()}&cur_page=${cur_page}'">
@@ -266,8 +267,7 @@
 								<input type="hidden" name="id" value="${regData.getId()}">
 								<input type="hidden" name="A_secret" id="A_secret" value="${data.getQ_secret()}">
 								<input type="hidden" name="QnA" value="A">
-								<textarea class="tarea1" id="A_text" name="A_text" placeholder="최대 200자까지 입력가능합니다" maxlength="200"></textarea>
-								&nbsp;&nbsp;
+								<textarea class="tarea2" id="A_text" name="A_text" placeholder="최대 200자까지 입력가능합니다" maxlength="200"></textarea>
 								<input type="submit" id="QnA" value="작성하기" class="QnA_btn">
 							</form>
 						</td>

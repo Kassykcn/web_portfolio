@@ -50,7 +50,7 @@ $(document).ready(function (){
 		});
 	});
 	
-	//
+	//구매하기 버튼 클릭 시
 	$("#price_btn").click(function(){
 		confirm("구매하시겠습니까?");
 		$("#price_form").submit();
@@ -90,6 +90,7 @@ $(document).ready(function (){
 		}
 	});
 	
+	//신고
 	$("#report").click(function(){
 		confirm("신고하시겠습니까?");
 	});
@@ -97,7 +98,11 @@ $(document).ready(function (){
 	//답변달기는 숨김처리했다가 클릭되면 답변달기
 	$(".answer").css('display','none');
 	$(".write_answer").click(function(){
-		$(".answer").css('display','');
+		if($(".answer").css('display') == 'none'){
+			$(".answer").css('display','');
+		}else{
+			$(".answer").css('display','none');
+		}
 	});
 	
 	

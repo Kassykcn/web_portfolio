@@ -24,10 +24,12 @@
 		<input type="hidden" name="cur_page" value="${cur_page}">
 		<input type="hidden" name="idx" value="${regData.getIdx()}" >
 		
-		<table class="table1">
+		<table class="page_title">
 			<tr>
 				<td class="align_left" colspan="2"><h2>경매/구매 수정</h2></td>
 			</tr>
+		</table>
+		<table class="table1">
 			<tr>
 				<th class="table1th">구분</th>
 				<td class="table1td"><c:set var="classify" value="${regData.getClassify()}"/>
