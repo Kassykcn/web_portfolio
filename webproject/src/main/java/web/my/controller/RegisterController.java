@@ -21,7 +21,7 @@ public class RegisterController {
 	private RegisterService regService;
 	
 	// 한페이지당 보여줄 게시글 수
-	private int lenPage = 5;
+	private int lenPage = 10;
 	
 	//이미지 파일 업로드 경로
 	String uploadPath = "D:\\soldesk_project\\git\\web_portfolio\\webproject\\src\\main\\webapp\\resources\\uploads\\";

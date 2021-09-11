@@ -17,7 +17,38 @@ body{
 	text-align: center;
 	vertical-align: middle;
 	margin-bottom: 20px;
+	display: inline-block;
+	overflow: hidden;
 }
+
+.banner_arrow{
+	position: relative;
+	vertical-align:middle;
+}
+.banner_arrow img{
+	
+	width:60px;
+	height: 60px;
+}
+.banner_arrowL{
+	position: absolute;
+	float: left;
+	display: inline-block;
+}
+.banner_arrowR{
+	position: absolute;
+	float: right;
+	display: inline-block;
+}
+
+.banner .banner_img img{
+	margin:0;
+	padding:0;
+	float:left;
+	width: 100%;
+	height: 200px;
+}
+
 .auction, .buy{
 	width:100%;
 	height: auto;
